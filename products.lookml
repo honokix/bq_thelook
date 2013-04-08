@@ -1,38 +1,36 @@
 - view: products
   fields:
 
-  - name: count
+  - measure: count
     type: count_distinct
-    sql: $$.id
+    sql: ${TABLE}.id
     detail: detail
 
-  - name: sku
+  - dimension: brand
 
-  - name: rank
+  - dimension: category
+
+  - dimension: department
+
+  - dimension: id
     type: int
 
-  - name: department
+  - dimension: item_name
 
-  - name: retail_price
+  - dimension: rank
+    type: int
+
+  - dimension: retail_price
     type: number
-    decimals: 2
 
-  - name: brand
-
-  - name: item_name
-
-  - name: category
-
-  - name: id
-    type: int
+  - dimension: sku
 
 
   # ----- Detail ------
   sets:
-    detail: [
-        item_name,
-        id,
+    detail:
+      - id
+      - item_name
         # Counters for views that join 'products'
-        inventory_items.count,
-    ]
+      - inventory_items.count
 

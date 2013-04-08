@@ -1,37 +1,31 @@
 - view: user_data
   fields:
 
-  - name: count
+  - measure: count
     type: count_distinct
-    sql: $$.id
+    sql: ${TABLE}.id
     detail: detail
 
-  - name: has_ordered
+  - dimension: has_ordered
     type: yesno
 
-  - name: one_order
+  - dimension: id
+    type: int
+
+  - dimension: one_order
     type: yesno
 
-  - name: user_id
+  - dimension: user_id
     type: int
     sets:
       - ignore
 
-  - name: id
-    type: int
-
-  # ----- Joins ------
-
-  - join: users
-    sql_on: user_data.user_id=users.id
-    base_only: true
 
   # ----- Detail ------
   sets:
-    detail: [
-        id,
-        users.last_name,
-        users.first_name,
-        users.id,
-    ]
+    detail:
+      - id
+      - users.last_name
+      - users.first_name
+      - users.id
 

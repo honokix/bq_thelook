@@ -1,41 +1,35 @@
 - view: events
   fields:
 
-  - name: count
+  - measure: count
     type: count_distinct
-    sql: $$.id
+    sql: ${TABLE}.id
     detail: detail
 
-  - name: id
-    type: int
-
-  - name: created
+  - dimension_group: created
     type: time
     timeframes: [time, date, week, month]
-    sql: $$.created_at
+    sql: ${TABLE}.created_at
 
-  - name: user_id
+  - dimension: id
+    type: int
+
+  - dimension: type_id
+    type: int
+
+  - dimension: user_id
     type: int
     sets:
       - ignore
 
-  - name: type_id
-    type: int
+  - dimension: value
 
-  - name: value
-
-  # ----- Joins ------
-
-  - join: users
-    sql_on: events.user_id=users.id
-    base_only: true
 
   # ----- Detail ------
   sets:
-    detail: [
-        id,
-        users.last_name,
-        users.first_name,
-        users.id,
-    ]
+    detail:
+      - id
+      - users.last_name
+      - users.first_name
+      - users.id
 

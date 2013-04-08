@@ -1,62 +1,48 @@
 - view: users
   fields:
 
-  - name: count
+  - measure: count
     type: count_distinct
-    sql: $$.id
+    sql: ${TABLE}.id
     detail: detail
 
-  - name: zip
+  - dimension: age
     type: int
 
-  - name: country
+  - dimension: city
 
-  - name: state
+  - dimension: country
 
-  - name: city
-
-  - name: created
+  - dimension_group: created
     type: time
     timeframes: [time, date, week, month]
-    sql: $$.created_at
+    sql: ${TABLE}.created_at
 
-  - name: gender
+  - dimension: email
 
-  - name: last_name
+  - dimension: first_name
 
-  - name: first_name
+  - dimension: gender
 
-  - name: email
-
-  - name: id
+  - dimension: id
     type: int
 
-  - name: age
+  - dimension: last_name
+
+  - dimension: state
+
+  - dimension: zip
     type: int
-    
-  - name: lifetime_number_of_orders
-    type: int
-    sql: |
-      (SELECT COUNT(orders.id) FROM orders WHERE orders.user_id = users.id)
-  
-  - name: lifetime_number_of_orders_tier
-    type: tier
-    sql: ${lifetime_number_of_orders}
-    tiers: [0,1,3,5,10]
-    
-  - name: age_tier
-    type: tier
-    sql: ${age}
-    tiers: [15,19,26,33]
+
 
   # ----- Detail ------
   sets:
-    detail: [
-        last_name,
-        first_name,
-        id,
+    detail:
+      - last_name
+      - first_name
+      - id
         # Counters for views that join 'users'
-        events.count,
-        orders.count,
-    ]
+      - events.count
+      - orders.count
+      - user_data.count
 

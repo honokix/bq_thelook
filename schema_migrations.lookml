@@ -1,16 +1,15 @@
 - view: schema_migrations
   fields:
 
-  - name: count
+  - measure: count
     type: count
     detail: detail
 
-  - name: filename
+  - dimension: filename
 
 
   # ----- Detail ------
   sets:
-    detail: [
-        filename,
-    ]
+    detail:
+      - filename
 

@@ -1,46 +1,38 @@
 - view: inventory_items
   fields:
 
-  - name: count
+  - measure: count
     type: count_distinct
-    sql: $$.id
+    sql: ${TABLE}.id
     detail: detail
 
-  - name: cost
+  - dimension: cost
     type: number
-    decimals: 2
 
-  - name: sold
+  - dimension_group: created
     type: time
     timeframes: [time, date, week, month]
-    sql: $$.sold_at
+    sql: ${TABLE}.created_at
 
-  - name: created
-    type: time
-    timeframes: [time, date, week, month]
-    sql: $$.created_at
+  - dimension: id
+    type: int
 
-  - name: product_id
+  - dimension: product_id
     type: int
     sets:
       - ignore
 
-  - name: id
-    type: int
+  - dimension_group: sold
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.sold_at
 
-  # ----- Joins ------
-
-  - join: products
-    sql_on: inventory_items.product_id=products.id
-    base_only: true
 
   # ----- Detail ------
   sets:
-    detail: [
-        id,
-        products.item_name,
-        products.id,
+    detail:
+      - id
+      - products.item_name
         # Counters for views that join 'inventory_items'
-        order_items.count,
-    ]
+      - order_items.count
 
