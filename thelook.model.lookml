@@ -1,4 +1,3 @@
-
 - scoping: true       # for backward compatibility
 
 - connection: thelook
