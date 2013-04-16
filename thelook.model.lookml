@@ -31,6 +31,10 @@
     - join: users
       sql_on: orders.user_id=users.id
       required_joins: [orders]
+    - join: users_orders_facts
+      sql_on: users.id=users_orders_facts.user_id
+      required_joins: [users]
+
 
 - base_view: products
   view: products
@@ -39,6 +43,9 @@
 - base_view: users
   view: users
   label: Users
+  joins:
+  - join: users_orders_facts
+    sql_on: users.id=users_orders_facts.user_id
 
 # - base_view: user_data
 #   view: user_data

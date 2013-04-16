@@ -12,6 +12,26 @@
     sql: |
       (SELECT SUM(order_items.sale_price) FROM order_items WHERE order_items.order_id = orders.id)
 
+  - dimension: total_amount_of_order_usd_tier
+    type: tier
+    sql: ${total_amount_of_order_usd}
+    tiers: [0,10,50,150,500,1000]
+
+  - dimension: order_items_list
+    sql: |
+      (
+        SELECT GROUP_CONCAT(products.item_name) 
+        FROM order_items
+        LEFT JOIN inventory_items ON order_items.inventory_item_id = inventory_items.id
+        LEFT JOIN products ON inventory_items.product_id = products.id
+        WHERE order_items.order_id = orders.id
+      )
+
+  - dimension: average_total_amount_of_order_usd
+    type: avg
+    sql: ${total_amount_of_order_usd}
+    decimals: 2
+
   - dimension: total_cost_of_order
     type: number
     decimals: 2
@@ -33,9 +53,15 @@
     decimals: 2
     sql: ${total_amount_of_order_usd} - ${total_cost_of_order}
   
-  - measure: order_profit_total
+  - measure: total_order_profit
     type: sum
     sql: ${order_profit}
+    decimals: 2
+
+  - measure: average_order_profit
+    type: average
+    sql: ${order_profit}
+    decimals: 2
 
   - dimension_group: created
     type: time
