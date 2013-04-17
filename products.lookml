@@ -16,12 +16,17 @@
     type: int
 
   - dimension: item_name
+  
+  - measure: list
+    type: list
+    list_field: item_name
 
   - dimension: rank
     type: int
 
   - dimension: retail_price
     type: number
+    decimals: 2
 
   - dimension: sku
 
@@ -31,6 +36,10 @@
     detail:
       - id
       - item_name
+      - brand
+      - category
+      - department
+      - retail_price
         # Counters for views that join 'products'
       - inventory_items.count
 

@@ -52,13 +52,19 @@
   # ----- Detail ------
   sets:
     detail:
-      - last_name
-      - first_name
       - id
+      - name
+      - email
+      - city
+      - state
+      - country
+      - zip
+      - gender
+      - age
+      - history
         # Counters for views that join 'users'
-      - events.count
       - orders.count
-      - user_data.count
+      - order_items.count
 
 - view: users_orders_facts
   derived_table:

@@ -81,9 +81,10 @@
   sets:
     detail:
       - id
-      - users.last_name
-      - users.first_name
-      - users.id
+      - created_time
+      - users.name
+      - users.history
+      - total_cost_of_order
         # Counters for views that join 'orders'
       - order_items.count
-
+      - products.list

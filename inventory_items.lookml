@@ -8,6 +8,7 @@
 
   - dimension: cost
     type: number
+    decimals: 2
 
   - dimension_group: created
     type: time
@@ -32,7 +33,12 @@
   sets:
     detail:
       - id
+      - sold_date
       - products.item_name
+      - products.brand
+      - products.category
+      - products.department
+      - cost
         # Counters for views that join 'inventory_items'
       - order_items.count
 

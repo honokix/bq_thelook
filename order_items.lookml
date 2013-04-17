@@ -33,17 +33,19 @@
     sql: ${profit}
     tiers: [0,10,25,50,150,300]
     
-  - name: profit_sum
+  - name: total_profit
     type: sum
     sql: ${profit}
+    decimals: 2
     
-  - name: sale_price_sum
+  - name: total_sale_price
     type: sum
     sql: $$.sale_price
+    decimals: 2
     
   - name: profit_margin
     type: percentage
-    sql: ${profit_sum}/${sale_price_sum}
+    sql: ${total_profit}/${total_sale_price}
   
   - name: average_profit
     type: average
@@ -54,7 +56,15 @@
   # ----- Detail ------
   sets:
     detail:
+      - orders.created_date
       - id
-      - inventory_items.id
       - orders.id
+      - users.name
+      - users.history
+      - products.item_name
+      - products.brand
+      - products.category
+      - products.department
+      - total_sale_price
+      
 
