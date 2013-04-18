@@ -34,7 +34,8 @@
   joins:
     - join: inventory_items
       sql_on: order_items.inventory_item_id=inventory_items.id
-      
+      fields: inventory_items.export        # don't import all of the fields, just
+                                            #  the fields in this set.
     - join: orders
       sql_on: order_items.order_id=orders.id
       
