@@ -23,33 +23,37 @@
     type: number
     decimals: 2
 
-  - name: profit
+  - dimension: item_gross_margin
     type: number
-    required_joins: [inventory_items]
-    sql: ${TABLE}.sale_price - inventory_items.cost
-    
-  - name: profit_tier
+    sql: (${sale_price} - ${inventory_items.cost})
+
+  - dimension: item_gross_margin_percentage
+    type: number
+    sql: 100.0 * ${item_gross_margin}/${sale_price}
+
+  - dimension: item_gross_margin_percentage_tier
     type: tier
-    sql: ${profit}
-    tiers: [0,10,25,50,150,300]
-    
-  - name: total_profit
+    sql: ${item_gross_margin_percentage}
+    tiers: [0,10,20,30,40,50,60,70,80,90]
+
+  - measure: total_gross_margin
     type: sum
-    sql: ${profit}
+    sql: ${item_gross_margin}
     decimals: 2
     
-  - name: total_sale_price
+  - measure: total_sale_price
     type: sum
     sql: $$.sale_price
     decimals: 2
     
-  - name: profit_margin
-    type: percentage
-    sql: ${total_profit}/${total_sale_price}
-  
-  - name: average_profit
+  - measure: gross_margin_percentage
+    type: number
+    sql: 100.0 * ${total_gross_margin}/${total_sale_price}    # postgres does integer division by default multiply by 100.0
+    decimals: 2                                               #  to force real numbers.
+    
+  - measure: average_gross_margin
     type: average
-    sql: ${profit}
+    sql: ${item_gross_margin}
     decimals: 2
 
 

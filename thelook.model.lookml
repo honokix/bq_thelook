@@ -17,20 +17,35 @@
     - join: users
       sql_on: orders.user_id=users.id
 
+
 - base_view: order_items
   view: order_items
   label: Order Items
+  conditionally_filter:                     # prevent runaway queries.
+    orders.created_date: 1 month            # by always requiring a filter 
+    unless:                                 # on one of the fields below.
+      - orders.created_time
+      - orders.created_week
+      - orders.created_month
+      - users.name
+      - users.id
+      - products.id
+      - products.item_name
   joins:
     - join: inventory_items
       sql_on: order_items.inventory_item_id=inventory_items.id
+      
     - join: orders
       sql_on: order_items.order_id=orders.id
+      
     - join: products
       sql_on: inventory_items.product_id=products.id
       required_joins: [inventory_items]
+
     - join: users
       sql_on: orders.user_id=users.id
       required_joins: [orders]
+
     - join: users_orders_facts
       sql_on: users.id=users_orders_facts.user_id
       required_joins: [users]
