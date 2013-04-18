@@ -9,6 +9,14 @@
   - dimension: cost
     type: number
     decimals: 2
+    
+  - measure: total_cost
+    type: sum
+    sql: ${cost}
+
+  - measure: average_cost
+    type: average
+    sql: ${cost}
 
   - dimension_group: created
     type: time

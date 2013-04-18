@@ -6,35 +6,38 @@
     sql: ${TABLE}.id
     detail: detail          # set to show when the count field is clicked
 
-  - dimension: brand        # brand name is a string in the db.
+  - dimension: brand.name   # brand name is a string in the db.
+    sql: ${TABLE}.brand     #  we want a top level entity.
   
-  - measure: brand_count    # number of different brands.
+  - measure: brand.count    # number of different brands.
     type: count_distinct
     sql: ${TABLE}.brand     # the field in the db to distinctly count
     detail:                 # when the user clicks brand count
-      - brand               # show the brand
+      - brand.name          # show the brand
       - sub_detail*         # a bunch of counts (see the set below)
-      - -brand_count        # but don't show the brand count, because it will always be 1
+      - -brand.count        # but don't show the brand count, because it will always be 1
       
-  - dimension: category
+  - dimension: category.name    # We want category to be a top level entity even though doesn't
+    sql: ${TABLE}.category      #  have its own table
 
-  - measure: category_count
+  - measure: category.count #
     type: count_distinct
     sql: ${TABLE}.category
     detail: 
-      - category
+      - category.name
       - sub_detail*
-      - -category_count
+      - -category.count
 
-  - dimension: department
+  - dimension: department.name
+    sql: ${TABLE}.department
 
-  - measure: department_count
+  - measure: department.count
     type: count_distinct
     sql: ${TABLE}.department
     detail: 
-      - department
+      - department.name
       - sub_detail*
-      - -department_count
+      - -department.count
 
   - dimension: id
     type: int
@@ -60,9 +63,9 @@
     detail:
       - id
       - item_name
-      - brand
-      - category
-      - department
+      - brand.name
+      - category.name
+      - department.name
       - retail_price
         # Counters for views that join 'products'
       - customers.count
@@ -71,9 +74,9 @@
       - inventory_items.count
   
     sub_detail:
-      - category_count
-      - brand_count
-      - department_count
+      - category.count
+      - brand.count
+      - department.count
       - count
       - customers.count
       - orders.count

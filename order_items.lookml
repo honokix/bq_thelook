@@ -43,9 +43,15 @@
     
   - measure: total_sale_price
     type: sum
-    sql: $$.sale_price
+    sql: ${sale_price}
     decimals: 2
-    
+
+  - measure: average_sale_price
+    type: avg
+    sql: ${sale_price}
+    decimals: 2
+
+
   - measure: gross_margin_percentage
     type: number
     sql: 100.0 * ${total_gross_margin}/${total_sale_price}    # postgres does integer division by default multiply by 100.0

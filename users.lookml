@@ -89,7 +89,7 @@
     tiers: [0,1,2,3,5,10]
     sql: ${lifetime_orders}
     
-  - name: repeat_order
+  - name: repeat_customer
     type: yesno
     sql: ${lifetime_orders} > 1
   
