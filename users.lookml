@@ -37,11 +37,11 @@
   - dimension: name
     sql: CONCAT($$.first_name,' ', $$.last_name)
 
-  - name: history
+  - dimension: history
     sql: $$.id
     html: |
-      <a href=orders?fields=orders.detail*&limit=500&f[orders.completed_time]=10+years&f[users.id]=<%= value %>>Orders</a>
-      | <a href=order_items?fields=order_items.detail*&f[orders.completed_time]=10+years&limit=500&f[users.id]=<%= value %>>Items</a>
+      <a href=orders?fields=orders.detail*&f[users.id]=<%= value %>>Orders</a>
+      | <a href=order_items?fields=order_items.detail*&f[users.id]=<%= value %>>Items</a>
 
   - dimension: state
 
@@ -81,34 +81,34 @@
       GROUP BY user_id
     indexes: [user_id]
   fields:
-  - name: lifetime_orders
+  - dimension: lifetime_orders
     type: number
 
-  - name: lifetime_number_of_orders_tier
+  - dimension: lifetime_number_of_orders_tier
     type: tier
     tiers: [0,1,2,3,5,10]
     sql: ${lifetime_orders}
     
-  - name: repeat_customer
+  - dimension: repeat_customer
     type: yesno
     sql: ${lifetime_orders} > 1
   
-  - name: first_order
+  - dimension_group: first_order
     type: time
     timeframes: [date, week, month]
     sql: $$.first_order
 
-  - name: latest_order
+  - dimension: latest_order
     type: time
     timeframes: [date, week, month]
     sql: $$.latest_order
 
-  - name: days_as_customer
+  - dimension: days_as_customer
     type: int
     
-  - name: days_since_purchase
+  - dimension: days_since_purchase
     type: int
 
-  - name: number_of_distinct_months_with_orders
+  - dimension: number_of_distinct_months_with_orders
     type: int
 
