@@ -43,7 +43,11 @@
     type: int
 
   - dimension: item_name
-  
+
+  - measure: brand.list
+    type: list
+    list_field: brand.name
+
   - measure: list
     type: list
     list_field: item_name
