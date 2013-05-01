@@ -6,6 +6,18 @@
     sql: ${TABLE}.id
     detail: detail
 
+  - measure: sold_count
+    type: count_distinct
+    sql: ${TABLE}.id
+    detail: detail
+    filters:
+      sold: Yes
+
+  - measure: percent_sold
+    type: number
+    decimals: 2
+    sql: 100.0 * ${sold_count}/${count}
+
   - dimension: cost
     type: number
     decimals: 2
