@@ -52,11 +52,15 @@
     type: number
     decimals: 2
     sql: ${total_amount_of_order_usd} - ${total_cost_of_order}
-  
+    html: |
+      $<%= rendered_value %> 
+ 
   - measure: total_order_profit
     type: sum
     sql: ${order_profit}
     decimals: 2
+    html: |
+      $<%= rendered_value %>
 
   - measure: average_order_profit
     type: average

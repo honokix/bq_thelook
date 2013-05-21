@@ -45,12 +45,15 @@
     type: sum
     sql: ${sale_price}
     decimals: 2
+    html: |
+      $<%= rendered_value %>
 
   - measure: average_sale_price
     type: avg
     sql: ${sale_price}
     decimals: 2
-
+    html: |
+      $<%= rendered_value %>
 
   - measure: gross_margin_percentage
     type: number
@@ -76,5 +79,3 @@
       - products.category
       - products.department
       - total_sale_price
-      
-
