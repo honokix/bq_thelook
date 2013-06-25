@@ -55,6 +55,14 @@
     html: |
       $<%= rendered_value %> 
  
+  - dimension: order_sequence_number
+    type: number
+    sql: |
+      (SELECT COUNT(*) 
+      FROM orders o
+      WHERE o.id < ${TABLE}.id
+        AND o.user_id=${TABLE}.user_id)+1
+ 
   - measure: total_order_profit
     type: sum
     sql: ${order_profit}
@@ -69,7 +77,7 @@
 
   - dimension_group: created
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, month_num]
     sql: ${TABLE}.created_at
 
   - dimension: id
