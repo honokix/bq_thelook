@@ -13,6 +13,14 @@
     type: int
     sets:
       - ignore
+      
+  - dimension: return_date
+    type: date
+    sql: $$.returned_at
+    
+  - dimension: returned
+    type: yesno
+    sql: ${return_date}  
 
   - dimension: order_id
     type: int

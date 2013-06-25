@@ -6,6 +6,8 @@
     sql: ${TABLE}.id
     detail: detail
 
+  - dimension: status
+
   - dimension: total_amount_of_order_usd
     type: number
     decimals: 2
