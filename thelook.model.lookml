@@ -22,7 +22,7 @@
   view: order_items
   label: Order Items
   conditionally_filter:                     # prevent runaway queries.
-    orders.created_date: 1 month            # by always requiring a filter 
+    orders.created_date: 30 days            # by always requiring a filter 
     unless:                                 # on one of the fields below.
       - orders.created_time
       - orders.created_week
