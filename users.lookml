@@ -100,7 +100,7 @@
 
   - dimension: latest_order
     type: time
-    timeframes: [date, week, month]
+    timeframes: [date, week, month, year]
     sql: $$.latest_order
 
   - dimension: days_as_customer
