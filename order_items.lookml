@@ -8,9 +8,6 @@
 
   - dimension: id
     type: int
-    
-  - dimension: legacy_item_id
-    type: int
 
   - dimension: inventory_item_id
     type: int
