@@ -52,6 +52,9 @@
     type: list
     list_field: item_name
 
+  - dimension: rank
+    type: int
+
   - dimension: retail_price
     type: number
     decimals: 2
