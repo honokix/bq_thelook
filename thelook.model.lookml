@@ -80,3 +80,4 @@
 # - base_view: schema_migrations
 #   view: schema_migrations
 #   label: Schema Migrations
+#   test comment
