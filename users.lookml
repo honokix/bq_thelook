@@ -12,7 +12,7 @@
   - dimension: age_tier
     type: tier
     sql: ${age}
-    tiers: [15,19,26,33]
+    tiers: [15,20,27,38]
 
   - dimension: city
 
@@ -20,7 +20,7 @@
 
   - dimension_group: created
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, year]
     sql: ${TABLE}.created_at
 
   - dimension: email
