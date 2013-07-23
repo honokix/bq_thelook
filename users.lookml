@@ -35,10 +35,10 @@
   - dimension: last_name
   
   - dimension: name
-    sql: CONCAT($$.first_name,' ', $$.last_name)
+    sql: CONCAT(${TABLE}.first_name,' ', ${TABLE}.last_name)
 
   - dimension: history
-    sql: $$.id
+    sql: ${TABLE}.id
     html: |
       <a href=orders?fields=orders.detail*&f[users.id]=<%= value %>>Orders</a>
       | <a href=order_items?fields=order_items.detail*&f[users.id]=<%= value %>>Items</a>
@@ -96,12 +96,12 @@
   - dimension_group: first_order
     type: time
     timeframes: [date, week, month]
-    sql: $$.first_order
+    sql: ${TABLE}.first_order
 
   - dimension: latest_order
     type: time
     timeframes: [date, week, month, year]
-    sql: $$.latest_order
+    sql: ${TABLE}.latest_order
 
   - dimension: days_as_customer
     type: int
