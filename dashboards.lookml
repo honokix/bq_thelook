@@ -8,7 +8,7 @@
       - name: top_5_categories
         type: column
         base_view: order_items
-        dimension: category.name
+        dimensions: category.name
         measures: [orders.count, order_items.count, orders.total_activation_count]
         filters:
           orders.created_date: 7 days
@@ -19,7 +19,7 @@
       - name: total_orders
         type: single_value
         base_view: orders
-        measure: [orders.count]
+        measures: [orders.count]
         filters:
           orders.created_date: 7 days
         width: 4
@@ -28,7 +28,7 @@
       - name: average_order_profit
         type: single_value
         base_view: orders
-        measure: [orders.average_order_profit]
+        measures: [orders.average_order_profit]
         filters:
           orders.created_date: 7 days
         width: 4
@@ -37,10 +37,10 @@
       - name: activations_as_%_of_total_orders
         type: pie
         base_view: orders
-        group: [orders.is_activation]
+        dimensions: [orders.is_activation]
         filters:
           orders.created_date: 7 days
-        measure: orders.count
+        measures: orders.count
         width: 4
         height: 4
   
@@ -61,7 +61,7 @@
       - name: activations_by_day
         type: area
         base_view: orders
-        dimension: orders.created_date
+        dimensions: orders.created_date
         measures: [orders.total_activation_revenue, orders.total_returning_shopper_revenue]
         filters:
           orders.created_date: 7 days
@@ -74,7 +74,7 @@
       - name: user_registrations
         type: line
         base_view: users
-        dimension: users.created_date
+        dimensions: users.created_date
         measures: [users.count]
         filters:
           users.created_date: 7 days
