@@ -97,7 +97,7 @@
 
   - dimension_group: created
     type: time
-    timeframes: [time, date, week, month, month_num]
+    timeframes: [time, date, week, month, month_num, year]
     sql: ${TABLE}.created_at
 
   - dimension: id
