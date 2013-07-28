@@ -4,7 +4,6 @@
   tile_size: 100
   elements:
   
-  
       - name: top_5_categories
         type: column
         base_view: order_items
