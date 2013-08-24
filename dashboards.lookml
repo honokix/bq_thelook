@@ -8,7 +8,7 @@
       - name: top_5_categories
         type: column
         base_view: order_items
-        dimension: category.name
+        dimensions: category.name
         measures: [orders.count, order_items.count, orders.total_activation_count]
         filters:
           orders.created_date: 7 days
@@ -19,7 +19,7 @@
       - name: total_orders
         type: single_value
         base_view: orders
-        measure: [orders.count]
+        measures: [orders.count]
         filters:
           orders.created_date: 7 days
         width: 4
@@ -34,7 +34,7 @@
         width: 4
         height: 2
         
-      - name: activations_as_%_of_total_orders
+      - name: activations_as_percent_of_total_orders
         type: pie
         base_view: orders
         group: [orders.is_activation]
