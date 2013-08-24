@@ -33,7 +33,7 @@
         width: 4
         height: 2
         
-      - name: activations_as_%_of_total_orders
+      - name: activations_as_percent_of_total_orders
         type: pie
         base_view: orders
         dimensions: [orders.is_activation]
