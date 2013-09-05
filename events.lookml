@@ -2,8 +2,7 @@
   fields:
 
   - measure: count
-    type: count_distinct
-    sql: ${TABLE}.id
+    type: count
     detail: detail
 
   - dimension_group: created
@@ -13,6 +12,7 @@
 
   - dimension: id
     type: int
+    primary_key: true
 
   - dimension: type_id
     type: int

@@ -1,22 +1,21 @@
 - view: order_items
   fields:
-
-  - measure: count
-    type: count_distinct
-    sql: ${TABLE}.id
-    detail: detail
-
   - dimension: id
     type: int
+    primary_key: true
+    sql: ${TABLE}.id
+    
+  - measure: count
+    type: count
+    detail: detail
 
   - dimension: inventory_item_id
     type: int
-    sets:
-      - ignore
+    hidden: true
       
   - dimension: return_date
     type: date
-    sql: $$.returned_at
+    sql: ${TABLE}.returned_at
     
   - dimension: returned
     type: yesno

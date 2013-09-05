@@ -1,14 +1,16 @@
 - view: inventory_items
   fields:
 
+  - dimension: id
+    primary_key: true
+    type: int
+
   - measure: count
-    type: count_distinct
-    sql: ${TABLE}.id
+    type: count
     detail: detail
 
   - measure: sold_count
-    type: count_distinct
-    sql: ${TABLE}.id
+    type: count
     detail: detail
     filters:
       sold: Yes
@@ -21,6 +23,7 @@
   - dimension: cost
     type: number
     decimals: 2
+    sql: ${TABLE}.cost
     
   - measure: total_cost
     type: sum
@@ -35,13 +38,9 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.created_at
 
-  - dimension: id
-    type: int
-
   - dimension: product_id
+    hidden: true
     type: int
-    sets:
-      - ignore
 
   - dimension_group: sold
     type: time
