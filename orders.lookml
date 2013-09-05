@@ -30,7 +30,7 @@
       )
 
   - dimension: average_total_amount_of_order_usd
-    type: avg
+    type: average
     sql: ${total_amount_of_order_usd}
     decimals: 2
 
@@ -105,8 +105,7 @@
 
   - dimension: user_id
     type: int
-    sets:
-      - ignore
+    hidden: true
 
 
   # ----- Detail ------

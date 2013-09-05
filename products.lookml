@@ -4,7 +4,7 @@
   - measure: count          # number of different products
     type: count_distinct
     sql: ${TABLE}.id
-    detail: detail          # set to show when the count field is clicked
+    detail: detail*         # set to show when the count field is clicked
 
   - dimension: brand.name   # brand name is a string in the db.
     sql: ${TABLE}.brand     #  we want a top level entity.

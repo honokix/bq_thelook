@@ -40,8 +40,7 @@
 
   - dimension: product_id
     type: int
-    sets:
-      - ignore
+    hidden: true
 
   - dimension_group: sold
     type: time
