@@ -65,7 +65,7 @@
       WHERE o.id < ${TABLE}.id
         AND o.user_id=${TABLE}.user_id)+1
         
-  - dimension: is_activation
+  - dimension: is_first_time_purchaser
     type: yesno
     sql: ${order_sequence_number} = 1
  
