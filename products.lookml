@@ -1,10 +1,15 @@
 - view: products
   fields:
 
-  - measure: count          # number of different products
-    type: count_distinct
+  - dimension: id
+    type: int
+    primary_key: true
     sql: ${TABLE}.id
     detail: detail*         # set to show when the count field is clicked
+
+  - measure: count          # number of different products
+    type: count
+    detail: detail          # set to show when the count field is clicked
 
   - dimension: brand.name   # brand name is a string in the db.
     sql: ${TABLE}.brand     #  we want a top level entity.
@@ -39,10 +44,8 @@
       - sub_detail*
       - -department.count
 
-  - dimension: id
-    type: int
-
   - dimension: item_name
+    sql: ${TABLE}.item_name
 
   - measure: brand.list
     type: list
@@ -54,12 +57,15 @@
 
   - dimension: rank
     type: int
+    sql: ${TABLE}.rank
 
   - dimension: retail_price
     type: number
     decimals: 2
+    sql: ${TABLE}.retail_price
 
   - dimension: sku
+    sql: ${TABLE}.sku
 
 
   # ----- Detail ------
