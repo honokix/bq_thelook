@@ -68,29 +68,29 @@
       WHERE o.id < ${TABLE}.id
         AND o.user_id=${TABLE}.user_id)+1
         
-  - dimension: is_first_time_purchaser
+  - dimension: is_first_purchase
     type: yesno
     sql: ${order_sequence_number} = 1
  
-  - measure: total_activation_revenue
+  - measure: total_first_purchase_revenue
     type: sum
     sql: ${total_amount_of_order_usd}
     decimals: 2
     filters:
-      is_activation: yes
+      is_first_purchase: yes
     
-  - measure: activation_count
+  - measure: first_purchase_count
     type: count
     detail: detail*
     filters:
-      is_activation: yes
+      is_first_purchase: yes
       
   - measure: total_returning_shopper_revenue
     type: sum
     sql: ${total_amount_of_order_usd}
     decimals: 2  
     filters:
-      is_activation: no
+      is_first_purchase: no
  
   - measure: total_order_profit
     type: sum

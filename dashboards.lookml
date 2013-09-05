@@ -8,7 +8,7 @@
         type: column
         base_view: order_items
         dimensions: category.name
-        measures: [orders.count, order_items.count, orders.total_activation_count]
+        measures: [orders.count, order_items.count, orders.total_first_purchase_count]
         filters:
           orders.created_date: 7 days
         limit: 5
@@ -36,7 +36,7 @@
       - name: activations_as_percent_of_total_orders
         type: pie
         base_view: orders
-        dimensions: [orders.is_activation]
+        dimensions: [orders.is_first_purchase]
         filters:
           orders.created_date: 7 days
         measures: orders.count
@@ -59,7 +59,7 @@
         type: area
         base_view: orders
         dimensions: orders.created_date
-        measures: [orders.total_activation_revenue, orders.total_returning_shopper_revenue]
+        measures: [orders.total_first_purchase_revenue, orders.total_returning_shopper_revenue]
         filters:
           orders.created_date: 7 days
         sorts: orders.created_date
@@ -92,7 +92,7 @@
         type: column
         base_view: order_items
         dimensions: category.name
-        measures: [orders.count, order_items.count, orders.total_activation_count]
+        measures: [orders.count, order_items.count, orders.total_first_purchase_count]
         filters:
           orders.created_date: 7 days
         limit: 5
@@ -151,7 +151,7 @@
         type: area
         base_view: orders
         dimensions: orders.created_date
-        measures: [orders.total_activation_revenue, orders.total_returning_shopper_revenue]
+        measures: [orders.total_first_purchase_revenue, orders.total_returning_shopper_revenue]
         filters:
           orders.created_date: 7 days
         sorts: orders.created_date
