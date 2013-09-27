@@ -1,11 +1,6 @@
 - view: orders
   fields:
 
-  - measure: count
-    type: count_distinct
-    sql: ${TABLE}.id
-    detail: detail
-
   - dimension: status
 
   - dimension: total_amount_of_order_usd
@@ -68,6 +63,11 @@
   - dimension: is_activation
     type: yesno
     sql: ${order_sequence_number} = 1
+    
+  - measure: count
+    type: count_distinct
+    sql: ${TABLE}.id
+    detail: detail
  
   - measure: total_activation_revenue
     type: sum
@@ -107,7 +107,7 @@
     type: int
     sets:
       - ignore
-
+      
 
   # ----- Detail ------
   sets:

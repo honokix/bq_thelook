@@ -16,6 +16,7 @@
   joins:
     - join: users
       sql_on: orders.user_id=users.id
+      
 
 
 - base_view: order_items
