@@ -1,9 +1,13 @@
 - view: users
   fields:
 
-  - measure: count
-    type: count_distinct
+  - dimension: id
+    type: int
+    primary_key: true
     sql: ${TABLE}.id
+
+  - measure: count
+    type: count
     detail: detail
 
   - dimension: age
@@ -29,8 +33,6 @@
 
   - dimension: gender
 
-  - dimension: id
-    type: int
 
   - dimension: last_name
   
@@ -81,6 +83,10 @@
       GROUP BY user_id
     indexes: [user_id]
   fields:
+  - dimension: user_id
+    primary_key: true
+    hidden: true
+  
   - dimension: lifetime_orders
     type: number
 

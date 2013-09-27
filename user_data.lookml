@@ -17,8 +17,7 @@
 
   - dimension: user_id
     type: int
-    sets:
-      - ignore
+    hidden: true
 
 
   # ----- Detail ------

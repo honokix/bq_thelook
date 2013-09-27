@@ -8,8 +8,8 @@
   label: Inventory Items
   joins:
     - join: products
-      sql_on: inventory_items.product_id=products.id
-
+      sql_foreign_key: inventory_items.product_id
+      
 - base_view: orders
   view: orders
   label: Orders
@@ -34,22 +34,22 @@
       - products.item_name
   joins:
     - join: inventory_items
-      sql_on: order_items.inventory_item_id=inventory_items.id
+      sql_foreign_key: order_items.inventory_item_id
       fields: inventory_items.export        # don't import all of the fields, just
                                             #  the fields in this set.
     - join: orders
-      sql_on: order_items.order_id=orders.id
+      sql_foreign_key: order_items.order_id
       
     - join: products
-      sql_on: inventory_items.product_id=products.id
+      sql_foreign_key: inventory_items.product_id
       required_joins: [inventory_items]
 
     - join: users
-      sql_on: orders.user_id=users.id
+      sql_foreign_key: orders.user_id
       required_joins: [orders]
 
     - join: users_orders_facts
-      sql_on: users.id=users_orders_facts.user_id
+      sql_foreign_key: users.id
       required_joins: [users]
 
 
@@ -62,23 +62,6 @@
   label: Users
   joins:
   - join: users_orders_facts
-    sql_on: users.id=users_orders_facts.user_id
+    sql_foreign_key: users.id
 
-# - base_view: user_data
-#   view: user_data
-#   label: User Data
-#   joins:
-#     - join: users
-#       sql_on: user_data.user_id=users.id
 
-# - base_view: events
-#   view: events
-#   label: Events
-#   joins:
-#     - join: users
-#       sql_on: events.user_id=users.id
-
-# - base_view: schema_migrations
-#   view: schema_migrations
-#   label: Schema Migrations
-#   test comment

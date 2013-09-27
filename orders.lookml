@@ -1,6 +1,10 @@
 - view: orders
   fields:
 
+  - dimension: id
+    primary_key: true
+    type: int
+
   - dimension: status
 
   - dimension: total_amount_of_order_usd
@@ -25,7 +29,7 @@
       )
 
   - dimension: average_total_amount_of_order_usd
-    type: avg
+    type: average
     sql: ${total_amount_of_order_usd}
     decimals: 2
 
@@ -60,7 +64,7 @@
       WHERE o.id < ${TABLE}.id
         AND o.user_id=${TABLE}.user_id)+1
         
-  - dimension: is_activation
+  - dimension: is_first_purchase
     type: yesno
     sql: ${order_sequence_number} = 1
     
@@ -69,19 +73,25 @@
     sql: ${TABLE}.id
     detail: detail
  
-  - measure: total_activation_revenue
+  - measure: total_first_purchase_revenue
     type: sum
-    sql: case when ${order_sequence_number} = 1 then ${total_amount_of_order_usd} else 0 end
+    sql: ${total_amount_of_order_usd}
     decimals: 2
+    filters:
+      is_first_purchase: yes
     
-  - measure: total_activation_count
-    type: count_distinct
-    sql: CASE WHEN ${order_sequence_number} = 1 THEN ${id} ELSE NULL END
-    
+  - measure: first_purchase_count
+    type: count
+    detail: detail*
+    filters:
+      is_first_purchase: yes
+      
   - measure: total_returning_shopper_revenue
     type: sum
-    sql: case when ${order_sequence_number} > 1 then ${total_amount_of_order_usd} else 0 end
+    sql: ${total_amount_of_order_usd}
     decimals: 2  
+    filters:
+      is_first_purchase: no
  
   - measure: total_order_profit
     type: sum
@@ -100,14 +110,9 @@
     timeframes: [time, date, week, month, month_num, year]
     sql: ${TABLE}.created_at
 
-  - dimension: id
-    type: int
 
   - dimension: user_id
     type: int
-    sets:
-      - ignore
-      
 
   # ----- Detail ------
   sets:

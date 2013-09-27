@@ -1,22 +1,21 @@
 - view: order_items
   fields:
-
-  - measure: count
-    type: count_distinct
-    sql: ${TABLE}.id
-    detail: detail
-
   - dimension: id
     type: int
+    primary_key: true
+    sql: ${TABLE}.id
+    
+  - measure: count
+    type: count
+    detail: detail
 
   - dimension: inventory_item_id
     type: int
-    sets:
-      - ignore
+    hidden: true
       
   - dimension: return_date
     type: date
-    sql: $$.returned_at
+    sql: ${TABLE}.returned_at
     
   - dimension: returned
     type: yesno
@@ -24,8 +23,7 @@
 
   - dimension: order_id
     type: int
-    sets:
-      - ignore
+    hidden: true
 
   - dimension: sale_price
     type: number
@@ -57,7 +55,7 @@
       $<%= rendered_value %>
 
   - measure: average_sale_price
-    type: avg
+    type: average
     sql: ${sale_price}
     decimals: 2
     html: |
@@ -65,7 +63,7 @@
 
   - measure: gross_margin_percentage
     type: number
-    sql: 100.0 * ${total_gross_margin}/${total_sale_price}    # postgres does integer division by default multiply by 100.0
+    sql: 100.0 * ${total_gross_margin}/${total_sale_price}    # postgres does integer division by default, so multiply by 100.0
     decimals: 2                                               #  to force real numbers.
     
   - measure: average_gross_margin
