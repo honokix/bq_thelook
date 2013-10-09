@@ -5,10 +5,6 @@
     primary_key: true
     type: int
 
-  - measure: count
-    type: count
-    detail: detail
-
   - dimension: status
 
   - dimension: total_amount_of_order_usd
@@ -71,6 +67,11 @@
   - dimension: is_first_purchase
     type: yesno
     sql: ${order_sequence_number} = 1
+    
+  - measure: count
+    type: count_distinct
+    sql: ${TABLE}.id
+    detail: detail
  
   - measure: total_first_purchase_revenue
     type: sum
@@ -112,8 +113,6 @@
 
   - dimension: user_id
     type: int
-    hidden: true
-
 
   # ----- Detail ------
   sets:
