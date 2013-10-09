@@ -4,30 +4,30 @@
   tile_size: 100
   elements:
   
-      - name: total_orders
+      - name: total_orders_last_30_days
         type: single_value
         base_view: orders
         measures: [orders.count]
         filters:
-          orders.created_date: 7 days
+          orders.created_date: 30 days
         width: 4
         height: 2
         
-      - name: average_order_profit
+      - name: average_order_profit_last_30_days
         type: single_value
         base_view: orders
         measures: [orders.average_order_profit]
         filters:
-          orders.created_date: 7 days
+          orders.created_date: 30 days
         width: 4
         height: 2
 
-      - name: average_order_profit
+      - name: first_purchasers_last_30_days
         type: single_value
         base_view: orders
-        measures: [orders.average_order_profit]
+        measures: [orders.first_purchase_count]
         filters:
-          orders.created_date: 7 days
+          orders.created_date: 30 days
         width: 4
         height: 2
         
