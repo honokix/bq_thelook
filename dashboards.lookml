@@ -144,7 +144,8 @@
         limit: 500
         width: 12
         height:
-        legend_align:
+        x_axis_label: "Order Month"
+        legend_align: right
         stacking: normal
         
 - dashboard: static_sales_this_week
