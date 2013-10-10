@@ -144,6 +144,7 @@
         limit: 500
         width: 12
         height:
+        y_axis_labels: ["Number of Orders"]
         x_axis_label: "Order Month"
         legend_align: right
         stacking: normal
