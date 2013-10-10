@@ -114,6 +114,39 @@
         y_axis_labels: ["# Users"]
         stacking: normal  
         
+      - name: cohort_thelook
+        title: "Cohort - First Purchase Date by Sign Up Month"
+        type: table
+        base_view: orders
+        dimensions: [users.created_month]
+        pivots: [orders.created_month]
+        measures: [orders.count_percent_of_total]
+        filters:
+          orders.created_month: 12 months
+          users.created_month: 12 months
+          orders.is_first_purchase: 'yes'
+        sorts: [users.created_month]
+        limit: 500
+        width: 12
+        height: 4
+        
+      - name: layer_cake_cohort
+        title: "Cohort - Orders Layered by Sign Up Month"
+        type: area
+        base_view: orders
+        dimensions: [orders.created_month]
+        pivots: [users.created_month]
+        measures: [orders.count]
+        filters:
+          orders.created_month: 12 months ago for 12 months
+          users.created_month: 12 months ago for 12 months
+        sorts: [orders.created_month]
+        limit: 500
+        width: 12
+        height:
+        legend_align:
+        stacking: normal
+        
 - dashboard: static_sales_this_week
   title: Weekly Stats
   layout: static
@@ -193,4 +226,3 @@
         top: 4
         x_axis_label_rotation: -45
         stacking: normal
-        
