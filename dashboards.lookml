@@ -1,4 +1,4 @@
-- dashboard: sales_this_week
+- dashboard: business_pulse
   title: "Business Pulse"
   layout: tile
   tile_size: 100
