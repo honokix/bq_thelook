@@ -22,18 +22,6 @@
       
 
 - base_view: order_items
-  view: order_items
-  conditionally_filter:
-    created_date: 30 days
-  joins:
-    - join: users
-      sql_foreign_key: orders.user_id
-      
-    - join: users_orders_facts
-      sql_foreign_key: orders.user_id
-      
-
-- base_view: order_items
   conditionally_filter:                     # prevent runaway queries.
     orders.created_date: 30 days            # by always requiring a filter 
     unless:                                 # on one of the fields below.
@@ -64,8 +52,10 @@
       sql_foreign_key: users.id
       required_joins: [users]
       
+      
 - base_view: products
   view: products
+
 
 - base_view: users
   joins:
