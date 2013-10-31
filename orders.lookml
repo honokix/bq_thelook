@@ -78,6 +78,14 @@
   - dimension: user_id
     type: int
     hidden: true
+
+  - dimension: month_text
+    sql_case:
+      September: ${created_month_num} = 9
+      October: ${created_month_num} = 10
+      November: ${created_month_num} = 11
+      December: ${created_month_num} = 12
+      else: Another Month
     
 # MEASURES #
 
@@ -85,6 +93,13 @@
     type: count_distinct
     sql: ${TABLE}.id
     detail: detail
+    
+  - measure: count_percent_of_total
+    label: Count (Percent of Total)
+    type: percent_of_total
+    detail: detail*
+    decimals: 1
+    sql: ${count}
  
   - measure: total_first_purchase_revenue
     type: sum
