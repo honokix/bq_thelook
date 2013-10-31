@@ -1,17 +1,26 @@
 - view: orders
   fields:
 
+# DIMENSIONS #
+
   - dimension: id
     primary_key: true
     type: int
 
+  - dimension_group: created
+    type: time
+    timeframes: [time, date, week, month, month_num, year]
+    sql: ${TABLE}.created_at   
+    
   - dimension: status
 
   - dimension: total_amount_of_order_usd
     type: number
     decimals: 2
     sql: |
-      (SELECT SUM(order_items.sale_price) FROM order_items WHERE order_items.order_id = orders.id)
+      (SELECT SUM(order_items.sale_price) 
+      FROM order_items 
+      WHERE order_items.order_id = orders.id)
 
   - dimension: total_amount_of_order_usd_tier
     type: tier
@@ -20,13 +29,11 @@
 
   - dimension: order_items_list
     sql: |
-      (
-        SELECT GROUP_CONCAT(products.item_name) 
+        (SELECT GROUP_CONCAT(products.item_name) 
         FROM order_items
         LEFT JOIN inventory_items ON order_items.inventory_item_id = inventory_items.id
         LEFT JOIN products ON inventory_items.product_id = products.id
-        WHERE order_items.order_id = orders.id
-      )
+        WHERE order_items.order_id = orders.id)
 
   - dimension: average_total_amount_of_order_usd
     type: average
@@ -37,17 +44,17 @@
     type: number
     decimals: 2
     sql: |
-      (
-        SELECT SUM(inventory_items.cost)
+        (SELECT SUM(inventory_items.cost)
         FROM order_items
         LEFT JOIN inventory_items ON order_items.inventory_item_id = inventory_items.id
-        WHERE order_items.order_id = orders.id
-      )
+        WHERE order_items.order_id = orders.id)
 
   - dimension: total_number_of_items
     type: int
     sql: |
-      (SELECT COUNT(order_items.id) FROM order_items WHERE order_items.order_id = orders.id)
+        (SELECT COUNT(order_items.id) 
+        FROM order_items 
+        WHERE order_items.order_id = orders.id)
 
   - dimension: order_profit
     type: number
@@ -62,12 +69,18 @@
       (SELECT COUNT(*) 
       FROM orders o
       WHERE o.id < ${TABLE}.id
-        AND o.user_id=${TABLE}.user_id)+1
+        AND o.user_id=${TABLE}.user_id) + 1
         
   - dimension: is_first_purchase
     type: yesno
     sql: ${order_sequence_number} = 1
     
+  - dimension: user_id
+    type: int
+    hidden: true
+    
+# MEASURES #
+
   - measure: count
     type: count_distinct
     sql: ${TABLE}.id
@@ -105,16 +118,8 @@
     sql: ${order_profit}
     decimals: 2
 
-  - dimension_group: created
-    type: time
-    timeframes: [time, date, week, month, month_num, year]
-    sql: ${TABLE}.created_at
+# SETS #
 
-
-  - dimension: user_id
-    type: int
-
-  # ----- Detail ------
   sets:
     detail:
       - id

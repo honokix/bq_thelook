@@ -1,59 +1,24 @@
 - view: products
   fields:
 
+# DIMENSIONS #
+
   - dimension: id
     type: int
     primary_key: true
     sql: ${TABLE}.id
-    detail: detail*         # set to show when the count field is clicked
-
-  - measure: count          # number of different products
-    type: count
-    detail: detail          # set to show when the count field is clicked
 
   - dimension: brand.name   # brand name is a string in the db.
     sql: ${TABLE}.brand     #  we want a top level entity.
-  
-  - measure: brand.count    # number of different brands.
-    type: count_distinct
-    sql: ${TABLE}.brand     # the field in the db to distinctly count
-    detail:                 # when the user clicks brand count
-      - brand.name          # show the brand
-      - sub_detail*         # a bunch of counts (see the set below)
-      - -brand.count        # but don't show the brand count, because it will always be 1
       
   - dimension: category.name    # We want category to be a top level entity even though doesn't
     sql: ${TABLE}.category      #  have its own table
 
-  - measure: category.count #
-    type: count_distinct
-    sql: ${TABLE}.category
-    detail: 
-      - category.name
-      - sub_detail*
-      - -category.count
-
   - dimension: department.name
     sql: ${TABLE}.department
 
-  - measure: department.count
-    type: count_distinct
-    sql: ${TABLE}.department
-    detail: 
-      - department.name
-      - sub_detail*
-      - -department.count
-
   - dimension: item_name
     sql: ${TABLE}.item_name
-
-  - measure: brand.list
-    type: list
-    list_field: brand.name
-
-  - measure: list
-    type: list
-    list_field: item_name
 
   - dimension: rank
     type: int
@@ -67,8 +32,46 @@
   - dimension: sku
     sql: ${TABLE}.sku
 
+# MEASURES #
 
-  # ----- Detail ------
+  - measure: count          # number of different products
+    type: count
+    detail: detail          # set to show when the count field is clicked
+    
+  - measure: brand.count    # number of different brands.
+    type: count_distinct
+    sql: ${TABLE}.brand     # the field in the db to distinctly count
+    detail:                 # when the user clicks brand count
+      - brand.name          # show the brand
+      - sub_detail*         # a bunch of counts (see the set below)
+      - -brand.count        # but don't show the brand count, because it will always be 1
+      
+  - measure: category.count #
+    type: count_distinct
+    sql: ${TABLE}.category
+    detail: 
+      - category.name
+      - sub_detail*
+      - -category.count
+      
+  - measure: department.count
+    type: count_distinct
+    sql: ${TABLE}.department
+    detail: 
+      - department.name
+      - sub_detail*
+      - -department.count
+      
+  - measure: brand.list
+    type: list
+    list_field: brand.name
+
+  - measure: list
+    type: list
+    list_field: item_name
+    
+# SETS #
+
   sets:
     detail:
       - id
@@ -93,4 +96,3 @@
       - order_items.count
       - inventory_items.count
       - products.count
-

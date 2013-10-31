@@ -1,9 +1,7 @@
 - view: events
   fields:
 
-  - measure: count
-    type: count
-    detail: detail
+# DIMENSIONS #
 
   - dimension_group: created
     type: time
@@ -23,12 +21,17 @@
 
   - dimension: value
 
+# MEASURES #
 
-  # ----- Detail ------
+  - measure: count
+    type: count
+    detail: detail
+  
+# SETS #
+
   sets:
     detail:
       - id
       - users.last_name
       - users.first_name
       - users.id
-

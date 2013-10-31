@@ -1,13 +1,12 @@
 - view: order_items
   fields:
+  
+# DIMENSIONS #
+
   - dimension: id
     type: int
     primary_key: true
     sql: ${TABLE}.id
-    
-  - measure: count
-    type: count
-    detail: detail
 
   - dimension: inventory_item_id
     type: int
@@ -42,6 +41,12 @@
     sql: ${item_gross_margin_percentage}
     tiers: [0,10,20,30,40,50,60,70,80,90]
 
+# MEASURES #
+
+  - measure: count
+    type: count
+    detail: detail
+    
   - measure: total_gross_margin
     type: sum
     sql: ${item_gross_margin}
@@ -71,8 +76,8 @@
     sql: ${item_gross_margin}
     decimals: 2
 
+# SETS #
 
-  # ----- Detail ------
   sets:
     detail:
       - orders.created_date

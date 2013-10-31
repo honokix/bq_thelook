@@ -1,27 +1,28 @@
 - scoping: true       # for backward compatibility
-
 - connection: thelook
 - include: thelook.includes
 
+
 - base_view: inventory_items
   view: inventory_items
-  label: Inventory Items
   joins:
     - join: products
       sql_foreign_key: inventory_items.product_id
       
+      
 - base_view: orders
   view: orders
-  label: Orders
   joins:
     - join: users
-      sql_on: orders.user_id=users.id
+      sql_foreign_key: orders.user_id
       
-
+    - join: users_orders_facts
+      sql_foreign_key: users.id
+      required_joins: [users]      
+      
 
 - base_view: order_items
   view: order_items
-  label: Order Items
   conditionally_filter:                     # prevent runaway queries.
     orders.created_date: 30 days            # by always requiring a filter 
     unless:                                 # on one of the fields below.
@@ -55,13 +56,10 @@
 
 - base_view: products
   view: products
-  label: Products
+
 
 - base_view: users
   view: users
-  label: Users
   joins:
   - join: users_orders_facts
     sql_foreign_key: users.id
-
-

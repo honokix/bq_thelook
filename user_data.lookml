@@ -1,10 +1,7 @@
 - view: user_data
   fields:
 
-  - measure: count
-    type: count_distinct
-    sql: ${TABLE}.id
-    detail: detail
+# DIMENSIONS #
 
   - dimension: has_ordered
     type: yesno
@@ -19,12 +16,18 @@
     type: int
     hidden: true
 
+# MEASURES #
 
-  # ----- Detail ------
+  - measure: count
+    type: count_distinct
+    sql: ${TABLE}.id
+    detail: detail
+
+# SETS #
+
   sets:
     detail:
       - id
       - users.last_name
       - users.first_name
       - users.id
-
