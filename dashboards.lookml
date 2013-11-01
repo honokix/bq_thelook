@@ -4,30 +4,30 @@
   tile_size: 100
   elements:
   
-      - name: total_orders_last_30_days
+      - name: total_orders_last_7_days
         type: single_value
         base_view: orders
         measures: [orders.count]
         filters:
-          orders.created_date: 30 days
+          orders.created_date: 7 days
         width: 4
         height: 2
         
-      - name: average_order_profit_last_30_days
+      - name: average_order_profit_last_7_days
         type: single_value
         base_view: orders
         measures: [orders.average_order_profit]
         filters:
-          orders.created_date: 30 days
+          orders.created_date: 7 days
         width: 4
         height: 2
 
-      - name: first_purchasers_last_30_days
+      - name: first_purchasers_last_7_days
         type: single_value
         base_view: orders
         measures: [orders.first_purchase_count]
         filters:
-          orders.created_date: 30 days
+          orders.created_date: 7 days
         width: 4
         height: 2
         
@@ -39,7 +39,7 @@
         pivots: [category.name]
         measures: [order_items.count]
         filters:
-          orders.created_date: 8 weeks
+          orders.created_date: 5 weeks ago for 5 weeks
           category.name: Blazers & Jackets, Sweaters, Pants, Shorts, Fashion Hoodies & Sweatshirts, Accessories
         sorts: [orders.created_week]
         limit: 500
@@ -105,7 +105,7 @@
         dimensions: users.created_date
         measures: [users.count]
         filters:
-          users.created_date: 10 weeks
+          users.created_date: 6 weeks
         sorts: users.created_date
         width: 5
         height: 3
