@@ -4,14 +4,13 @@
 
 
 - base_view: inventory_items
-  view: inventory_items
   joins:
     - join: products
       sql_foreign_key: inventory_items.product_id
       
       
 - base_view: orders
-  view: orders
+  persist_for: 120                          # cache for x minutes
   joins:
     - join: users
       sql_foreign_key: orders.user_id
@@ -22,6 +21,7 @@
       
 
 - base_view: order_items
+  persist_for: 120                          # cache for x minutes
   conditionally_filter:                     # prevent runaway queries.
     orders.created_date: 30 days            # by always requiring a filter 
     unless:                                 # on one of the fields below.
@@ -52,10 +52,7 @@
       sql_foreign_key: users.id
       required_joins: [users]
       
-      
 - base_view: products
-  view: products
-
 
 - base_view: users
   joins:
