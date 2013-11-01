@@ -70,11 +70,7 @@
     type: number
     sql: 100.0 * ${total_gross_margin}/${total_sale_price}    # postgres does integer division by default, so multiply by 100.0
     decimals: 2                                               #  to force real numbers.
-    
-  - measure: average_gross_margin
-    type: average
-    sql: ${item_gross_margin}
-    decimals: 2
+
 
 # SETS #
 

@@ -61,3 +61,6 @@
   joins:
   - join: users_orders_facts
     sql_foreign_key: users.id
+    
+  - join: users_sales_facts
+    sql_foreign_key: users.id

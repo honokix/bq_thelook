@@ -43,6 +43,11 @@
   - dimension: days_as_customer
     type: int
     
+  - dimension: days_as_customer_tiered
+    type: tier
+    tiers: [0,1,2,3,4,5,6,7,30,60,90,180]
+    sql: ${days_as_customer}
+    
   - dimension: days_since_purchase
     type: int
 
