@@ -49,6 +49,13 @@
     type: count
     detail: detail
 
+  - measure: count_percent_of_total
+    label: Count (Percent of Total)
+    type: percent_of_total
+    detail: detail*
+    decimals: 1
+    sql: ${count}
+
 # SETS #
 
   sets:

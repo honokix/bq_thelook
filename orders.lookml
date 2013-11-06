@@ -9,7 +9,7 @@
 
   - dimension_group: created
     type: time
-    timeframes: [time, date, week, month, month_num, year]
+    timeframes: [time, date, week, month, month_num, year, dow_num]
     sql: ${TABLE}.created_at   
     
   - dimension: status
@@ -88,6 +88,14 @@
       else: Another Month
     
 # MEASURES #
+
+  - measure: this_week_count
+    type: count_distinct
+    sql: ${TABLE}.id
+    detail: detail
+    filters:
+      created_date: 7 days
+      
 
   - measure: count
     type: count_distinct
