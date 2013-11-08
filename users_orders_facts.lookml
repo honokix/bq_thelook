@@ -12,6 +12,7 @@
       FROM orders
       GROUP BY user_id
     indexes: [user_id]
+    persist_for: 4 hours
 
   fields:
   - dimension: user_id
