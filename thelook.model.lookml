@@ -9,11 +9,11 @@
       sql_on: inventory_items.product_id = products.id
 
 - base_view: orders
-#   access_filter_fields: [users.state]
-  conditionally_filter:
-    orders.created_date: 30 days 
-    unless: [users.name, users.id]
-  
+  access_filter_fields: [users.state]
+#   conditionally_filter:
+#     orders.created_date: 30 days 
+#     unless: [users.name, users.id]
+#   
   joins:
     - join: users
       sql_foreign_key: orders.user_id
