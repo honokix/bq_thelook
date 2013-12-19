@@ -7,6 +7,7 @@
     primary_key: true
     type: int
 
+ # dow to timeframes
   - dimension_group: created
     type: time
     timeframes: [time, date, week, month, month_num, year, dow_num]
@@ -74,6 +75,10 @@
   - dimension: is_first_purchase
     type: yesno
     sql: ${order_sequence_number} = 1
+
+  - dimension: is_second_purchase
+    type: yesno
+    sql: ${order_sequence_number} = 2
     
   - dimension: user_id
     type: int
@@ -95,7 +100,13 @@
     detail: detail
     filters:
       created_date: 7 days
-      
+   
+  - measure: this_last_14_days_count
+    type: count_distinct
+    sql: ${TABLE}.id
+    detail: detail
+    filters:
+      created_date: 14 days
 
   - measure: count
     type: count_distinct

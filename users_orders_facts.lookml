@@ -21,6 +21,9 @@
   
   - dimension: lifetime_orders
     type: number
+    
+  - dimension: test
+    type: number 
 
   - dimension: lifetime_number_of_orders_tier
     type: tier

@@ -27,19 +27,34 @@
   - dimension: sale_price
     type: number
     decimals: 2
-
-  - dimension: item_gross_margin
+    
+  - dimension: gross_margin
     type: number
-    sql: (${sale_price} - ${inventory_items.cost})
+    decimals: 2
+    sql: ${sale_price} - ${inventory_items.cost}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
-  - dimension: item_gross_margin_percentage
-    type: number
-    sql: 100.0 * ${item_gross_margin}/${sale_price}
-
-  - dimension: item_gross_margin_percentage_tier
-    type: tier
-    sql: ${item_gross_margin_percentage}
-    tiers: [0,10,20,30,40,50,60,70,80,90]
+#   - dimension: item_gross_margin_percentage
+#     type: number
+#     sql: 100.0 * ${item_gross_margin}/${sale_price}
+# 
+#   - dimension: item_gross_margin_percentage_tier
+#     type: tier
+#     sql: ${item_gross_margin_percentage}
+#     tiers: [0,10,20,30,40,50,60,70,80,90]
 
 # MEASURES #
 
@@ -47,10 +62,10 @@
     type: count
     detail: detail
     
-  - measure: total_gross_margin
-    type: sum
-    sql: ${item_gross_margin}
-    decimals: 2
+#   - measure: total_gross_margin
+#     type: sum
+#     sql: ${item_gross_margin}
+#     decimals: 2
     
   - measure: total_sale_price
     type: sum
@@ -66,10 +81,10 @@
     html: |
       $<%= rendered_value %>
 
-  - measure: gross_margin_percentage
-    type: number
-    sql: 100.0 * ${total_gross_margin}/${total_sale_price}    # postgres does integer division by default, so multiply by 100.0
-    decimals: 2                                               #  to force real numbers.
+#   - measure: gross_margin_percentage
+#     type: number
+#     sql: 100.0 * ${total_gross_margin}/${total_sale_price}    # postgres does integer division by default, so multiply by 100.0
+#     decimals: 2                                               #  to force real numbers.
 
 
 # SETS #

@@ -3,7 +3,7 @@
   layout: tile
   tile_size: 100
   elements:
-  
+
       - name: total_orders_last_7_days
         type: single_value
         base_view: orders
