@@ -7,11 +7,14 @@
     primary_key: true
     type: int
 
- # dow to timeframes
   - dimension_group: created
     type: time
     timeframes: [time, date, week, month, month_num, year, dow_num]
     sql: ${TABLE}.created_at   
+  
+  - dimension: week_starting_tuesday
+    sql: |
+      DATE_ADD(DATE(CONVERT_TZ(orders.created_at,'UTC','America/Los_Angeles')),INTERVAL (0-(DAYOFWEEK(CONVERT_TZ(orders.created_at,'UTC','America/Los_Angeles'))+4)%7) DAY)
     
   - dimension: status
 
@@ -75,11 +78,11 @@
   - dimension: is_first_purchase
     type: yesno
     sql: ${order_sequence_number} = 1
-
+    
   - dimension: is_second_purchase
     type: yesno
     sql: ${order_sequence_number} = 2
-    
+
   - dimension: user_id
     type: int
     hidden: true

@@ -33,20 +33,6 @@
     decimals: 2
     sql: ${sale_price} - ${inventory_items.cost}
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
 #   - dimension: item_gross_margin_percentage
 #     type: number
 #     sql: 100.0 * ${item_gross_margin}/${sale_price}

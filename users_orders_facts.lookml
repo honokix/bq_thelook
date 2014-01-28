@@ -22,9 +22,6 @@
   - dimension: lifetime_orders
     type: number
     
-  - dimension: test
-    type: number 
-
   - dimension: lifetime_number_of_orders_tier
     type: tier
     tiers: [0,1,2,3,5,10]
@@ -49,7 +46,7 @@
     
   - dimension: days_as_customer_tiered
     type: tier
-    tiers: [0,1,2,3,4,5,6,7,30,60,90,180]
+    tiers: [0,10,50,100,500]
     sql: ${days_as_customer}
     
   - dimension: days_since_purchase
