@@ -35,7 +35,7 @@
   - dimension: history
     sql: ${TABLE}.id
     html: |
-      <a href=orders?fields=orders.detail*&f[users.id]=<%= value %>>Orders</a>
+      <a href=orders?fields=orders.order_set*&f[users.id]=<%= value %>>Orders</a>
       | <a href=order_items?fields=order_items.detail*&f[users.id]=<%= value %>>Items</a>
 
   - dimension: state

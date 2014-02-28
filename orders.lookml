@@ -69,7 +69,7 @@
       (SELECT COUNT(*) 
       FROM orders o
       WHERE o.id < ${TABLE}.id
-        AND o.user_id=${TABLE}.user_id) + 1
+      AND o.user_id=${TABLE}.user_id) + 1
         
   - dimension: is_first_purchase
     type: yesno
@@ -85,7 +85,7 @@
       October: ${created_month_num} = 10
       November: ${created_month_num} = 11
       December: ${created_month_num} = 12
-      else: Another Month
+      else: 'Another Month'
     
 # MEASURES #
 
@@ -96,11 +96,10 @@
     filters:
       created_date: 7 days
       
-
   - measure: count
     type: count_distinct
     sql: ${TABLE}.id
-    detail: detail
+    detail: order_set*
     
   - measure: count_percent_of_total
     label: Count (Percent of Total)
@@ -144,7 +143,7 @@
 # SETS #
 
   sets:
-    detail:
+    order_set:
       - id
       - created_time
       - users.name
