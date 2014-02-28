@@ -25,6 +25,7 @@
     hidden: true
 
   - dimension: sale_price
+    description: The sale price reflects the price thtat the item was sold at.
     type: number
     decimals: 2
 
