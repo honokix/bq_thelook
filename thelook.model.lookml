@@ -10,7 +10,7 @@
 - base_view: inventory_items
   joins:
     - join: products
-      sql_on: inventory_items.product_id = products.id
+      sql_foreign_key: inventory_items.product_id
 
 
 - base_view: orders
@@ -68,3 +68,5 @@
     
   - join: users_sales_facts
     sql_foreign_key: users.id
+    
+  

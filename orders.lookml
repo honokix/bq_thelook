@@ -101,6 +101,11 @@
     sql: ${TABLE}.id
     detail: order_set*
     
+  - measure: order_percent_change
+    type: percent_of_previous
+    sql: ${count}
+    
+    
   - measure: count_percent_of_total
     label: Count (Percent of Total)
     type: percent_of_total

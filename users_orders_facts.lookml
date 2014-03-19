@@ -1,20 +1,22 @@
 - view: users_orders_facts
   derived_table:
     sql: |
-      SELECT
-        orders.user_id as user_id
-        , COUNT(*) as lifetime_orders
-        , MIN(NULLIF(orders.created_at,0)) as first_order
-        , MAX(NULLIF(orders.created_at,0)) as latest_order
-        , DATEDIFF(MAX(NULLIF(orders.created_at,0)),MIN(NULLIF(orders.created_at,0))) as days_as_customer
-        , DATEDIFF(CURDATE(),MAX(NULLIF(orders.created_at,0))) as days_since_purchase
-        , COUNT(DISTINCT MONTH(NULLIF(orders.created_at,0))) as number_of_distinct_months_with_orders
+      SELECT orders.user_id AS user_id
+        , COUNT(*) AS lifetime_orders
+        , MIN(NULLIF(orders.created_at,0)) AS first_order
+        , MAX(NULLIF(orders.created_at,0)) AS latest_order
+        , DATEDIFF(MAX(NULLIF(orders.created_at,0)),MIN(NULLIF(orders.created_at,0))) AS days_as_customer
+        , DATEDIFF(CURDATE(),MAX(NULLIF(orders.created_at,0))) AS days_since_last_purchase
+        , COUNT(DISTINCT MONTH(NULLIF(orders.created_at,0))) AS number_of_distinct_months_with_orders
       FROM orders
       GROUP BY user_id
     indexes: [user_id]
     persist_for: 12 hours
-
+#     sql_trigger_value: SELECT CURDATE()
   fields:
+  
+# DIMENSIONS #
+
   - dimension: user_id
     primary_key: true
     hidden: true
