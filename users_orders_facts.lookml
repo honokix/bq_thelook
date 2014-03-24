@@ -6,7 +6,7 @@
         , MIN(NULLIF(orders.created_at,0)) AS first_order
         , MAX(NULLIF(orders.created_at,0)) AS latest_order
         , DATEDIFF(MAX(NULLIF(orders.created_at,0)),MIN(NULLIF(orders.created_at,0))) AS days_as_customer
-        , DATEDIFF(CURDATE(),MAX(NULLIF(orders.created_at,0))) AS days_since_last_purchase
+        , DATEDIFF(CURDATE(),MAX(NULLIF(orders.created_at,0))) AS days_since_purchase
         , COUNT(DISTINCT MONTH(NULLIF(orders.created_at,0))) AS number_of_distinct_months_with_orders
       FROM orders
       GROUP BY user_id
