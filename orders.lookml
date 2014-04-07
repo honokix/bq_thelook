@@ -39,11 +39,6 @@
         LEFT JOIN products ON inventory_items.product_id = products.id
         WHERE order_items.order_id = orders.id)
 
-  - dimension: average_total_amount_of_order_usd
-    type: average
-    sql: ${total_amount_of_order_usd}
-    decimals: 2
-
   - dimension: total_cost_of_order
     type: number
     decimals: 2
@@ -66,6 +61,13 @@
     sql: ${total_amount_of_order_usd} - ${total_cost_of_order}
     html: |
       $<%= rendered_value %> 
+      
+  - measure: profit_per_user
+    type: number 
+    decimals: 2
+    sql: 100.0 * ${order_profit}/NULLIF(${users.count},0)
+    html: |
+      $<%= rendered_value %>
  
   - dimension: order_sequence_number
     type: number
@@ -78,10 +80,6 @@
   - dimension: is_first_purchase
     type: yesno
     sql: ${order_sequence_number} = 1
-    
-  - dimension: is_second_purchase
-    type: yesno
-    sql: ${order_sequence_number} = 2
 
   - dimension: user_id
     type: int
@@ -97,6 +95,11 @@
     
 # MEASURES #
 
+  - measure: average_total_amount_of_order_usd
+    type: average
+    sql: ${total_amount_of_order_usd}
+    decimals: 2
+    
   - measure: this_week_count
     type: count_distinct
     sql: ${TABLE}.id
@@ -159,6 +162,8 @@
     type: average
     sql: ${order_profit}
     decimals: 2
+    html: |
+      $<%= rendered_value %>
 
 # SETS #
 
