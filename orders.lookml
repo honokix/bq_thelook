@@ -10,7 +10,7 @@
   - dimension_group: created
     type: time
     timeframes: [time, date, week, month, month_num, year, dow_num]
-    sql: ${TABLE}.created_at   
+    sql: ${TABLE}.created_at
   
   - dimension: week_starting_tuesday
     sql: |
@@ -80,6 +80,10 @@
   - dimension: is_first_purchase
     type: yesno
     sql: ${order_sequence_number} = 1
+  
+  - dimension: is_second_purchase
+    type: yesno
+    sql: ${order_sequence_number} = 2
 
   - dimension: user_id
     type: int
