@@ -121,7 +121,7 @@
   - measure: count
     type: count_distinct
     sql: ${TABLE}.id
-    detail: order_set*
+    detail: detail*
     
   - measure: order_percent_change
     type: percent_of_previous
@@ -172,7 +172,7 @@
 # SETS #
 
   sets:
-    order_set:
+    detail:
       - id
       - created_time
       - users.name
