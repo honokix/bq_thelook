@@ -158,7 +158,7 @@
     pivots: [category.name]
     measures: [order_items.count]
     filters:
-      orders.created_date: last 7 weeks
+      orders.created_date: 6 weeks ago for 6 weeks
       category.name: Accessories, Active, Blazers & Jackets, Clothing Sets
     sorts: [orders.created_week desc]
     colors: [yellow, orange, red, blue, purple]
