@@ -18,6 +18,7 @@
     
   elements:
   
+  
   - name: total_orders
     type: single_value
     base_view: orders
@@ -50,7 +51,7 @@
     
   - name: orders_by_day_and_category
     title: "Orders by Day and Category"
-    type: area
+    type: looker_area
     base_view: order_items
     dimensions: [orders.created_date]
     pivots: [category.name]
@@ -63,12 +64,109 @@
     sorts: [orders.created_date]
     limit: 500
     width: 6
+    colors: [lightskyblue, aqua, cornflowerblue, mediumblue, blue, navy]
     height: 4
     legend_align:
     y_axis_labels: "# Order Items"
     stacking: normal
     x_axis_datetime: yes
     hide_points: yes
+    hide_legend: yes
+    
+  - name: sales_by_date
+    title: "Sales by Date - Last 30 Days"
+    type: looker_column
+    base_view: order_items
+    dimensions: [orders.created_date]
+    measures: [order_items.total_sale_price]
+    listen:
+      state: users.state
+    filters: 
+      orders.created_date: last 30 days
+    sorts: [orders.created_date desc]
+    limit: 30
+    width: 6
+    height: 4
+    legend_align:
+    colors: [darkorange]
+    reference_lines:
+      - value: [max, mean]
+        label: Above Average
+        color: midnightblue
+      - value: 20000
+        label: Target
+        color: black
+      - value: [median]
+        label: Median
+        color: grey
+    hide_legend:
+    stacking:
+    x_axis_label:
+    x_axis_datetime: yes
+    x_axis_datetime_label:
+    x_axis_label_rotation:
+    y_axis_orientation: 
+    y_axis_labels: "Total Sale Price ($)"
+    y_axis_combined: yes
+    y_axis_min: 
+    hide_legend: yes
+    y_axis_max: 50000
+    hide_points: yes
+
+  - name: top_zips_map
+    title: "Top Zip Codes"
+    type: looker_geo_coordinates
+    map: usa
+    base_view: order_items
+    dimensions: [users.zipcode]
+    measures: [order_items.count]
+    colors: [gold, orange, darkorange, orangered, red]
+    listen:
+      date: orders.created_date
+      state: users.state
+    point_color: yellow
+    map_color: "#000061"
+    width: 6
+    point_radius: 3
+    sorts: [order_items.count desc]
+    height: 4
+    limit: 500
+    
+  - name: sales_state_map
+    title: "Sales by State"
+    type: looker_geo_choropleth
+    map: usa
+    base_view: order_items
+    dimensions: [users.state]
+    measures: [order_items.count]
+   # colors: [fff000, 000000] #gold, orange, darkorange, orangered, red]
+#     colors: [red, white, blue, yellow]
+    colors: [red, '#122f8c','#202e7e','#2e2d70','#3c2d63']
+    sorts: [order_items.total_sale_price desc]
+    listen:
+      date: orders.created_date
+      state: users.state
+    width: 6
+    height: 4
+    limit: 500  
+    
+  - name: sales_by_date_and_category
+    title: "Sales by Date and Category"
+    type: looker_donut_multiples
+    base_view: order_items
+    dimensions: [orders.created_week]
+    pivots: [category.name]
+    measures: [order_items.count]
+    filters:
+      orders.created_date: last 7 weeks
+      category.name: Accessories, Active, Blazers & Jackets, Clothing Sets
+    sorts: [orders.created_week desc]
+    colors: [yellow, orange, red, blue, purple]
+    limit: 24
+    width: 6
+    height: 4
+    charts_across: 3
+  
     
   - name: top_10_brands
     title: "Top 10 Brands"
@@ -84,23 +182,9 @@
     width: 6
     height: 4
     
-  - name: customer_cohort
-    type: table
-    base_view: orders
-    dimensions: [orders.created_month]
-    pivots: [users.created_month]
-    measures: [users.count]
-    filters:
-      orders.created_month: 12 months ago for 12 months
-      users.created_month: 12 months ago for 12 months
-    sorts: [orders.created_month desc]
-    limit: 500
-    width: 12
-    height:
-    
   - name: layer_cake_cohort
     title: "Cohort - Orders Layered by Sign Up Month"
-    type: area
+    type: looker_area
     base_view: orders
     dimensions: [orders.created_month]
     pivots: [users.created_month]
@@ -115,8 +199,23 @@
     y_axis_labels: ["Number of Orders"]
     x_axis_label: "Order Month"
     legend_align: right
+    colors: [FF0000,DE0000,C90000,9C0202,800101,6B0000,4D006B,0D0080,080054,040029,000000]
     stacking: normal
     hide_points: yes
+    
+  - name: customer_cohort
+    type: table
+    base_view: orders
+    dimensions: [orders.created_month]
+    pivots: [users.created_month]
+    measures: [users.count]
+    filters:
+      orders.created_month: 12 months ago for 12 months
+      users.created_month: 12 months ago for 12 months
+    sorts: [orders.created_month desc]
+    limit: 500
+    width: 12
+    height:  
         
 - dashboard: 2_brand_overview
   title: "2) Brand Overview"
@@ -171,7 +270,7 @@
     
   - name: sales_over_time
     title: "Sales, Last 90 Days"
-    type: line
+    type: looker_line
     base_view: order_items
     dimensions: [orders.created_date]
     measures: [order_items.total_sale_price, order_items.average_sale_price]
@@ -181,7 +280,7 @@
       orders.created_date: 90 days
     limit: 500
     width: 12
-    height: 2
+    height: 3
     legend_align:
     stacking:
     x_axis_label:
@@ -189,11 +288,13 @@
     x_axis_datetime_label:
     x_axis_label_rotation:
     y_axis_orientation: [left,right]
+    colors: [purple, gold]
     y_axis_combined:
     y_axis_labels: ["Total Sale Amount","Average Selling Price"]
     y_axis_min:
     y_axis_max:
     hide_points: yes
+    hide_legend: yes
   
         
   - name: sales_by_department_and_category
@@ -301,7 +402,7 @@
 
   - name: sales_by_day
     title: "Sales by Date"
-    type: line
+    type: looker_line
     base_view: order_items
     dimensions: [orders.created_date]
     measures: [order_items.average_sale_price, order_items.total_sale_price]
@@ -327,7 +428,7 @@
     
   - name: demographic
     title: "Age Demographic"
-    type: column
+    type: looker_column
     base_view: order_items
     dimensions: [users.age_tier]
     measures: [order_items.average_sale_price, order_items.count]
@@ -365,5 +466,3 @@
     limit: 25
     width: 6
     height: 4
-  
-    

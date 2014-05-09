@@ -42,7 +42,12 @@
 
   - dimension: zip
     type: int
-
+    
+  - dimension: zipcode
+    type: zipcode
+    hidden: true
+    sql: ${zip}
+    
 # MEASURES #
 
   - measure: count
