@@ -18,7 +18,7 @@
     
   - dimension: status
 
-  - dimension: total_amount_of_order_usd
+  - dimension: total_amount_of_order_us_dollars
     type: number
     decimals: 2
     sql: |
