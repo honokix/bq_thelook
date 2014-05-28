@@ -35,7 +35,7 @@
   - dimension: history
     sql: ${TABLE}.id
     html: |
-      <a href=/explore/thelook/orders?fields=orders.detail*&f[users.id]=<%= value %>>Orders</a>
+      <a href=/explore/thelook/new_orders?fields=new_orders.detail*&f[users.id]=<%= value %>>new_orders</a>
       | <a href=/explore/thelook/order_items?fields=order_items.detail*&f[users.id]=<%= value %>>Items</a>
 
   - dimension: state
@@ -76,5 +76,5 @@
       - age
       - history
         # Counters for views that join 'users'
-      - orders.count
+      - new_orders.count
       - order_items.count

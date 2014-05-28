@@ -1,14 +1,14 @@
 - view: users_orders_facts
   derived_table:
     sql: |
-      SELECT orders.user_id AS user_id
-        , COUNT(*) AS lifetime_orders
-        , MIN(NULLIF(orders.created_at,0)) AS first_order
-        , MAX(NULLIF(orders.created_at,0)) AS latest_order
-        , DATEDIFF(MAX(NULLIF(orders.created_at,0)),MIN(NULLIF(orders.created_at,0))) AS days_as_customer
-        , DATEDIFF(CURDATE(),MAX(NULLIF(orders.created_at,0))) AS days_since_purchase
-        , COUNT(DISTINCT MONTH(NULLIF(orders.created_at,0))) AS number_of_distinct_months_with_orders
-      FROM orders
+      SELECT new_orders.user_id AS user_id
+        , COUNT(*) AS lifetime_new_orders
+        , MIN(NULLIF(new_orders.created_at,0)) AS first_order
+        , MAX(NULLIF(new_orders.created_at,0)) AS latest_order
+        , DATEDIFF(MAX(NULLIF(new_orders.created_at,0)),MIN(NULLIF(new_orders.created_at,0))) AS days_as_customer
+        , DATEDIFF(CURDATE(),MAX(NULLIF(new_orders.created_at,0))) AS days_since_purchase
+        , COUNT(DISTINCT MONTH(NULLIF(new_orders.created_at,0))) AS number_of_distinct_months_with_new_orders
+      FROM new_orders
       GROUP BY user_id
     indexes: [user_id]
     persist_for: 12 hours
@@ -21,17 +21,17 @@
     primary_key: true
     hidden: true
   
-  - dimension: lifetime_orders
+  - dimension: lifetime_new_orders
     type: number
     
-  - dimension: lifetime_number_of_orders_tier
+  - dimension: lifetime_number_of_new_orders_tier
     type: tier
     tiers: [0,1,2,3,5,10]
-    sql: ${lifetime_orders}
+    sql: ${lifetime_new_orders}
     
   - dimension: repeat_customer
     type: yesno
-    sql: ${lifetime_orders} > 1
+    sql: ${lifetime_new_orders} > 1
   
   - dimension_group: first_order
     type: time
@@ -54,5 +54,5 @@
   - dimension: days_since_purchase
     type: int
 
-  - dimension: number_of_distinct_months_with_orders
+  - dimension: number_of_distinct_months_with_new_orders
     type: int

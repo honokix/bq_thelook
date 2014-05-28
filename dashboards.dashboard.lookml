@@ -19,49 +19,49 @@
   elements:
   
   
-  - name: total_orders
+  - name: total_new_orders
     type: single_value
-    base_view: orders
-    measures: [orders.count]
+    base_view: new_orders
+    measures: [new_orders.count]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       state: users.state
     width: 4
     height: 2
     
   - name: average_order_profit
     type: single_value
-    base_view: orders
-    measures: [orders.average_order_profit]
+    base_view: new_orders
+    measures: [new_orders.average_order_profit]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       state: users.state
     width: 4
     height: 2
 
   - name: first_purchasers
     type: single_value
-    base_view: orders
-    measures: [orders.first_purchase_count]
+    base_view: new_orders
+    measures: [new_orders.first_purchase_count]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       state: users.state
     width: 4
     height: 2
     
-  - name: orders_by_day_and_category
-    title: "Orders by Day and Category"
+  - name: new_orders_by_day_and_category
+    title: "new_orders by Day and Category"
     type: looker_area
     base_view: order_items
-    dimensions: [orders.created_date]
+    dimensions: [new_orders.created_date]
     pivots: [category.name]
     measures: [order_items.count]
     filters:
       category.name: Blazers & Jackets, Sweaters, Pants, Shorts, Fashion Hoodies & Sweatshirts, Accessories
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       state: users.state
-    sorts: [orders.created_date]
+    sorts: [new_orders.created_date]
     limit: 500
     width: 6
     colors: [lightskyblue, aqua, cornflowerblue, mediumblue, blue, navy]
@@ -77,13 +77,13 @@
     title: "Sales by Date - Last 30 Days"
     type: looker_column
     base_view: order_items
-    dimensions: [orders.created_date]
+    dimensions: [new_orders.created_date]
     measures: [order_items.total_sale_price]
     listen:
       state: users.state
     filters: 
-      orders.created_date: last 30 days
-    sorts: [orders.created_date desc]
+      new_orders.created_date: last 30 days
+    sorts: [new_orders.created_date desc]
     limit: 30
     width: 6
     height: 4
@@ -122,7 +122,7 @@
     measures: [order_items.count]
     colors: [gold, orange, darkorange, orangered, red]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       state: users.state
     point_color: yellow
     map_color: "#000061"
@@ -144,7 +144,7 @@
     colors: [red, '#122f8c','#202e7e','#2e2d70','#3c2d63']
     sorts: [order_items.total_sale_price desc]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       state: users.state
     width: 6
     height: 4
@@ -154,13 +154,13 @@
     title: "Sales by Date and Category"
     type: looker_donut_multiples
     base_view: order_items
-    dimensions: [orders.created_week]
+    dimensions: [new_orders.created_week]
     pivots: [category.name]
     measures: [order_items.count]
     filters:
-      orders.created_date: 6 weeks ago for 6 weeks
+      new_orders.created_date: 6 weeks ago for 6 weeks
       category.name: Accessories, Active, Blazers & Jackets, Clothing Sets
-    sorts: [orders.created_week desc]
+    sorts: [new_orders.created_week desc]
     colors: [yellow, orange, red, blue, purple]
     limit: 24
     width: 6
@@ -175,7 +175,7 @@
     dimensions: [brand.name]
     measures: [order_items.count, order_items.total_sale_price, order_items.average_sale_price]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       state: users.state
     sorts: [order_items.count desc]
     limit: 15
@@ -183,20 +183,20 @@
     height: 4
     
   - name: layer_cake_cohort
-    title: "Cohort - Orders Layered by Sign Up Month"
+    title: "Cohort - new_orders Layered by Sign Up Month"
     type: looker_area
-    base_view: orders
-    dimensions: [orders.created_month]
+    base_view: new_orders
+    dimensions: [new_orders.created_month]
     pivots: [users.created_month]
-    measures: [orders.count]
+    measures: [new_orders.count]
     filters:
-      orders.created_month: 12 months ago for 12 months
+      new_orders.created_month: 12 months ago for 12 months
       users.created_month: 12 months ago for 12 months
-    sorts: [orders.created_month]
+    sorts: [new_orders.created_month]
     limit: 500
     width: 12
     height:
-    y_axis_labels: ["Number of Orders"]
+    y_axis_labels: ["Number of new_orders"]
     x_axis_label: "Order Month"
     legend_align: right
     colors: [FF0000,DE0000,C90000,9C0202,800101,6B0000,4D006B,0D0080,080054,040029,000000]
@@ -205,14 +205,14 @@
     
   - name: customer_cohort
     type: table
-    base_view: orders
-    dimensions: [orders.created_month]
+    base_view: new_orders
+    dimensions: [new_orders.created_month]
     pivots: [users.created_month]
     measures: [users.count]
     filters:
-      orders.created_month: 12 months ago for 12 months
+      new_orders.created_month: 12 months ago for 12 months
       users.created_month: 12 months ago for 12 months
-    sorts: [orders.created_month desc]
+    sorts: [new_orders.created_month desc]
     limit: 500
     width: 12
     height:  
@@ -238,12 +238,12 @@
     
   elements:
   
-  - name: total_orders
+  - name: total_new_orders
     type: single_value
     base_view: order_items
-    measures: [orders.count]
+    measures: [new_orders.count]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       brand: brand.name
     width: 4
     height: 2
@@ -253,7 +253,7 @@
     base_view: order_items
     measures: [users.count]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       brand: brand.name
     width: 4
     height: 2  
@@ -263,7 +263,7 @@
     base_view: order_items
     measures: [order_items.average_sale_price]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       brand: brand.name
     width: 4
     height: 2
@@ -272,12 +272,12 @@
     title: "Sales, Last 90 Days"
     type: looker_line
     base_view: order_items
-    dimensions: [orders.created_date]
+    dimensions: [new_orders.created_date]
     measures: [order_items.total_sale_price, order_items.average_sale_price]
     listen:
       brand: brand.name
     filters:
-      orders.created_date: 90 days
+      new_orders.created_date: 90 days
     limit: 500
     width: 12
     height: 3
@@ -305,7 +305,7 @@
     pivots: [department.name]
     measures: [order_items.count, order_items.total_sale_price]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       brand: brand.name
     sorts: [order_items.count desc]
     limit: 500
@@ -319,7 +319,7 @@
     dimensions: [users.name, users.email, users.history]
     measures: [order_items.count, order_items.total_sale_price]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       brand: brand.name
     sorts: [order_items.count desc]
     limit: 15
@@ -353,13 +353,13 @@
     
   elements:
   
-  - name: total_orders
+  - name: total_new_orders
     type: single_value
     base_view: order_items
-    measures: [orders.count]
+    measures: [new_orders.count]
     listen:
       category: category.name
-      date: orders.created_date
+      date: new_orders.created_date
       department: department.name
     width: 4
     height: 2  
@@ -369,7 +369,7 @@
     base_view: order_items
     measures: [users.count]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       category: category.name
       department: department.name
     width: 4
@@ -380,7 +380,7 @@
     base_view: order_items
     measures: [order_items.average_sale_price]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       category: category.name
       department: department.name
     width: 4
@@ -391,9 +391,9 @@
     type: table
     base_view: order_items
     dimensions: [category.name]
-    measures: [order_items.average_sale_price, users.count, orders.count]
+    measures: [order_items.average_sale_price, users.count, new_orders.count]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       department: department.name
     sorts: [order_items.average_sale_price desc]
     width: 6
@@ -404,13 +404,13 @@
     title: "Sales by Date"
     type: looker_line
     base_view: order_items
-    dimensions: [orders.created_date]
+    dimensions: [new_orders.created_date]
     measures: [order_items.average_sale_price, order_items.total_sale_price]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       category: category.name
       department: department.name
-    sorts: [orders.created_date]
+    sorts: [new_orders.created_date]
     width: 6
     height: 4
     legend_align:
@@ -433,7 +433,7 @@
     dimensions: [users.age_tier]
     measures: [order_items.average_sale_price, order_items.count]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       category: category.name
       department: department.name    
     sorts: [users.age_tier]
@@ -448,7 +448,7 @@
     x_axis_label_rotation:
     y_axis_orientation: [left,right]
     y_axis_combined:
-    y_axis_labels: ["Average Selling Price ($)","# Orders"]
+    y_axis_labels: ["Average Selling Price ($)","# new_orders"]
     y_axis_min:
     y_axis_max:
     
@@ -459,7 +459,7 @@
     dimensions: [brand.name]
     measures: [order_items.count, order_items.gross_margin_percentage, order_items.total_sale_price]
     listen:
-      date: orders.created_date
+      date: new_orders.created_date
       category: category.name
       department: department.name    
     sorts: [order_items.total_sale_price desc]

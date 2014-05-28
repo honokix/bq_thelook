@@ -7,7 +7,7 @@
         , ROUND(AVG(oi.sale_price), 2) AS average_item_price
         , ROUND(SUM(oi.sale_price), 2) AS lifetime_revenue
       FROM order_items AS oi
-      LEFT JOIN orders AS o
+      LEFT JOIN new_orders AS o
       ON oi.order_id = o.id
       GROUP BY user_id
     indexes: [user_id]

@@ -90,7 +90,7 @@
       - retail_price
         # Counters for views that join 'products'
       - customers.count
-      - orders.count
+      - new_orders.count
       - order_items.count
       - inventory_items.count
   
@@ -100,7 +100,7 @@
       - department.count
       - count
       - customers.count
-      - orders.count
+      - new_orders.count
       - order_items.count
       - inventory_items.count
       - products.count

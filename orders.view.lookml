@@ -14,7 +14,7 @@
   
   - dimension: week_starting_tuesday
     sql: |
-      DATE_ADD(DATE(CONVERT_TZ(orders.created_at,'UTC','America/Los_Angeles')),INTERVAL (0-(DAYOFWEEK(CONVERT_TZ(orders.created_at,'UTC','America/Los_Angeles'))+4)%7) DAY)
+      DATE_ADD(DATE(CONVERT_TZ(new_orders.created_at,'UTC','America/Los_Angeles')),INTERVAL (0-(DAYOFWEEK(CONVERT_TZ(new_orders.created_at,'UTC','America/Los_Angeles'))+4)%7) DAY)
     
   - dimension: status
 
@@ -24,7 +24,7 @@
     sql: |
       (SELECT SUM(order_items.sale_price) 
       FROM order_items 
-      WHERE order_items.order_id = orders.id)
+      WHERE order_items.order_id = new_orders.id)
 
   - dimension: total_amount_of_order_usd_tier
     type: tier
@@ -37,7 +37,7 @@
         FROM order_items
         LEFT JOIN inventory_items ON order_items.inventory_item_id = inventory_items.id
         LEFT JOIN products ON inventory_items.product_id = products.id
-        WHERE order_items.order_id = orders.id)
+        WHERE order_items.order_id = new_orders.id)
 
   - dimension: total_cost_of_order
     type: number
@@ -46,14 +46,14 @@
         (SELECT SUM(inventory_items.cost)
         FROM order_items
         LEFT JOIN inventory_items ON order_items.inventory_item_id = inventory_items.id
-        WHERE order_items.order_id = orders.id)
+        WHERE order_items.order_id = new_orders.id)
 
   - dimension: total_number_of_items
     type: int
     sql: |
         (SELECT COUNT(order_items.id) 
         FROM order_items 
-        WHERE order_items.order_id = orders.id)
+        WHERE order_items.order_id = new_orders.id)
 
   - dimension: order_profit
     type: number
@@ -73,7 +73,7 @@
     type: number
     sql: |
       (SELECT COUNT(*) 
-      FROM orders o
+      FROM new_orders o
       WHERE o.id < ${TABLE}.id
       AND o.user_id=${TABLE}.user_id) + 1
         
@@ -178,6 +178,6 @@
       - users.name
       - users.history
       - total_cost_of_order
-        # Counters for views that join 'orders'
+        # Counters for views that join 'new_orders'
       - order_items.count
       - products.list
