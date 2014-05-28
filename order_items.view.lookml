@@ -78,9 +78,9 @@
 
   sets:
     detail:
-      - new_orders.created_date
+      - orders.created_date
       - id
-      - new_orders.id
+      - orders.id
       - users.name
       - users.history
       - products.item_name
