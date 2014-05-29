@@ -54,10 +54,12 @@
     
   - measure: total_cost
     type: sum
+    decimals: 2
     sql: ${cost}
 
   - measure: average_cost
     type: average
+    decimals: 2
     sql: ${cost}    
     
 # SETS #
