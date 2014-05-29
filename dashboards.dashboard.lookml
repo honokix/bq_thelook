@@ -50,7 +50,7 @@
     height: 2
     
   - name: orders_by_day_and_category
-    title: "Orders by Day and Category"
+    title: "orders by Day and Category"
     type: looker_area
     base_view: order_items
     dimensions: [orders.created_date]
@@ -183,7 +183,7 @@
     height: 4
     
   - name: layer_cake_cohort
-    title: "Cohort - Orders Layered by Sign Up Month"
+    title: "Cohort - orders Layered by Sign Up Month"
     type: looker_area
     base_view: orders
     dimensions: [orders.created_month]
@@ -196,7 +196,7 @@
     limit: 500
     width: 12
     height:
-    y_axis_labels: ["Number of Orders"]
+    y_axis_labels: ["Number of orders"]
     x_axis_label: "Order Month"
     legend_align: right
     colors: [FF0000,DE0000,C90000,9C0202,800101,6B0000,4D006B,0D0080,080054,040029,000000]
@@ -448,7 +448,7 @@
     x_axis_label_rotation:
     y_axis_orientation: [left,right]
     y_axis_combined:
-    y_axis_labels: ["Average Selling Price ($)","# Orders"]
+    y_axis_labels: ["Average Selling Price ($)","# orders"]
     y_axis_min:
     y_axis_max:
     
