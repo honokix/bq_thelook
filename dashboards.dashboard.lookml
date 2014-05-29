@@ -50,7 +50,7 @@
     height: 2
     
   - name: orders_by_day_and_category
-    title: "orders by Day and Category"
+    title: "Orders by Day and Category"
     type: looker_area
     base_view: order_items
     dimensions: [orders.created_date]
