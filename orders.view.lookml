@@ -6,6 +6,7 @@
   - dimension: id
     primary_key: true
     type: int
+    sql: ${TABLE}.id
 
   - dimension_group: created
     type: time
