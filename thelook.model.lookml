@@ -1,7 +1,7 @@
 # PRELIMINARIES # 
 
-- scoping: true       # for backward compatibility
 - connection: thelook
+- scoping: true                          # for backward compatibility
 - include: "*.lookml"
 
 
@@ -27,8 +27,8 @@
       
 
 - base_view: order_items
-  conditionally_filter:                     # prevent runaway queries.
-    orders.created_date: 30 days            # by always requiring a filter 
+  conditionally_filter:                     # prevent runaway queries
+    orders.created_date: '30 days'          # by always requiring a filter 
     unless:                                 # on one of the fields below.
       - orders.created_time
       - orders.created_week
@@ -41,7 +41,7 @@
     - join: inventory_items
       sql_foreign_key: order_items.inventory_item_id
       fields: inventory_items.export        # don't import all of the fields, just
-                                            #  the fields in this set.
+                                            # the fields in this set.
     - join: orders
       sql_foreign_key: order_items.order_id
       

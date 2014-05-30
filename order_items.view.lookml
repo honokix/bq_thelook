@@ -34,14 +34,14 @@
     decimals: 2
     sql: ${sale_price} - ${inventory_items.cost}
     
-#   - dimension: item_gross_margin_percentage
-#     type: number
-#     sql: 100.0 * ${item_gross_margin}/${sale_price}
-# 
-#   - dimension: item_gross_margin_percentage_tier
-#     type: tier
-#     sql: ${item_gross_margin_percentage}
-#     tiers: [0,10,20,30,40,50,60,70,80,90]
+  - dimension: item_gross_margin_percentage
+    type: number
+    sql: 100.0 * ${gross_margin}/NULLIF(${sale_price}, 0)
+
+  - dimension: item_gross_margin_percentage_tier
+    type: tier
+    sql: ${item_gross_margin_percentage}
+    tiers: [0,10,20,30,40,50,60,70,80,90]
 
 # MEASURES #
 
@@ -49,10 +49,10 @@
     type: count
     detail: detail
     
-#   - measure: total_gross_margin
-#     type: sum
-#     sql: ${item_gross_margin}
-#     decimals: 2
+  - measure: total_gross_margin
+    type: sum
+    decimals: 2
+    sql: ${gross_margin}
     
   - measure: total_sale_price
     type: sum
@@ -67,6 +67,11 @@
     decimals: 2
     html: |
       $<%= rendered_value %>
+  
+  - measure: average_gross_margin
+    type: average
+    sql: ${gross_margin}
+    decimals: 2    
 
 #   - measure: gross_margin_percentage
 #     type: number

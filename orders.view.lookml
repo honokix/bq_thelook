@@ -6,6 +6,7 @@
   - dimension: id
     primary_key: true
     type: int
+    sql: ${TABLE}.id
 
   - dimension_group: created
     type: time
@@ -80,10 +81,6 @@
   - dimension: is_first_purchase
     type: yesno
     sql: ${order_sequence_number} = 1
-  
-  - dimension: is_second_purchase
-    type: yesno
-    sql: ${order_sequence_number} = 2
 
   - dimension: user_id
     type: int
@@ -117,6 +114,13 @@
     detail: detail
     filters:
       created_date: 14 days
+   
+  - measure: this_last_30_days_count
+    type: count_distinct
+    sql: ${TABLE}.id
+    detail: detail
+    filters:
+      created_date: 30 days
 
   - measure: count
     type: count_distinct
@@ -126,7 +130,6 @@
   - measure: order_percent_change
     type: percent_of_previous
     sql: ${count}
-    
     
   - measure: count_percent_of_total
     label: Count (Percent of Total)
