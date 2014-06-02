@@ -17,33 +17,7 @@
     dimension: users.state
     
   elements:
-  
-  - name: test_dashboard_tile
-    title: Add a title
-    type: line
-    base_view: orders
-    dimensions: [orders.created_date]
-    measures: [orders.count, orders.average_order_profit]
-    filters:
-      orders.created_date: last 30 days
-    limit: 500
-    width: 12
-    height: 4
-    legend_align:
-    hide_legend:
-    stacking:
-    x_axis_label:
-    x_axis_datetime:
-    x_axis_datetime_label:
-    x_axis_label_rotation:
-    y_axis_orientation:
-    y_axis_combined:
-    y_axis_labels:
-    y_axis_min:
-    y_axis_max:
-    hide_points:
-  
-  
+
   
   - name: total_orders
     type: single_value
