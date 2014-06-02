@@ -10,7 +10,7 @@
 
   - dimension_group: created
     type: time
-    timeframes: [time, date, week, month, month_num, year, dow_num]
+    timeframes: [time, date, week, month, month_num, year, dow_num, hod]
     sql: ${TABLE}.created_at
   
   - dimension: week_starting_tuesday
@@ -19,7 +19,7 @@
     
   - dimension: status
 
-  - dimension: total_amount_of_order_us_dollars
+  - dimension: total_amount_of_order_usd
     type: number
     decimals: 2
     sql: |
