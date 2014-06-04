@@ -3,6 +3,7 @@
 - connection: thelook
 - scoping: true                          # for backward compatibility
 - include: "*.lookml"
+- template: erb
 
 
 # BASE VIEWS #
