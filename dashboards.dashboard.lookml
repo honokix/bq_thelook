@@ -2,6 +2,7 @@
   title: "1) Business Pulse"
   layout: tile
   tile_size: 100
+  auto_run: false
   
   filters:
   
