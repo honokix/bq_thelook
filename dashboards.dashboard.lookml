@@ -2,8 +2,7 @@
   title: "1) Business Pulse"
   layout: tile
   tile_size: 100
-  auto_run: false
-  
+
   filters:
   
   - name: date
@@ -331,7 +330,8 @@
   title: "3) Category Lookup"
   layout: tile
   tile_size: 100
-  
+  auto_run: false
+
   filters:
   
   - name: category
