@@ -13,4 +13,3 @@
   sets:
     detail:
       - filename
-

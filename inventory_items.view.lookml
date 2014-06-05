@@ -51,7 +51,7 @@
     type: number
     decimals: 2
     sql: 100.0 * ${sold_count}/${count}
-    
+
   - measure: total_cost
     type: sum
     decimals: 2
@@ -60,8 +60,8 @@
   - measure: average_cost
     type: average
     decimals: 2
-    sql: ${cost}    
-    
+    sql: ${cost}
+
 # SETS #
 
   sets:
@@ -71,7 +71,7 @@
       - created_date
       - days_in_inventory
       - days_in_inventory_tier
-      
+
     detail:     # The fields we want to show when drilling.
       - id
       - sold_date
@@ -82,4 +82,3 @@
       - cost
         # Counters for views that join 'inventory_items'
       - order_items.count
-

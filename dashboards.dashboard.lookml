@@ -4,21 +4,21 @@
   tile_size: 100
 
   filters:
-  
+
   - name: date
     title: "Date"
     type: date_filter
     default_value: Last 90 Days
-    
+
   - name: state
     title: "State / Region"
     type: select_filter
     base_view: users
     dimension: users.state
-    
+
   elements:
 
-  
+
   - name: total_orders
     type: single_value
     base_view: orders
@@ -28,7 +28,7 @@
       state: users.state
     width: 4
     height: 2
-    
+
   - name: average_order_profit
     type: single_value
     base_view: orders
@@ -48,7 +48,7 @@
       state: users.state
     width: 4
     height: 2
-    
+
   - name: orders_by_day_and_category
     title: "Orders by Day and Category"
     type: looker_area
@@ -72,7 +72,7 @@
     x_axis_datetime: yes
     hide_points: yes
     hide_legend: yes
-    
+
   - name: sales_by_date
     title: "Sales by Date - Last 30 Days"
     type: looker_column
@@ -81,7 +81,7 @@
     measures: [order_items.total_sale_price]
     listen:
       state: users.state
-    filters: 
+    filters:
       orders.created_date: last 30 days
     sorts: [orders.created_date desc]
     limit: 30
@@ -105,10 +105,10 @@
     x_axis_datetime: yes
     x_axis_datetime_label:
     x_axis_label_rotation:
-    y_axis_orientation: 
+    y_axis_orientation:
     y_axis_labels: "Total Sale Price ($)"
     y_axis_combined: yes
-    y_axis_min: 
+    y_axis_min:
     hide_legend: yes
     y_axis_max: 50000
     hide_points: yes
@@ -131,7 +131,7 @@
     sorts: [order_items.count desc]
     height: 4
     limit: 500
-    
+
   - name: sales_state_map
     title: "Sales by State"
     type: looker_geo_choropleth
@@ -148,8 +148,8 @@
       state: users.state
     width: 6
     height: 4
-    limit: 500  
-    
+    limit: 500
+
   - name: sales_by_date_and_category
     title: "Sales by Date and Category"
     type: looker_donut_multiples
@@ -166,8 +166,8 @@
     width: 6
     height: 4
     charts_across: 3
-  
-    
+
+
   - name: top_10_brands
     title: "Top 10 Brands"
     type: table
@@ -181,7 +181,7 @@
     limit: 15
     width: 6
     height: 4
-    
+
   - name: layer_cake_cohort
     title: "Cohort - orders Layered by Sign Up Month"
     type: looker_area
@@ -202,7 +202,7 @@
     colors: [FF0000,DE0000,C90000,9C0202,800101,6B0000,4D006B,0D0080,080054,040029,000000]
     stacking: normal
     hide_points: yes
-    
+
   - name: customer_cohort
     type: table
     base_view: orders
@@ -215,29 +215,29 @@
     sorts: [orders.created_month desc]
     limit: 500
     width: 12
-    height:  
-        
+    height:
+
 - dashboard: 2_brand_overview
   title: "2) Brand Overview"
   layout: tile
   tile_size: 100
-  
+
   filters:
-  
+
   - name: brand
     title: "Brand Name"
     type: select_filter
     base_view: products
     dimension: brand.name
     default_value: Calvin Klein
-    
+
   - name: date
     title: "Date"
     type: date_filter
     default_value: Last 90 Days
-    
+
   elements:
-  
+
   - name: total_orders
     type: single_value
     base_view: order_items
@@ -247,7 +247,7 @@
       brand: brand.name
     width: 4
     height: 2
-    
+
   - name: total_customers
     type: single_value
     base_view: order_items
@@ -256,8 +256,8 @@
       date: orders.created_date
       brand: brand.name
     width: 4
-    height: 2  
-    
+    height: 2
+
   - name: average_order_value
     type: single_value
     base_view: order_items
@@ -267,7 +267,7 @@
       brand: brand.name
     width: 4
     height: 2
-    
+
   - name: sales_over_time
     title: "Sales, Last 90 Days"
     type: looker_line
@@ -295,8 +295,8 @@
     y_axis_max:
     hide_points: yes
     hide_legend: yes
-  
-        
+
+
   - name: sales_by_department_and_category
     title: "Sales by Department and Category"
     type: table
@@ -311,7 +311,7 @@
     limit: 500
     width: 6
     height: 4
-    
+
   - name: connoisseur
     title: "Top Purchasers of "
     type: table
@@ -333,27 +333,27 @@
   auto_run: false
 
   filters:
-  
+
   - name: category
     title: "Category Name"
     type: select_filter
     base_view: products
     dimension: category.name
     default_value: Jeans
-    
+
   - name: department
     title: "Department"
     type: select_filter
     base_view: products
     dimension: department.name
-    
+
   - name: date
     title: "Date"
     type: date_filter
     default_value: Last 90 Days
-    
+
   elements:
-  
+
   - name: total_orders
     type: single_value
     base_view: order_items
@@ -363,8 +363,8 @@
       date: orders.created_date
       department: department.name
     width: 4
-    height: 2  
-    
+    height: 2
+
   - name: total_customers
     type: single_value
     base_view: order_items
@@ -374,8 +374,8 @@
       category: category.name
       department: department.name
     width: 4
-    height: 2  
-    
+    height: 2
+
   - name: average_order_value
     type: single_value
     base_view: order_items
@@ -386,7 +386,7 @@
       department: department.name
     width: 4
     height: 2
-    
+
   - name: comparison
     title: "All Categories Comparison"
     type: table
@@ -426,7 +426,7 @@
     y_axis_min:
     y_axis_max:
     hide_points: yes
-    
+
   - name: demographic
     title: "Age Demographic"
     type: looker_column
@@ -436,7 +436,7 @@
     listen:
       date: orders.created_date
       category: category.name
-      department: department.name    
+      department: department.name
     sorts: [users.age_tier]
     limit: 500
     width: 6
@@ -444,7 +444,7 @@
     legend_align:
     stacking:
     x_axis_label: "Age Tier"
-    x_axis_datetime: 
+    x_axis_datetime:
     x_axis_datetime_label:
     x_axis_label_rotation:
     y_axis_orientation: [left,right]
@@ -452,7 +452,7 @@
     y_axis_labels: ["Average Selling Price ($)","# orders"]
     y_axis_min:
     y_axis_max:
-    
+
   - name: top_brands_within_category
     title: "Top Brands"
     type: table
@@ -462,7 +462,7 @@
     listen:
       date: orders.created_date
       category: category.name
-      department: department.name    
+      department: department.name
     sorts: [order_items.total_sale_price desc]
     limit: 25
     width: 6

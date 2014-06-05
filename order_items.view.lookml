@@ -1,6 +1,6 @@
 - view: order_items
   fields:
-  
+
 # DIMENSIONS #
 
   - dimension: id
@@ -11,14 +11,14 @@
   - dimension: inventory_item_id
     type: int
     hidden: true
-      
+
   - dimension: return_date
     type: date
     sql: ${TABLE}.returned_at
-    
+
   - dimension: returned
     type: yesno
-    sql: ${return_date}  
+    sql: ${return_date}
 
   - dimension: order_id
     type: int
@@ -28,12 +28,12 @@
     description: The sale price reflects the price that the item was sold at.
     type: number
     decimals: 2
-    
+
   - dimension: gross_margin
     type: number
     decimals: 2
     sql: ${sale_price} - ${inventory_items.cost}
-    
+
   - dimension: item_gross_margin_percentage
     type: number
     sql: 100.0 * ${gross_margin}/NULLIF(${sale_price}, 0)
@@ -48,12 +48,12 @@
   - measure: count
     type: count
     detail: detail
-    
+
   - measure: total_gross_margin
     type: sum
     decimals: 2
     sql: ${gross_margin}
-    
+
   - measure: total_sale_price
     type: sum
     sql: ${sale_price}
@@ -67,11 +67,11 @@
     decimals: 2
     html: |
       $<%= rendered_value %>
-  
+
   - measure: average_gross_margin
     type: average
     sql: ${gross_margin}
-    decimals: 2    
+    decimals: 2
 
 #   - measure: gross_margin_percentage
 #     type: number

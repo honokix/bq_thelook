@@ -28,7 +28,7 @@
   - dimension: email
 
   - dimension: gender
-  
+
   - dimension: name
     sql: CONCAT(${TABLE}.first_name,' ', ${TABLE}.last_name)
 
@@ -42,12 +42,12 @@
 
   - dimension: zip
     type: int
-    
+
   - dimension: zipcode
     type: zipcode
     hidden: true
     sql: ${zip}
-    
+
 # MEASURES #
 
   - measure: count

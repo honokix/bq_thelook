@@ -10,14 +10,14 @@
 
   - dimension: brand.name   # brand name is a string in the db.
     sql: ${TABLE}.brand     #  we want a top level entity.
-    html: 
+    html:
       <%= linked_value %>
       <a href="/dashboards/thelook/2_brand_overview?brand=<%= value %>" target="_new">
       <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>
-      
+
   - dimension: category.name    # We want category to be a top level entity even though doesn't
     sql: ${TABLE}.category      #  have its own table
-    html: 
+    html:
       <%= linked_value %>
       <a href="/dashboards/thelook/3_category_lookup?category=<%=  CGI::escape(value) %>" target="_new">
       <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>
@@ -45,7 +45,7 @@
   - measure: count          # number of different products
     type: count
     detail: detail          # set to show when the count field is clicked
-    
+
   - measure: brand.count    # number of different brands.
     type: count_distinct
     sql: ${TABLE}.brand     # the field in the db to distinctly count
@@ -53,23 +53,23 @@
       - brand.name          # show the brand
       - sub_detail*         # a bunch of counts (see the set below)
       - -brand.count        # but don't show the brand count, because it will always be 1
-      
+
   - measure: category.count #
     type: count_distinct
     sql: ${TABLE}.category
-    detail: 
+    detail:
       - category.name
       - sub_detail*
       - -category.count
-      
+
   - measure: department.count
     type: count_distinct
     sql: ${TABLE}.department
-    detail: 
+    detail:
       - department.name
       - sub_detail*
       - -department.count
-      
+
   - measure: brand.list
     type: list
     list_field: brand.name
@@ -77,7 +77,7 @@
   - measure: list
     type: list
     list_field: item_name
-    
+
 # SETS #
 
   sets:
@@ -93,7 +93,7 @@
       - orders.count
       - order_items.count
       - inventory_items.count
-  
+
     sub_detail:
       - category.count
       - brand.count

@@ -14,25 +14,25 @@
     persist_for: 12 hours
 #     sql_trigger_value: SELECT CURDATE()
   fields:
-  
+
 # DIMENSIONS #
 
   - dimension: user_id
     primary_key: true
     hidden: true
-  
+
   - dimension: lifetime_orders
     type: number
-    
+
   - dimension: lifetime_number_of_orders_tier
     type: tier
     tiers: [0,1,2,3,5,10]
     sql: ${lifetime_orders}
-    
+
   - dimension: repeat_customer
     type: yesno
     sql: ${lifetime_orders} > 1
-  
+
   - dimension_group: first_order
     type: time
     timeframes: [date, week, month]
@@ -45,12 +45,12 @@
 
   - dimension: days_as_customer
     type: int
-    
+
   - dimension: days_as_customer_tiered
     type: tier
     tiers: [0,10,50,100,500]
     sql: ${days_as_customer}
-    
+
   - dimension: days_since_purchase
     type: int
 

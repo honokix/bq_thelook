@@ -31,4 +31,3 @@
       - users.last_name
       - users.first_name
       - users.id
-
