@@ -61,6 +61,11 @@
     type: average
     decimals: 2
     sql: ${cost}
+    
+  - measure: average_days_in_inventory
+    type: average
+    decimals: 2
+    sql: ${days_in_inventory}
 
 # SETS #
 
