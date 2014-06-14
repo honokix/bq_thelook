@@ -199,7 +199,7 @@
     y_axis_labels: ["Number of orders"]
     x_axis_label: "Order Month"
     legend_align: right
-    colors: [FF0000,DE0000,C90000,9C0202,800101,6B0000,4D006B,0D0080,080054,040029,000000]
+    colors: ["#FF0000","#DE0000","#C90000","#9C0202","#800101","#6B0000","#4D006B","#0D0080","#080054","#040029","#000000"]
     stacking: normal
     hide_points: yes
 
