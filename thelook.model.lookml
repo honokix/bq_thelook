@@ -4,6 +4,7 @@
 - scoping: true                          # for backward compatibility
 - include: "*.lookml"
 
+
 # BASE VIEWS #
 
 - base_view: inventory_items
@@ -55,6 +56,7 @@
     - join: users_orders_facts
       sql_foreign_key: users.id
       required_joins: [users]
+
 
 - base_view: products
 
