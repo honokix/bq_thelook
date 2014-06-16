@@ -18,7 +18,6 @@
 
   elements:
 
-
   - name: total_orders
     type: single_value
     base_view: orders

@@ -60,15 +60,13 @@
     type: number
     decimals: 2
     sql: ${total_amount_of_order_usd} - ${total_cost_of_order}
-    html: |
-      $<%= rendered_value %>
+    html: ${{ rendered_value }}
 
   - measure: profit_per_user
     type: number
     decimals: 2
     sql: 100.0 * ${order_profit}/NULLIF(${users.count},0)
-    html: |
-      $<%= rendered_value %>
+    html: ${{ rendered_value }}
 
   - dimension: order_sequence_number
     type: number
@@ -167,15 +165,13 @@
     type: sum
     sql: ${order_profit}
     decimals: 2
-    html: |
-      $<%= rendered_value %>
+    html: ${{ rendered_value }}
 
   - measure: average_order_profit
     type: average
     sql: ${order_profit}
     decimals: 2
-    html: |
-      $<%= rendered_value %>
+    html: ${{ rendered_value }}
 
 # SETS #
 
