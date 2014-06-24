@@ -206,7 +206,7 @@
     type: table
     base_view: orders
     dimensions: [orders.created_month]
-    pivots: [users.created_month]
+    pivots: [orders.created_month]
     measures: [users.count]
     filters:
       orders.created_month: 12 months ago for 12 months
