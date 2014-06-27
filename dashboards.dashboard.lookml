@@ -211,7 +211,7 @@
     filters:
       orders.created_month: 12 months ago for 12 months
       users.created_month: 12 months ago for 12 months
-    sorts: [orders.created_month desc]
+    sorts: [users.created_month]
     limit: 500
     width: 12
     height:
