@@ -91,7 +91,7 @@
       November: ${created_month_num} = 11
       December: ${created_month_num} = 12
       else: 'Another Month'
-      
+
   - dimension: user_order_month_normalized
     type: number
     sql: 12* (YEAR(${TABLE}.created_at)  - YEAR(${users.created_date}))  + MONTH(${TABLE}.created_at) - MONTH(${users.created_date})
