@@ -1,4 +1,4 @@
-- base_view: order_purchase_affinity
+- base_view: order_category_affinity
 
 - view: order_category
   derived_table: 
@@ -27,7 +27,7 @@
       JOIN products p ON ii.product_id = p.id
       GROUP BY p.category
 
-- view: order_purchase_affinity
+- view: order_category_affinity
   derived_table: 
     persist_for: 24 hours
     indexes: [category_a]
@@ -68,7 +68,7 @@
     type: number
     sql: ${TABLE}.category_b_frequency
     
-  - measure: affinity
+  - measure: category_affinity
     type: number
     decimals: 1
     sql: ${joint_frequency}/(${category_a_frequency}+${category_b_frequency}-${joint_frequency})*100
