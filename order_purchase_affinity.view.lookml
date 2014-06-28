@@ -42,7 +42,7 @@
         , oc2.category as category_b
         , count(*) as joint_frequency
         FROM ${order_category.SQL_TABLE_NAME} as oc1
-        JOIN ${order_category.SQL_TABLE_NAME} uc2 ON oc1.order_id = oc2.order_id
+        JOIN ${order_category.SQL_TABLE_NAME} oc2 ON oc1.order_id = oc2.order_id
         GROUP BY category_a, category_b 
       ) as prop
       JOIN ${total_order_category.SQL_TABLE_NAME} as toc1 ON prop.category_a = toc1.category
