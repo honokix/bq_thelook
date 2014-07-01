@@ -61,6 +61,10 @@
     decimals: 1
     sql: ${count}
 
+  - measure: random number
+    sql: |
+      SELECT rand() FROM users LIMIT 1
+
 # SETS #
 
   sets:
