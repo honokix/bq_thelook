@@ -50,15 +50,15 @@
     - join: users_orders_facts
       foreign_key: users.id
 
-- base_view: order_purchase_affinity
-  joins: 
-    - join: product_a_detail
-      from: products
-      sql_on: order_purchase_affinity.product_a = product_a_detail.item_name
-    
-    - join: product_b_detail
-      from: products
-      sql_on: order_purchase_affinity.product_b = product_b_detail.item_name
+# - base_view: order_purchase_affinity
+#   joins: 
+#     - join: product_a_detail
+#       from: products
+#       sql_on: order_purchase_affinity.product_a = product_a_detail.item_name
+#     
+#     - join: product_b_detail
+#       from: products
+#       sql_on: order_purchase_affinity.product_b = product_b_detail.item_name
 
 - base_view: products
 
