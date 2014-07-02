@@ -1,6 +1,6 @@
 - view: order_sequence_number
   derived_table: 
-    persist_for: 24 hours
+    sql_trigger_value: SELECT CURDATE()
     indexes: [order_id]
     sql: |
       SELECT orders.id as order_id
@@ -17,7 +17,7 @@
 
 - view: user_order_speed
   derived_table:
-    persist_for: 24 hours
+    sql_trigger_value: SELECT CURDATE()
     indexes: [user_id]
     sql: |
       SELECT orders.user_id AS user_id
