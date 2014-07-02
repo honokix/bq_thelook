@@ -8,21 +8,21 @@
     primary_key: true
     sql: ${TABLE}.id
 
-  - dimension: brand.name   # brand name is a string in the db.
+  - dimension: brand_name   # brand name is a string in the db.
     sql: ${TABLE}.brand     #  we want a top level entity.
     html: |
       <%= linked_value %>
       <a href="/dashboards/thelook/2_brand_overview?brand=<%= URI.escape(value, '&') %>" target="_new">
       <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>
 
-  - dimension: category.name    # We want category to be a top level entity even though doesn't
+  - dimension: category_name    # We want category to be a top level entity even though doesn't
     sql: ${TABLE}.category      #  have its own table
     html: |
       <%= linked_value %>
       <a href="/dashboards/thelook/3_category_lookup?category=<%= URI.escape(value, '&') %>" target="_new">
       <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>
 
-  - dimension: department.name
+  - dimension: department_name
     sql: ${TABLE}.department
 
   - dimension: item_name
@@ -46,7 +46,7 @@
     type: count
     detail: detail          # set to show when the count field is clicked
 
-  - measure: brand.count    # number of different brands.
+  - measure: brand_count    # number of different brands.
     type: count_distinct
     sql: ${TABLE}.brand     # the field in the db to distinctly count
     detail:                 # when the user clicks brand count
@@ -54,7 +54,7 @@
       - sub_detail*         # a bunch of counts (see the set below)
       - -brand.count        # but don't show the brand count, because it will always be 1
 
-  - measure: category.count #
+  - measure: category_count #
     type: count_distinct
     sql: ${TABLE}.category
     detail:
@@ -62,7 +62,7 @@
       - sub_detail*
       - -category.count
 
-  - measure: department.count
+  - measure: department_count
     type: count_distinct
     sql: ${TABLE}.department
     detail:
@@ -70,7 +70,7 @@
       - sub_detail*
       - -department.count
 
-  - measure: brand.list
+  - measure: brand_list
     type: list
     list_field: brand.name
 

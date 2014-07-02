@@ -59,3 +59,14 @@
       foreign_key: users.id
 
 - base_view: products
+
+- base_view: order_purchase_affinity
+  joins: 
+    - join: product_a_detail
+      from: products
+      sql_on: order_purchase_affinity.product_a = product_a_detail.item_name
+    
+    - join: product_b_detail
+      from: products
+      sql_on: order_purchase_affinity.product_a = product_b_detail.item_name
+
