@@ -11,14 +11,6 @@
     - join: products
       foreign_key: inventory_items.product_id
 
-- base_view: users
-  joins:
-  - join: users_orders_facts
-    foreign_key: users.id
-
-  - join: users_sales_facts
-    foreign_key: users.id
-
 - base_view: orders
   conditionally_filter:
     orders.created_date: 30 days
@@ -58,8 +50,6 @@
     - join: users_orders_facts
       foreign_key: users.id
 
-- base_view: products
-
 - base_view: order_purchase_affinity
   joins: 
     - join: product_a_detail
@@ -69,4 +59,19 @@
     - join: product_b_detail
       from: products
       sql_on: order_purchase_affinity.product_b = product_b_detail.item_name
+
+- base_view: products
+
+- base_view: users
+  joins:
+  - join: users_orders_facts
+    foreign_key: users.id
+
+  - join: users_sales_facts
+    foreign_key: users.id
+
+- base_view: user_order_speed
+  joins:
+  - join: users
+    foreign_key: user_order_speed.user_id
 
