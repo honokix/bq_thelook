@@ -68,5 +68,5 @@
     
     - join: product_b_detail
       from: products
-      sql_on: order_purchase_affinity.product_a = product_b_detail.item_name
+      sql_on: order_purchase_affinity.product_b = product_b_detail.item_name
 
