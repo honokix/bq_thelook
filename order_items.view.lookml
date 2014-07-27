@@ -58,13 +58,15 @@
     type: sum
     sql: ${sale_price}
     decimals: 2
-    html: $<%= rendered_value %>
+    html: |
+      ${{ rendered_value }}
 
   - measure: average_sale_price
     type: average
     sql: ${sale_price}
     decimals: 2
-    html: $<%= rendered_value %>
+    html: |
+      ${{ rendered_value }}
 
   - measure: average_gross_margin
     type: average

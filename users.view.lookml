@@ -35,8 +35,8 @@
   - dimension: history
     sql: ${TABLE}.id
     html: |
-      <a href=/explore/thelook/orders?fields=orders.detail*&f[users.id]=<%= value %>>Orders</a>
-      | <a href=/explore/thelook/order_items?fields=order_items.detail*&f[users.id]=<%= value %>>Items</a>
+      <a href=/explore/thelook/orders?fields=orders.detail*&f[users.id]={{ value }}>Orders</a>
+      | <a href=/explore/thelook/order_items?fields=order_items.detail*&f[users.id]={{ value }}>Items</a>
 
   - dimension: state
 
@@ -61,11 +61,6 @@
     decimals: 1
     sql: ${count}
 
-  - measure: random_number
-    type: number
-    decimals: 5
-    sql: |
-      (SELECT rand())
 
 # SETS #
 

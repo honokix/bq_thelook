@@ -11,8 +11,8 @@
   - dimension: brand.name   # brand name is a string in the db.
     sql: ${TABLE}.brand     #  we want a top level entity.
     html: |
-      <%= linked_value %>
-      <a href="/dashboards/thelook/2_brand_overview?brand=<%= URI.escape(value, '&') %>" target="_new">
+      {{ linked_value }}
+      <a href="/dashboards/thelook/2_brand_overview?brand={{ value | encode_uri }}" target="_new">
       <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>
 
   - dimension: category.name    # We want category to be a top level entity even though doesn't
