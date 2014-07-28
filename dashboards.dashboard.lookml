@@ -82,7 +82,7 @@
       state: users.state
     filters:
       orders.created_date: last 30 days
-    sorts: [orders.created_date desc]
+    sorts: [orders.created_date]
     limit: 30
     width: 6
     height: 4
