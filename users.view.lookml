@@ -6,7 +6,7 @@
   - dimension: id
     type: int
     primary_key: true
-    sql: ${TABLE}.id
+    sql: ${TABLE}.id 
 
   - dimension: age
     type: int

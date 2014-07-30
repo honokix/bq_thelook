@@ -32,6 +32,10 @@
   - dimension: repeat_customer
     type: yesno
     sql: ${lifetime_orders} > 1
+  
+  - dimension: more_than_ten
+    type: yesno
+    sql: ${lifetime_orders} > 10
 
   - dimension_group: first_order
     type: time
