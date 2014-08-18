@@ -188,4 +188,4 @@
       - total_cost_of_order
         # Counters for views that join 'orders'
 #       - order_items.count
-      - products.list
+#       - products.list
