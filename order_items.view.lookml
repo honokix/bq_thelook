@@ -89,7 +89,7 @@
       - users.name
       - users.history
       - products.item_name
-      - products.brand
-      - products.category
-      - products.department
+      - brand.name
+      - category.name
+      - department.name
       - total_sale_price

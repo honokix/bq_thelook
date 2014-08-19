@@ -192,5 +192,5 @@
       - users.history
       - total_cost_of_order
         # Counters for views that join 'orders'
-      - order_items.count
-      - products.list
+#       - order_items.count
+#       - products.list
