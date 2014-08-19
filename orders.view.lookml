@@ -1,7 +1,9 @@
+# This view is referencing the 'orders' table in the database within the MODELS '- connection: thelook'
 - view: orders
   fields:
 
-# DIMENSIONS #
+# DIMENSIONS - Are used for grouping and filtering. #
+# When a view is joined to a base view all dimensions become available in that base view #
 
   - dimension: id
     primary_key: true
@@ -99,7 +101,8 @@
     sql: 12* (YEAR(${TABLE}.created_at)  - YEAR(${users.created_date}))  + MONTH(${TABLE}.created_at) - MONTH(${users.created_date})
 
 
-# MEASURES #
+# MEASURES - Measure fields calculate an aggregate value across a set of values for a dimension.
+# Measures will only appear for base views based on this view, or if the join of this view to a base view is one_to_one#
 
   - measure: average_total_amount_of_order_usd
     type: average
@@ -178,6 +181,8 @@
       ${{ rendered_value }}
 
 # SETS #
+# Allow to define a set of dimensions, measure combinations. This is useful for setting a drill_path associated with a count
+# or to create sets of dimensions to export when joining views to base views, in case you only want to include some dimensions of a view you join
 
   sets:
     detail:

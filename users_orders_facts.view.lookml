@@ -32,7 +32,7 @@
   - dimension: repeat_customer
     type: yesno
     sql: ${lifetime_orders} > 1
-
+  
   - dimension_group: first_order
     type: time
     timeframes: [date, week, month]

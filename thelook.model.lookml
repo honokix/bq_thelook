@@ -1,5 +1,4 @@
 # PRELIMINARIES #
-# test
 - connection: thelook
 - scoping: true                          # for backward compatibility
 - include: "*.lookml"
