@@ -44,19 +44,39 @@
     type: sum
     sql: ${24_hour_revenue}
     decimals: 2
+  
+  - measure: average_24_hour_revenue
+    type: average
+    sql: ${24_hour_revenue}
+    decimals: 2
 
   - measure: total_30_day_revenue
     type: sum
     sql: ${30_day_revenue}
     decimals: 2
 
+  - measure: average_30_day_revenue
+    type: average
+    sql: ${30_day_revenue}
+    decimals: 2    
+
   - measure: total_90_day_revenue
     type: sum
     sql: ${90_day_revenue}
     decimals: 2
 
+  - measure: average_90_day_revenue
+    type: average
+    sql: ${90_day_revenue}
+    decimals: 2        
+
   - measure: total_365_day_revenue
     type: sum
     sql: ${365_day_revenue}
-    decimals: 2   
+    decimals: 2 
+
+  - measure: average_365_day_revenue
+    type: average
+    sql: ${365_day_revenue}
+    decimals: 2      
 
