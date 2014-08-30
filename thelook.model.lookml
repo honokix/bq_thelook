@@ -67,6 +67,10 @@
   - join: users_orders_facts
     foreign_key: users.id
 
+  - join: users_revenue_facts
+    foreign_key: users.id   
+    join_type: one_to_one
+
   - join: users_sales_facts
     foreign_key: users.id
 
