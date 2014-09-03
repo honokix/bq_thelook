@@ -182,7 +182,7 @@
     height: 4
 
   - name: layer_cake_cohort
-    title: "Cohort - orders Layered by Sign Up Month"
+    title: "Cohort - Orders Layered by Sign Up Month"
     type: looker_area
     base_view: orders
     dimensions: [orders.created_month]
