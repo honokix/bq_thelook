@@ -44,12 +44,12 @@
 
   - measure: count          # number of different products
     type: count
-    detail: detail          # set to show when the count field is clicked
+    drill_fields: detail          # set to show when the count field is clicked
 
   - measure: brand_count    # number of different brands.
     type: count_distinct
     sql: ${TABLE}.brand     # the field in the db to distinctly count
-    detail:                 # when the user clicks brand count
+    drill_fields:                 # when the user clicks brand count
       - brand.name          # show the brand
       - sub_detail*         # a bunch of counts (see the set below)
       - -brand.count        # but don't show the brand count, because it will always be 1
@@ -57,7 +57,7 @@
   - measure: category_count #
     type: count_distinct
     sql: ${TABLE}.category
-    detail:
+    drill_fields:
       - category.name
       - sub_detail*
       - -category.count
@@ -65,7 +65,7 @@
   - measure: department_count
     type: count_distinct
     sql: ${TABLE}.department
-    detail:
+    drill_fields:
       - department.name
       - sub_detail*
       - -department.count

@@ -21,7 +21,7 @@
 
   - measure: count
     type: count
-    detail: detail*
+    drill_fields: detail*
 
 
   # ----- Detail ------

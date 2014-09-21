@@ -112,28 +112,28 @@
   - measure: this_week_count
     type: count_distinct
     sql: ${TABLE}.id
-    detail: detail
+    drill_fields: detail
     filters:
       created_date: 7 days
 
   - measure: this_last_14_days_count
     type: count_distinct
     sql: ${TABLE}.id
-    detail: detail
+    drill_fields: detail
     filters:
       created_date: 14 days
 
   - measure: this_last_30_days_count
     type: count_distinct
     sql: ${TABLE}.id
-    detail: detail
+    drill_fields: detail
     filters:
       created_date: 30 days
 
   - measure: count
     type: count_distinct
     sql: ${TABLE}.id
-    detail: detail*
+    drill_fields: detail*
 
   - measure: order_percent_change
     type: percent_of_previous
@@ -142,7 +142,7 @@
   - measure: count_percent_of_total
     label: Count (Percent of Total)
     type: percent_of_total
-    detail: detail*
+    drill_fields: detail*
     decimals: 1
     sql: ${count}
 
@@ -155,7 +155,7 @@
 
   - measure: first_purchase_count
     type: count
-    detail: detail*
+    drill_fields: detail*
     filters:
       is_first_purchase: yes
 

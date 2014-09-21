@@ -13,14 +13,14 @@
   - name: state
     title: "State / Region"
     type: select_filter
-    base_view: users
+    explore: users
     dimension: users.state
 
   elements:
 
   - name: total_orders
     type: single_value
-    base_view: orders
+    explore: orders
     measures: [orders.count]
     listen:
       date: orders.created_date
@@ -30,7 +30,7 @@
 
   - name: average_order_profit
     type: single_value
-    base_view: orders
+    explore: orders
     measures: [orders.average_order_profit]
     listen:
       date: orders.created_date
@@ -40,7 +40,7 @@
 
   - name: first_purchasers
     type: single_value
-    base_view: orders
+    explore: orders
     measures: [orders.first_purchase_count]
     listen:
       date: orders.created_date
@@ -51,7 +51,7 @@
   - name: orders_by_day_and_category
     title: "Orders by Day and Category"
     type: looker_area
-    base_view: order_items
+    explore: order_items
     dimensions: [orders.created_date]
     pivots: [category.name]
     measures: [order_items.count]
@@ -75,7 +75,7 @@
   - name: sales_by_date
     title: "Sales by Date - Last 30 Days"
     type: looker_column
-    base_view: order_items
+    explore: order_items
     dimensions: [orders.created_date]
     measures: [order_items.total_sale_price]
     listen:
@@ -116,7 +116,7 @@
     title: "Top Zip Codes"
     type: looker_geo_coordinates
     map: usa
-    base_view: order_items
+    explore: order_items
     dimensions: [users.zipcode]
     measures: [order_items.count]
     colors: [gold, orange, darkorange, orangered, red]
@@ -135,7 +135,7 @@
     title: "Sales by State"
     type: looker_geo_choropleth
     map: usa
-    base_view: order_items
+    explore: order_items
     dimensions: [users.state]
     measures: [order_items.count]
    # colors: [fff000, 000000] #gold, orange, darkorange, orangered, red]
@@ -152,7 +152,7 @@
   - name: sales_by_date_and_category
     title: "Sales by Date and Category"
     type: looker_donut_multiples
-    base_view: order_items
+    explore: order_items
     dimensions: [orders.created_week]
     pivots: [category.name]
     measures: [order_items.count]
@@ -170,7 +170,7 @@
   - name: top_10_brands
     title: "Top 10 Brands"
     type: table
-    base_view: order_items
+    explore: order_items
     dimensions: [brand.name]
     measures: [order_items.count, order_items.total_sale_price, order_items.average_sale_price]
     listen:
@@ -184,7 +184,7 @@
   - name: layer_cake_cohort
     title: "Cohort - Orders Layered by Sign Up Month"
     type: looker_area
-    base_view: orders
+    explore: orders
     dimensions: [orders.created_month]
     pivots: [users.created_month]
     measures: [orders.count]
@@ -204,7 +204,7 @@
 
   - name: customer_cohort
     type: table
-    base_view: orders
+    explore: orders
     dimensions: [users.created_month]
     pivots: [orders.created_month]
     measures: [users.count]
@@ -226,7 +226,7 @@
   - name: brand
     title: "Brand Name"
     type: select_filter
-    base_view: products
+    explore: products
     dimension: brand.name
     default_value: Calvin Klein
 
@@ -239,7 +239,7 @@
 
   - name: total_orders
     type: single_value
-    base_view: order_items
+    explore: order_items
     measures: [orders.count]
     listen:
       date: orders.created_date
@@ -249,7 +249,7 @@
 
   - name: total_customers
     type: single_value
-    base_view: order_items
+    explore: order_items
     measures: [users.count]
     listen:
       date: orders.created_date
@@ -259,7 +259,7 @@
 
   - name: average_order_value
     type: single_value
-    base_view: order_items
+    explore: order_items
     measures: [order_items.average_sale_price]
     listen:
       date: orders.created_date
@@ -270,7 +270,7 @@
   - name: sales_over_time
     title: "Sales, Last 90 Days"
     type: looker_line
-    base_view: order_items
+    explore: order_items
     dimensions: [orders.created_date]
     measures: [order_items.total_sale_price, order_items.average_sale_price]
     listen:
@@ -299,7 +299,7 @@
   - name: sales_by_department_and_category
     title: "Sales by Department and Category"
     type: table
-    base_view: order_items
+    explore: order_items
     dimensions: [category.name]
     pivots: [department.name]
     measures: [order_items.count, order_items.total_sale_price]
@@ -314,7 +314,7 @@
   - name: connoisseur
     title: "Top Purchasers of "
     type: table
-    base_view: order_items
+    explore: order_items
     dimensions: [users.name, users.email, users.history]
     measures: [order_items.count, order_items.total_sale_price]
     listen:
@@ -336,14 +336,14 @@
   - name: category
     title: "Category Name"
     type: select_filter
-    base_view: products
+    explore: products
     dimension: category.name
     default_value: Jeans
 
   - name: department
     title: "Department"
     type: select_filter
-    base_view: products
+    explore: products
     dimension: department.name
 
   - name: date
@@ -355,7 +355,7 @@
 
   - name: total_orders
     type: single_value
-    base_view: order_items
+    explore: order_items
     measures: [orders.count]
     listen:
       category: category.name
@@ -366,7 +366,7 @@
 
   - name: total_customers
     type: single_value
-    base_view: order_items
+    explore: order_items
     measures: [users.count]
     listen:
       date: orders.created_date
@@ -377,7 +377,7 @@
 
   - name: average_order_value
     type: single_value
-    base_view: order_items
+    explore: order_items
     measures: [order_items.average_sale_price]
     listen:
       date: orders.created_date
@@ -389,7 +389,7 @@
   - name: comparison
     title: "All Categories Comparison"
     type: table
-    base_view: order_items
+    explore: order_items
     dimensions: [category.name]
     measures: [order_items.average_sale_price, users.count, orders.count]
     listen:
@@ -403,7 +403,7 @@
   - name: sales_by_day
     title: "Sales by Date"
     type: looker_line
-    base_view: order_items
+    explore: order_items
     dimensions: [orders.created_date]
     measures: [order_items.average_sale_price, order_items.total_sale_price]
     listen:
@@ -429,7 +429,7 @@
   - name: demographic
     title: "Age Demographic"
     type: looker_column
-    base_view: order_items
+    explore: order_items
     dimensions: [users.age_tier]
     measures: [order_items.average_sale_price, order_items.count]
     listen:
@@ -455,7 +455,7 @@
   - name: top_brands_within_category
     title: "Top Brands"
     type: table
-    base_view: order_items
+    explore: order_items
     dimensions: [brand.name]
     measures: [order_items.count, order_items.gross_margin_percentage, order_items.total_sale_price]
     listen:

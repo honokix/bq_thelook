@@ -39,11 +39,11 @@
 
   - measure: count
     type: count
-    detail: detail
+    drill_fields: detail
 
   - measure: sold_count
     type: count
-    detail: detail
+    drill_fields: detail
     filters:
       sold: Yes
 

@@ -47,7 +47,7 @@
 
   - measure: count
     type: count
-    detail: detail
+    drill_fields: detail
 
   - measure: total_gross_margin
     type: sum

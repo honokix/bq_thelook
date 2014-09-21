@@ -6,12 +6,12 @@
 
 # BASE VIEWS #
 
-- base_view: inventory_items
+- explore: inventory_items
   joins:
     - join: products
       foreign_key: inventory_items.product_id
 
-- base_view: orders
+- explore: orders
   conditionally_filter:
     orders.created_date: 30 days
     unless: [users.name, users.id]
@@ -22,7 +22,7 @@
     - join: users_orders_facts
       foreign_key: users.id
 
-- base_view: order_items
+- explore: order_items
   conditionally_filter:                     # prevent runaway queries
     orders.created_date: 30 days          # by always requiring a filter
     unless:                                 # on one of the fields below.
@@ -50,7 +50,7 @@
     - join: users_orders_facts
       foreign_key: users.id
 
-# - base_view: order_purchase_affinity
+# - explore: order_purchase_affinity
 #   joins: 
 #     - join: product_a_detail
 #       from: products
@@ -60,9 +60,9 @@
 #       from: products
 #       sql_on: order_purchase_affinity.product_b = product_b_detail.item_name
 
-- base_view: products
+- explore: products
 
-- base_view: users
+- explore: users
   joins:
   - join: users_orders_facts
     foreign_key: users.id
@@ -74,8 +74,7 @@
   - join: users_sales_facts
     foreign_key: users.id
 
-- base_view: user_order_speed
+- explore: user_order_speed
   joins:
   - join: users
     foreign_key: user_order_speed.user_id
-
