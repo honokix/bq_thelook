@@ -13,7 +13,7 @@
   - name: state
     title: "State / Region"
     type: select_filter
-    explore: users
+    base_view: users
     dimension: users.state
 
   elements:
