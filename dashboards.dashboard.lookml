@@ -226,7 +226,7 @@
   - name: brand
     title: "Brand Name"
     type: select_filter
-    explore: products
+    base_view: products
     dimension: brand.name
     default_value: Calvin Klein
 
@@ -336,14 +336,14 @@
   - name: category
     title: "Category Name"
     type: select_filter
-    explore: products
+    base_view: products
     dimension: category.name
     default_value: Jeans
 
   - name: department
     title: "Department"
     type: select_filter
-    explore: products
+    base_view: products
     dimension: department.name
 
   - name: date
