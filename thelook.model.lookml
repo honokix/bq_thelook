@@ -4,7 +4,7 @@
 - include: "*.lookml"
 - template: liquid
 
-# BASE VIEWS #
+# EXPLORES #
 
 - explore: inventory_items
   joins:
