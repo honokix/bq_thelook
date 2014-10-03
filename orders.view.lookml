@@ -32,7 +32,7 @@
   - dimension: total_amount_of_order_usd_tier
     type: tier
     sql: ${total_amount_of_order_usd}
-    tiers: [0,10,50,150,500,1000]
+    tiers: [0,10,50,150,500,750,1000]
 
   - dimension: order_items_list
     sql: |
@@ -68,7 +68,7 @@
   - measure: profit_per_user
     type: number
     decimals: 2
-    sql: 100.0 * ${order_profit}/NULLIF(${users.count},0)
+    sql: 1.0 * ${order_profit}/NULLIF(${users.count},0)
     html: |
       ${{ rendered_value }}
 

@@ -60,6 +60,20 @@
 #       from: products
 #       sql_on: order_purchase_affinity.product_b = product_b_detail.item_name
 
+#
+# Declare how the tables are linked
+#
+- explore: funnel
+  always_filter:
+    event_time: 30 days ago for 30 days
+  
+  joins:
+  - join: users
+    foreign_key: user_id
+  - join: orders
+    foreign_key: order_id
+    
+    
 - explore: products
 
 - explore: users
