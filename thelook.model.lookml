@@ -1,4 +1,3 @@
-# test commit
 # PRELIMINARIES #
 - connection: thelook
 - scoping: true                          # for backward compatibility
