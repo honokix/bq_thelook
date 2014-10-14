@@ -63,7 +63,7 @@
     sorts: [orders.created_date]
     limit: 500
     width: 6
-    colors: [lightskyblue, aqua, cornflowerblue, mediumblue, blue, navy]
+    colors: ["#651F81", "#80237D", "#C488DD", "#Ef7F0F", "#FEAC47", "#8ED1ED"]
     height: 4
     legend_align:
     y_axis_labels: "# Order Items"
@@ -87,17 +87,17 @@
     width: 6
     height: 4
     legend_align:
-    colors: [darkorange]
+    colors: ["#651F81"]
     reference_lines:
       - value: [max, mean]
         label: Above Average
-        color: midnightblue
+        color: "#Ef7F0F"
       - value: 20000
         label: Target
-        color: black
+        color: "#Ef7F0F"
       - value: [median]
         label: Median
-        color: grey
+        color: "#Ef7F0F"
     hide_legend:
     stacking:
     x_axis_label:
@@ -123,8 +123,8 @@
     listen:
       date: orders.created_date
       state: users.state
-    point_color: yellow
-    map_color: "#000061"
+    point_color: "#EF7F0F" #"#FEAC47"
+    map_color: "#555E61"
     width: 6
     point_radius: 3
     sorts: [order_items.count desc]
@@ -138,9 +138,7 @@
     explore: order_items
     dimensions: [users.state]
     measures: [order_items.count]
-   # colors: [fff000, 000000] #gold, orange, darkorange, orangered, red]
-#     colors: [red, white, blue, yellow]
-    colors: [red, '#122f8c','#202e7e','#2e2d70','#3c2d63']
+    colors: ["#efefef","#C488DD","#80237D","#651F81"]
     sorts: [order_items.total_sale_price desc]
     listen:
       date: orders.created_date
@@ -160,7 +158,7 @@
       orders.created_date: 6 weeks ago for 6 weeks
       category.name: Accessories, Active, Blazers & Jackets, Clothing Sets
     sorts: [orders.created_week desc]
-    colors: [yellow, orange, red, blue, purple]
+    colors: ["#651F81","#EF7F0F","#555E61","#2DA7CE"]
     limit: 24
     width: 6
     height: 4
