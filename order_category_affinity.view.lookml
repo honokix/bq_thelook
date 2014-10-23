@@ -1,4 +1,4 @@
-- base_view: order_category_affinity
+- explore: order_category_affinity
 
 - view: order_category
   derived_table: 

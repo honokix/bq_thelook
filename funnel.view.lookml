@@ -39,4 +39,4 @@
     type: count
     filters:
       event_type: SIGNUP
-    detail: [users.id, users.name, users.created_time]
+    drill_fields: [users.id, users.name, users.created_time]

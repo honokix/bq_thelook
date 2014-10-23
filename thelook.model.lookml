@@ -87,8 +87,3 @@
 
   - join: users_sales_facts
     foreign_key: users.id
-
-- explore: user_order_speed
-  joins:
-  - join: users
-    foreign_key: user_order_speed.user_id
