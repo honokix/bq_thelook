@@ -15,6 +15,18 @@
     timeframes: [time, date, week, month, month_num, year, dow_num, hod]
     sql: ${TABLE}.created_at
 
+  - dimension_group: months_since_user_created_sharp
+    type: number
+    sql: |
+      YEAR(${created_date})*12
+        + MONTH(${created_date})
+      - YEAR(${users_orders_facts.first_order_date})*12
+        - MONTH(${users_orders_facts.first_order_date})
+        
+  - dimension_group: months_since_user_created_smooth
+    type: int
+    sql: DATEDIFF(${created_date}, ${users_orders_facts.first_order_date})/30.416667
+
   - dimension: week_starting_tuesday
     sql: |
       DATE_ADD(DATE(CONVERT_TZ(orders.created_at,'UTC','America/Los_Angeles')),INTERVAL (0-(DAYOFWEEK(CONVERT_TZ(orders.created_at,'UTC','America/Los_Angeles'))+4)%7) DAY)
