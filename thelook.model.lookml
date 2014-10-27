@@ -49,7 +49,20 @@
 
     - join: users_orders_facts
       foreign_key: users.id
+    
+    - join: users_first_order_facts_daily
+      sql_on: ${users_first_order_facts_daily.first_order_date} = ${users_orders_facts.first_order_date}
+      join_type: many_to_one
 
+    - join: users_first_order_facts_weekly
+      sql_on: ${users_first_order_facts_weekly.first_order_week} = ${users_orders_facts.first_order_week}
+      join_type: many_to_one
+
+    - join: users_first_order_facts_monthly
+      sql_on: ${users_first_order_facts_monthly.first_order_month} = ${users_orders_facts.first_order_month}
+      join_type: many_to_one
+
+    
 # - explore: order_purchase_affinity
 #   joins: 
 #     - join: product_a_detail
