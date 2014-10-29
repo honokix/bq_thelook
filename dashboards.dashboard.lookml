@@ -478,7 +478,6 @@
     type: select_filter
     base_view: users
     dimension: users.email
-    default_value: "roxanne.roberts@gmail.com"
   
   elements:   
   
