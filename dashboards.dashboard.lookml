@@ -464,3 +464,116 @@
     limit: 25
     width: 6
     height: 4
+
+- dashboard: 4_user_lookup
+  title: "4) User Lookup"
+  layout: tile
+  tile_size: 100
+  
+  filters:
+  
+  - name: email
+    title: "Email"
+    type: select_filter
+    base_view: users
+    dimension: users.email
+    default_value: '"roxanne.roberts@gmail.com"'
+  
+  elements:   
+  
+  - name: user_info
+    title: "User Info" 
+    type: looker_single_record
+    base_view: order_items
+    dimensions: [users.id, users.email, users.name, users.created_month, users.age,
+      users.state, users.city, users.zip, users.history]
+    listen:
+      email: users.email
+    filters:
+      orders.created_date: 99 years      
+    limit: 500
+    show_null_labels: false
+    width: 3
+    height: 3    
+  
+      
+  - name: lifetime_orders
+    title: "Lifetime Orders" 
+    type: single_value
+    base_view: order_items
+    measures: [orders.count]
+    listen:
+      email: users.email
+    filters:
+      orders.created_date: 99 years      
+    sorts: [orders.count desc]
+    limit: 500
+    show_null_labels: false
+    width: 2
+    height: 3
+    
+  - name: total_items_returned
+    title: "Total Items Returned"
+    type: single_value
+    base_view: order_items
+    measures: [order_items.count]
+    filters:
+    listen:
+      email: users.email    
+      order_items.returned: 'Yes'
+    filters:
+      orders.created_date: 99 years      
+    sorts: [order_items.count desc]
+    limit: 500
+    show_null_labels: false
+    width: 2
+    height: 3      
+
+  - name: lifetime_spend
+    title: "Lifetime Spend" 
+    type: single_value
+    base_view: order_items
+    measures: [order_items.total_sale_price]
+    listen:
+      email: users.email
+    filters:
+      orders.created_date: 99 years      
+    sorts: [order_items.total_sale_price desc]
+    limit: 500
+    show_null_labels: false
+    width: 5
+    height: 3
+
+  - name: item_order_history
+    title: "Items Order History" 
+    type: table
+    base_view: order_items
+    dimensions: [products.item_name]
+    listen:
+      email: users.email
+    filters:
+      orders.created_date: 99 years      
+    sorts: [products.item_name]
+    limit: 500
+    width: 6
+    height: 3  
+
+  - name: favorite_categories
+    title: "Favorite Categories" 
+    type: looker_pie
+    base_view: order_items
+    dimensions: [category.name]
+    measures: [order_items.count]
+    listen:
+      email: users.email
+    filters:
+      orders.created_date: 99 years
+    sorts: [order_items.count desc]
+    limit: 500
+    width: 6
+    height: 3     
+    
+    
+    
+   
+    
