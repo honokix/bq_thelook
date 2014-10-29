@@ -469,6 +469,7 @@
   title: "4) User Lookup"
   layout: tile
   tile_size: 100
+  auto_run: false 
   
   filters:
   
@@ -477,7 +478,7 @@
     type: select_filter
     base_view: users
     dimension: users.email
-    default_value: '"roxanne.roberts@gmail.com"'
+    default_value: "roxanne.roberts@gmail.com"
   
   elements:   
   
