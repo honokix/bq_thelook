@@ -94,3 +94,21 @@
 #       - users.id
 #       - products.id
 #       - products.item_name
+#     - join: users_first_order_facts_weekly
+#       sql_on: ${users_first_order_facts_weekly.first_order_week} = ${users_orders_facts.first_order_week}
+#       join_type: many_to_one
+# 
+#     - join: users_first_order_facts_monthly
+#       sql_on: ${users_first_order_facts_monthly.first_order_month} = ${users_orders_facts.first_order_month}
+#       join_type: many_to_one
+
+    
+# - explore: order_purchase_affinity
+#   joins: 
+#     - join: product_a_detail
+#       from: products
+#       sql_on: order_purchase_affinity.product_a = product_a_detail.item_name
+#     
+#     - join: product_b_detail
+#       from: products
+#       sql_on: order_purchase_affinity.product_b = product_b_detail.item_name

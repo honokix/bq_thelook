@@ -1,4 +1,4 @@
-- base_view: user_category_affinity
+- explore: user_category_affinity
 
 - view: user_category
   derived_table: 

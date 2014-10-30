@@ -61,6 +61,27 @@
     html: |
       ${{ rendered_value }}
 
+#   - measure: total_sale_price_per_first_order_user_daily
+#     type: sum
+#     sql: ${sale_price} / ${users_first_order_facts_daily.first_orders_count_daily}
+#     decimals: 2
+#     html: |
+#       ${{ rendered_value }}
+# 
+#   - measure: total_sale_price_per_first_order_user_weekly
+#     type: sum
+#     sql: ${sale_price} / ${users_first_order_facts_weekly.first_orders_count_weekly}
+#     decimals: 2
+#     html: |
+#       ${{ rendered_value }}
+# 
+#   - measure: total_sale_price_per_first_order_user_monthly
+#     type: sum
+#     sql: ${sale_price} / ${users_first_order_facts_monthly.first_orders_count_monthly}
+#     decimals: 2
+#     html: |
+#       ${{ rendered_value }}
+
   - measure: average_sale_price
     type: average
     sql: ${sale_price}
