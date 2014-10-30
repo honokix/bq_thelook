@@ -12,12 +12,8 @@
 
   - dimension_group: created
     type: time
-    timeframes: [time, date, week, month, month_num, year, dow_num, hod]
+    timeframes: [time, date, week, month, month_num, year, dow_num]
     sql: ${TABLE}.created_at
-
-  - dimension: week_starting_tuesday
-    sql: |
-      DATE_ADD(DATE(CONVERT_TZ(orders.created_at,'UTC','America/Los_Angeles')),INTERVAL (0-(DAYOFWEEK(CONVERT_TZ(orders.created_at,'UTC','America/Los_Angeles'))+4)%7) DAY)
 
   - dimension: status
 
@@ -99,6 +95,11 @@
   - dimension: user_order_month_normalized
     type: number
     sql: 12* (YEAR(${TABLE}.created_at)  - YEAR(${users.created_date}))  + MONTH(${TABLE}.created_at) - MONTH(${users.created_date})
+
+  - dimension: is_same_dow_as_today
+    type: yesno
+#     hidden: true
+    sql: DAYOFWEEK(${TABLE}.created_at) = DAYOFWEEK(current_timestamp)
 
 
 # MEASURES - Measure fields calculate an aggregate value across a set of values for a dimension.
@@ -194,3 +195,8 @@
         # Counters for views that join 'orders'
 #       - order_items.count
 #       - products.list
+# 
+#   - dimension: week_starting_tuesday
+#     sql: |
+#       DATE_ADD(DATE(CONVERT_TZ(orders.created_at,'UTC','America/Los_Angeles')),INTERVAL (0-(DAYOFWEEK(CONVERT_TZ(orders.created_at,'UTC','America/Los_Angeles'))+4)%7) DAY)
+#     
