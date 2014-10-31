@@ -12,24 +12,8 @@
 
   - dimension_group: created
     type: time
-    timeframes: [time, date, week, month, month_num, year, dow_num, hod]
+    timeframes: [time, date, week, month, month_num, year, dow_num]
     sql: ${TABLE}.created_at
-
-  - dimension_group: months_since_user_created_sharp
-    type: int
-    sql: |
-      YEAR(${created_date})*12
-        + MONTH(${created_date})
-      - YEAR(${users_orders_facts.first_order_date})*12
-        - MONTH(${users_orders_facts.first_order_date})
-        
-  - dimension_group: months_since_user_created_smooth
-    type: int
-    sql: DATEDIFF(${created_date}, ${users_orders_facts.first_order_date})/30.416667
-
-  - dimension: week_starting_tuesday
-    sql: |
-      DATE_ADD(DATE(CONVERT_TZ(orders.created_at,'UTC','America/Los_Angeles')),INTERVAL (0-(DAYOFWEEK(CONVERT_TZ(orders.created_at,'UTC','America/Los_Angeles'))+4)%7) DAY)
 
   - dimension: status
 
@@ -112,6 +96,22 @@
     type: number
     sql: 12* (YEAR(${TABLE}.created_at)  - YEAR(${users.created_date}))  + MONTH(${TABLE}.created_at) - MONTH(${users.created_date})
 
+  - dimension: is_same_dow_as_today
+    type: yesno
+#     hidden: true
+    sql: DAYOFWEEK(${TABLE}.created_at) = DAYOFWEEK(current_timestamp)
+ 
+  - dimension_group: months_since_user_created_sharp
+    type: number
+    sql: |
+      YEAR(${created_date})*12
+        + MONTH(${created_date})
+      - YEAR(${users_orders_facts.first_order_date})*12
+        - MONTH(${users_orders_facts.first_order_date})
+        
+  - dimension_group: months_since_user_created_smooth
+    type: int
+    sql: DATEDIFF(${created_date}, ${users_orders_facts.first_order_date})/30.416667
 
 # MEASURES - Measure fields calculate an aggregate value across a set of values for a dimension.
 # Measures will only appear for base views based on this view, or if the join of this view to a base view is one_to_one#
@@ -206,3 +206,8 @@
         # Counters for views that join 'orders'
 #       - order_items.count
 #       - products.list
+# 
+#   - dimension: week_starting_tuesday
+#     sql: |
+#       DATE_ADD(DATE(CONVERT_TZ(orders.created_at,'UTC','America/Los_Angeles')),INTERVAL (0-(DAYOFWEEK(CONVERT_TZ(orders.created_at,'UTC','America/Los_Angeles'))+4)%7) DAY)
+#     

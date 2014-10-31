@@ -37,7 +37,7 @@
     type: time
     timeframes: [date, week, month]
     sql: ${TABLE}.first_order
-
+    
   - dimension: latest_order
     type: time
     timeframes: [date, week, month, year]
