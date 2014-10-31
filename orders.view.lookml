@@ -16,7 +16,7 @@
     sql: ${TABLE}.created_at
 
   - dimension_group: months_since_user_created_sharp
-    type: number
+    type: int
     sql: |
       YEAR(${created_date})*12
         + MONTH(${created_date})
