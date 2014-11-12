@@ -110,7 +110,6 @@
     y_axis_combined: yes
     y_axis_min:
     hide_legend: yes
-    y_axis_max: 50000
     hide_points: yes
 
   - name: top_zips_map
