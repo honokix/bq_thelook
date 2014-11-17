@@ -40,3 +40,7 @@
     filters:
       event_type: SIGNUP
     drill_fields: [users.id, users.name, users.created_time]
+
+  - measure: count
+    type: count
+    drill_fields: [event_type, users.id, users.name, users.created_time]
