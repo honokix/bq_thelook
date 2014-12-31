@@ -59,15 +59,15 @@
 
   - join: users_revenue_facts
     foreign_key: users.id   
-    join_type: one_to_one
+    relationship: one_to_one
 
   - join: users_sales_facts
     foreign_key: users.id
 
-- explore: user_order_speed
-  joins:
-  - join: users
-    foreign_key: user_order_speed.user_id
+# - explore: user_order_speed
+#   joins:
+#   - join: users
+#     foreign_key: user_order_speed.user_id
 
 
 # - explore: order_purchase_affinity

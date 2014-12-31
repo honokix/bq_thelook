@@ -13,8 +13,8 @@
 
   - name: state
     title: "State / Region"
-    type: select_filter
-    base_view: users
+    type: suggest_filter
+    explore: users
     dimension: users.state
 
   elements:
@@ -223,8 +223,8 @@
 
   - name: brand
     title: "Brand Name"
-    type: select_filter
-    base_view: products
+    type: suggest_filter
+    explore: products
     dimension: brand.name
     default_value: Calvin Klein
 
@@ -333,15 +333,15 @@
 
   - name: category
     title: "Category Name"
-    type: select_filter
-    base_view: products
+    type: suggest_filter
+    explore: products
     dimension: category.name
     default_value: Jeans
 
   - name: department
     title: "Department"
-    type: select_filter
-    base_view: products
+    type: suggest_filter
+    explore: products
     dimension: department.name
 
   - name: date
@@ -475,8 +475,8 @@
   
   - name: email
     title: "Email"
-    type: select_filter
-    base_view: users
+    type: suggest_filter
+    explore: users
     dimension: users.email
   
   elements:   
@@ -484,7 +484,7 @@
   - name: user_info
     title: "User Info" 
     type: looker_single_record
-    base_view: order_items
+    explore: order_items
     dimensions: [users.id, users.email, users.name, users.created_month, users.age,
       users.state, users.city, users.zip, users.history]
     listen:
@@ -500,7 +500,7 @@
   - name: lifetime_orders
     title: "Lifetime Orders" 
     type: single_value
-    base_view: order_items
+    explore: order_items
     measures: [orders.count]
     listen:
       email: users.email
@@ -515,7 +515,7 @@
   - name: total_items_returned
     title: "Total Items Returned"
     type: single_value
-    base_view: order_items
+    explore: order_items
     measures: [order_items.count]
     filters:
     listen:
@@ -532,7 +532,7 @@
   - name: lifetime_spend
     title: "Lifetime Spend" 
     type: single_value
-    base_view: order_items
+    explore: order_items
     measures: [order_items.total_sale_price]
     listen:
       email: users.email
@@ -547,7 +547,7 @@
   - name: item_order_history
     title: "Items Order History" 
     type: table
-    base_view: order_items
+    explore: order_items
     dimensions: [products.item_name]
     listen:
       email: users.email
@@ -561,7 +561,7 @@
   - name: favorite_categories
     title: "Favorite Categories" 
     type: looker_pie
-    base_view: order_items
+    explore: order_items
     dimensions: [category.name]
     measures: [order_items.count]
     listen:
