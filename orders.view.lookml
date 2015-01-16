@@ -2,6 +2,8 @@
 - view: orders
   fields:
 
+### This is a test commit comment 
+
 # DIMENSIONS - Are used for grouping and filtering. #
 # When a view is joined to a base view all dimensions become available in that base view #
 
