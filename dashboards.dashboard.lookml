@@ -1,8 +1,19 @@
 - dashboard: 1_business_pulse
   title: "1) Business Pulse"
-  layout: tile
-  tile_size: 100
-  auto_run: false
+  layout: grid
+  rows:
+    - elements: [total_orders, average_order_profit, first_purchasers]
+      height: 220
+    - elements: [orders_by_day_and_category, sales_by_date]
+      height: 400
+    - elements: [top_zips_map, sales_state_map]
+      height: 400
+    - elements: [sales_by_date_and_category, top_10_brands]
+      height: 400
+    - elements: [layer_cake_cohort]
+      height: 400
+    - elements: [customer_cohort]
+      height: 400
 
   filters:
 
@@ -72,22 +83,22 @@
     x_axis_datetime: yes
     hide_points: yes
     hide_legend: yes
+    x_axis_datetime_tick_count: 4
+    show_x_axis_label: false
 
   - name: sales_by_date
-    title: "Sales by Date - Last 30 Days"
+    title: "Sales by Date"
     type: looker_column
     explore: order_items
     dimensions: [orders.created_date]
     measures: [order_items.total_sale_price]
     listen:
       state: users.state
-    filters:
-      orders.created_date: last 30 days
+      date: orders.created_date
     sorts: [orders.created_date]
     limit: 30
     width: 6
     height: 4
-    legend_align:
     colors: ["#651F81"]
     reference_lines:
       - value: [max, mean]
@@ -99,16 +110,11 @@
       - value: [median]
         label: Median
         color: "#Ef7F0F"
-    hide_legend:
-    stacking:
-    x_axis_label:
-    x_axis_datetime: yes
-    x_axis_datetime_label:
-    x_axis_label_rotation:
-    y_axis_orientation:
+    x_axis_scale: time
+    x_axis_datetime_tick_count: 4
     y_axis_labels: "Total Sale Price ($)"
     y_axis_combined: yes
-    y_axis_min:
+    show_x_axis_label: false
     hide_legend: yes
     hide_points: yes
 
@@ -123,8 +129,8 @@
     listen:
       date: orders.created_date
       state: users.state
-    point_color: "#EF7F0F" #"#FEAC47"
-    map_color: "#555E61"
+    point_color: "#651F81"
+#     map_color: "#555E61"
     width: 6
     point_radius: 3
     sorts: [order_items.count desc]
@@ -138,7 +144,7 @@
     explore: order_items
     dimensions: [users.state]
     measures: [order_items.count]
-    colors: ["#efefef","#C488DD","#80237D","#651F81"]
+    colors: "#651F81"# ["#efefef","#C488DD","#80237D",]
     sorts: [order_items.total_sale_price desc]
     listen:
       date: orders.created_date
@@ -148,7 +154,7 @@
     limit: 500
 
   - name: sales_by_date_and_category
-    title: "Sales by Date and Category"
+    title: "Sales by Date and Category (Last 6 Weeks)"
     type: looker_donut_multiples
     explore: order_items
     dimensions: [orders.created_week]
