@@ -19,6 +19,7 @@
       foreign_key: orders.user_id
 
     - join: users_orders_facts
+      label: Users
       foreign_key: users.id
   
     - join: inventory_items
@@ -46,6 +47,9 @@
   - join: users
     foreign_key: user_id
     
+  - join: users_orders_facts
+    foreign_key: users.id
+ 
   - join: orders
     foreign_key: order_id
     
