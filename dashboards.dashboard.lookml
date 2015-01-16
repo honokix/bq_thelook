@@ -130,7 +130,6 @@
       date: orders.created_date
       state: users.state
     point_color: "#651F81"
-#     map_color: "#555E61"
     width: 6
     point_radius: 3
     sorts: [order_items.count desc]
@@ -144,7 +143,7 @@
     explore: order_items
     dimensions: [users.state]
     measures: [order_items.count]
-    colors: "#651F81"# ["#efefef","#C488DD","#80237D",]
+    colors: "#651F81"
     sorts: [order_items.total_sale_price desc]
     listen:
       date: orders.created_date
