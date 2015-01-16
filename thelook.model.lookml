@@ -3,6 +3,7 @@
 - scoping: true                          # for backward compatibility
 - include: "*.lookml"
 - template: liquid
+- label: The Look
 
 # EXPLORES #
 
