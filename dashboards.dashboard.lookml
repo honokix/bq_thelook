@@ -455,7 +455,7 @@
     type: table
     explore: order_items
     dimensions: [brand.name]
-    measures: [order_items.count, order_items.gross_margin_percentage, order_items.total_sale_price]
+    measures: [order_items.count, order_items.total_sale_price]
     listen:
       date: orders.created_date
       category: category.name
@@ -520,7 +520,6 @@
     filters:
     listen:
       email: users.email    
-      order_items.returned: 'Yes'
     filters:
       orders.created_date: 99 years      
     sorts: [order_items.count desc]
