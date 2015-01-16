@@ -20,7 +20,6 @@
       foreign_key: orders.user_id
 
     - join: users_orders_facts
-      label: Users
       foreign_key: users.id
   
     - join: inventory_items
