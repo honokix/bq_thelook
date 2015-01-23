@@ -42,7 +42,7 @@
         , uc2.category as category_b
         , count(*) as joint_frequency
         FROM ${user_category.SQL_TABLE_NAME} as uc1
-        JOIN ${user_category.SQL_TABLE_NAME} uc2 ON uc1.user_id = uc2.user_id
+        JOIN ${user_category.SQL_TABLE_NAME} uc2 ON uc1.user_id = uc2.user_id AND uc1.category <> uc2.category
         GROUP BY category_a, category_b 
       ) as prop
       JOIN ${total_user_category.SQL_TABLE_NAME} as tuc1 ON prop.category_a = tuc1.category
