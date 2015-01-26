@@ -41,15 +41,16 @@
     html: |
       <a href=/explore/thelook/orders?fields=orders.detail*&f[users.id]={{ value }}>Orders</a>
       | <a href=/explore/thelook/order_items?fields=order_items.detail*&f[users.id]={{ value }}>Items</a>
-
+  
   - dimension: state
 
+
   - dimension: zip
-    type: int
+    hidden: true
+    type: zipcode
 
   - dimension: zipcode
     type: zipcode
-    hidden: true
     sql: ${zip}
 
 # MEASURES #
