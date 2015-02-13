@@ -10,6 +10,7 @@
 
   - dimension: inventory_item_id
     type: int
+    sql: ${TABLE}.inventory_item_id
     hidden: true
 
   - dimension: return_date
@@ -18,16 +19,18 @@
 
   - dimension: returned
     type: yesno
-    sql: ${return_date}
+    sql: ${TABLE}.returned_at IS NOT NULL
 
   - dimension: order_id
     type: int
+    sql: ${TABLE}.order_id
     hidden: true
 
   - dimension: sale_price
     description: The sale price reflects the price that the item was sold at.
     type: number
     decimals: 2
+    sql: ${TABLE}.sale_price
 
   - dimension: gross_margin
     type: number
