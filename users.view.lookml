@@ -11,6 +11,44 @@
   - dimension: age
     type: int
 
+# kittens for certain demos
+
+#   - dimension: portrait
+#     sql: GREATEST(MOD(${id}*97,867),MOD(${id}*31,881),MOD(${id}*72,893))
+#     type: int
+#     html: |
+#       <img height=120 width=120 src=http://placekitten.com/g/{{ value }}/{{ value }}>
+# 
+#   - dimension: kitten_name
+#     sql: CONCAT(${first_name},' ', ${TABLE}.last_name)
+# 
+#   - dimension: first_name
+#     sql_case:
+#       Bella: MOD(${id},24) = 23
+#       Bandit: MOD(${id},24) = 22
+#       Tigger: MOD(${id},24) = 21
+#       Boots: MOD(${id},24) = 20
+#       Chloe: MOD(${id},24) = 19
+#       Maggie: MOD(${id},24) = 18
+#       Pumpkin: MOD(${id},24) = 17
+#       Oliver: MOD(${id},24) = 16
+#       Sammy: MOD(${id},24) = 15
+#       Shadow: MOD(${id},24) = 14
+#       Sassy: MOD(${id},24) = 13
+#       Kitty: MOD(${id},24) = 12
+#       Snowball: MOD(${id},24) = 11
+#       Snickers: MOD(${id},24) = 10
+#       Socks: MOD(${id},24) = 9
+#       Gizmo: MOD(${id},24) = 8
+#       Jake: MOD(${id},24) = 7
+#       Lily: MOD(${id},24) = 6
+#       Charlie: MOD(${id},24) = 5
+#       Peanut: MOD(${id},24) = 4
+#       Zoe: MOD(${id},24) = 3
+#       Felix: MOD(${id},24) = 2
+#       Mimi: MOD(${id},24) = 1
+#       Jasmine: MOD(${id},24) = 0
+
   - dimension: age_tier
     type: tier
     sql: ${age}
