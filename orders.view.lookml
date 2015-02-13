@@ -106,9 +106,9 @@
     type: number
     sql: |
       YEAR(${created_date})*12
-        + MONTH(${created_date})
+      + MONTH(${created_date})
       - YEAR(${users_orders_facts.first_order_date})*12
-        - MONTH(${users_orders_facts.first_order_date})
+      - MONTH(${users_orders_facts.first_order_date})
         
   - dimension_group: months_since_user_created_smooth
     type: int
