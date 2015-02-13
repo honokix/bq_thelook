@@ -5,9 +5,9 @@
     persist_for: 24 hours
     indexes: [user_id]
     sql: |
-      SELECT o.user_id as user_id
-      , oi.inventory_item_id as inventory_item_id
-      , p.category as category
+      SELECT 
+        o.user_id as user_id
+        , p.category as category
       FROM order_items oi
       JOIN orders o ON o.id = oi.order_id
       JOIN inventory_items ii ON oi.inventory_item_id = ii.id
@@ -19,8 +19,9 @@
     persist_for: 24 hours
     indexes: [category]
     sql: |
-      SELECT p.category as category
-      , count(distinct p.category, o.user_id) as category_frequency
+      SELECT 
+        p.category as category
+        , count(distinct o.user_id) as category_frequency
       FROM order_items oi
       JOIN orders o ON o.id = oi.order_id
       JOIN inventory_items ii ON oi.inventory_item_id = ii.id
@@ -32,11 +33,12 @@
     persist_for: 24 hours
     indexes: [category_a]
     sql: |
-      SELECT category_a
-      , category_b
-      , joint_frequency
-      , tuc1.category_frequency as category_a_frequency
-      , tuc2.category_frequency as category_b_frequency
+      SELECT 
+        category_a
+        , category_b
+        , joint_frequency
+        , tuc1.category_frequency as category_a_frequency
+        , tuc2.category_frequency as category_b_frequency
       FROM (
         SELECT uc1.category as category_a
         , uc2.category as category_b
