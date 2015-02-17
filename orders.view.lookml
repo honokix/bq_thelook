@@ -2,11 +2,9 @@
 - view: orders
   fields:
 
-### This is a test commit comment 
-
 # DIMENSIONS - Are used for grouping and filtering. #
 # When a view is joined to a base view all dimensions become available in that base view #
-
+    
   - dimension: id
     primary_key: true
     type: int
@@ -14,10 +12,11 @@
 
   - dimension_group: created
     type: time
-    timeframes: [time, date, week, month, month_num, year, dow_num]
+    timeframes: [time, date, week, month, month_num, year, dow_num, hour_of_day]
     sql: ${TABLE}.created_at
 
   - dimension: status
+    sql: ${TABLE}.status
 
   - dimension: total_amount_of_order_usd
     type: number
@@ -107,9 +106,9 @@
     type: number
     sql: |
       YEAR(${created_date})*12
-        + MONTH(${created_date})
+      + MONTH(${created_date})
       - YEAR(${users_orders_facts.first_order_date})*12
-        - MONTH(${users_orders_facts.first_order_date})
+      - MONTH(${users_orders_facts.first_order_date})
         
   - dimension_group: months_since_user_created_smooth
     type: int

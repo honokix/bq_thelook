@@ -37,6 +37,11 @@
     type: number
     decimals: 2
     sql: ${TABLE}.retail_price
+    
+  - dimension: retail_price_tiered
+    type: tier
+    sql: ${retail_price}
+    tiers: [0,100,200,300,400,500,600,700,800,900,999]
 
   - dimension: sku
     sql: ${TABLE}.sku
