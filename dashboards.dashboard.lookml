@@ -1,4 +1,6 @@
+#----------------------------
 - dashboard: 1_business_pulse
+#----------------------------
   title: "1) Business Pulse"
   layout: grid
   rows:
@@ -153,7 +155,6 @@
     limit: 24
     charts_across: 3
 
-
   - name: top_10_brands
     title: "Top 10 Brands"
     type: table
@@ -197,7 +198,9 @@
     sorts: [users.created_month]
     limit: 500
 
+#----------------------------
 - dashboard: 2_brand_overview
+#----------------------------
   title: "2) Brand Overview"
   layout: grid
   show_applied_filters: false
@@ -297,7 +300,9 @@
     sorts: [order_items.count desc]
     limit: 15
 
+#-----------------------------
 - dashboard: 3_category_lookup
+#-----------------------------
   title: "3) Category Lookup"
   layout: grid
   rows: 
@@ -414,7 +419,9 @@
     sorts: [order_items.total_sale_price desc]
     limit: 25
 
+#-------------------------
 - dashboard: 4_user_lookup
+#-------------------------
   title: "4) User Lookup"
   show_applied_filters: false
   layout: grid
@@ -512,3 +519,31 @@
       orders.created_date: 99 years
     sorts: [order_items.count desc]
     limit: 500
+    
+#------------------------------
+- dashboard: image_file_example
+#------------------------------
+- dashboard: sample_dashboard_with_images
+  title: 'Product Dashboard With Images'
+  layout: grid
+  tile_size: 100
+
+#  filters:
+
+  rows:
+  - height: 1000
+    elements: [dashboard_with_images]
+  
+  elements:
+  - name: dashboard_with_images
+    title: 'Product Dashboard with Images'
+    type: table
+    model: thelook
+    explore: products
+    dimensions: [products.id, category.name, brand.name, products.item_name, products.product_image,
+      products.retail_price]
+    filters:
+      products.id: '2671,7612,17264,24492,7201,3388,603,19921,25175,3607,21479,21397,14605,10249,1448,4859,6028,14359,17866,9933,24074,22444,11972,11380,4357,3796,16321,9261,6732,13204'
+    sorts: [products.id]
+    limit: 500
+    total: false

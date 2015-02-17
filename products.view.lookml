@@ -41,7 +41,14 @@
   - dimension: sku
     sql: ${TABLE}.sku
  
+  # these next two dimensions dyanmically builds an image file based on the product_id fior image dashboard
+  - dimension: image_file
+    sql: (concat('http://www.looker.com/_content/docs/99-hidden/images/image_',${id},'.png'))
 
+  - dimension: product_image
+    sql: ${image_file}
+    html: <img src="{{ value }}" width="100" height="100"/>
+    
 # MEASURES #
 
   - measure: count          # number of different products
