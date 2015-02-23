@@ -112,7 +112,7 @@
         
   - dimension_group: months_since_user_created_smooth
     type: int
-    sql: DATEDIFF(${created_date}, ${users_orders_facts.first_order_date})/30.416667
+    sql: FLOOR(DATEDIFF(${created_date}, ${users_orders_facts.first_order_date})/30.416667)
 
 # MEASURES - Measure fields calculate an aggregate value across a set of values for a dimension.
 # Measures will only appear for base views based on this view, or if the join of this view to a base view is one_to_one#
