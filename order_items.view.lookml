@@ -3,6 +3,10 @@
 
 # DIMENSIONS #
 
+  - dimension: today_is_28th
+    type: yesno
+    sql: EXTRACT(day FROM CURDATE()) = 28
+
   - dimension: id
     type: int
     primary_key: true
