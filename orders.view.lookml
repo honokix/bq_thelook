@@ -117,10 +117,18 @@
 # MEASURES - Measure fields calculate an aggregate value across a set of values for a dimension.
 # Measures will only appear for base views based on this view, or if the join of this view to a base view is one_to_one#
 
+  - measure: sum_total_amount_of_order_usd
+    type: sum
+    sql: ${total_amount_of_order_usd}
+    html:  |
+      ${{ rendered_value }}
+      
   - measure: average_total_amount_of_order_usd
     type: average
     sql: ${total_amount_of_order_usd}
     decimals: 2
+    html:  |
+      ${{ rendered_value }}
 
   - measure: this_week_count
     type: count_distinct
@@ -191,7 +199,7 @@
     sql: ${order_profit}
     decimals: 2
     html:  |
-      ${{ rendered_value }}
+      ${{ value }}
 
 # SETS #
 # Allow to define a set of dimensions, measure combinations. This is useful for setting a drill_path associated with a count
