@@ -520,10 +520,9 @@
     sorts: [order_items.count desc]
     limit: 500
     
-#------------------------------
-- dashboard: image_file_example
-#------------------------------
+#----------------------------------------
 - dashboard: sample_dashboard_with_images
+#----------------------------------------
   title: 'Product Dashboard With Images'
   layout: grid
   tile_size: 100
