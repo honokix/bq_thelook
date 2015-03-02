@@ -192,7 +192,7 @@
     sql: ${order_profit}
     decimals: 2
     html:  |
-      ${{ rendered_value }}
+      ${{ value }}
 
   - measure: average_order_profit
     type: average
