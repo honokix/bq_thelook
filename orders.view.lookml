@@ -199,7 +199,7 @@
     sql: ${order_profit}
     decimals: 2
     html:  |
-      ${{ value }}
+      ${{ rendered_value }}
 
 # SETS #
 # Allow to define a set of dimensions, measure combinations. This is useful for setting a drill_path associated with a count
