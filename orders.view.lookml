@@ -107,10 +107,18 @@
     sql: |
       YEAR(${created_date})*12
       + MONTH(${created_date})
+      - YEAR(${users.created_date})*12
+      - MONTH(${users.created_date})
+
+  - dimension_group: months_since_users_first_order_sharp
+    type: number
+    sql: |
+      YEAR(${created_date})*12
+      + MONTH(${created_date})
       - YEAR(${users_orders_facts.first_order_date})*12
       - MONTH(${users_orders_facts.first_order_date})
-        
-  - dimension_group: months_since_user_created_smooth
+
+  - dimension_group: months_since_users_first_order_smooth
     type: int
     sql: FLOOR(DATEDIFF(${created_date}, ${users_orders_facts.first_order_date})/30.416667)
 
