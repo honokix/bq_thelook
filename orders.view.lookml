@@ -192,6 +192,21 @@
     decimals: 2
     html:  |
       ${{ rendered_value }}
+      
+
+  - dimension: time_to_next_order
+    type: number
+    sql: DATEDIFF(${subsequent_order_facts.next_order_date},${created_date})
+    
+  - measure: average_time_to_next_order
+    type: average
+    sql: ${time_to_next_order}
+    
+  - dimension: time_to_next_order_tier
+    type: tier
+    style: integer
+    tiers: [0,7,30,90,180,365]
+    sql: ${time_to_next_order}
 
 # SETS #
 # Allow to define a set of dimensions, measure combinations. This is useful for setting a drill_path associated with a count
