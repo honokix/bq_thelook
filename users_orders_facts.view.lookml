@@ -24,15 +24,12 @@
   - dimension: lifetime_orders
     type: number
 
+
   - dimension: lifetime_number_of_orders_tier
-#     label: 'Lifetime Orders - Tier View'
-    sql: |
-      CASE
-      WHEN ${lifetime_orders} < 3 THEN '1 to 2 fewer orders'
-      WHEN ${lifetime_orders} < 6 THEN '3 to 5 orders'
-      WHEN ${lifetime_orders} < 9 THEN '6 to 8 orders'
-      ELSE '9 or more orders'
-      END
+    type: tier
+    style: integer
+    tiers: [0,1,2,3,5,10]
+    sql: ${lifetime_orders}
 
 
 
