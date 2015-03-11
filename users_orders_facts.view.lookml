@@ -24,10 +24,14 @@
   - dimension: lifetime_orders
     type: number
 
+
   - dimension: lifetime_number_of_orders_tier
     type: tier
+    style: integer
     tiers: [0,1,2,3,5,10]
     sql: ${lifetime_orders}
+
+
 
   - dimension: repeat_customer
     type: yesno
@@ -48,6 +52,7 @@
 
   - dimension: days_as_customer_tiered
     type: tier
+    style: integer
     tiers: [0,10,50,100,500]
     sql: ${days_as_customer}
 

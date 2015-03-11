@@ -25,6 +25,9 @@
     - join: inventory_items
       foreign_key: order_items.inventory_item_id
       fields: inventory_items.export        # don't import all of the fields, just the fields in this set.
+      
+    - join: subsequent_order_facts
+      foreign_key: orders.id
                                             
 
 - explore: inventory_items
@@ -67,6 +70,30 @@
 
   - join: users_sales_facts
     foreign_key: users.id
+
+- explore: users_cohorts
+  from: users
+  joins:
+  - join: users_orders_facts
+    foreign_key: users_cohorts.id
+
+  - join: users_revenue_facts
+    foreign_key: users_cohorts.id   
+    relationship: one_to_one
+
+  - join: users_sales_facts
+    foreign_key: users_cohorts.id
+  
+  - join: user_transactions_monthly
+    sql_on: user_transactions_monthly.user_id = users_cohorts.id
+    relationship: many_to_one
+  
+  - join: user_transactions_monthly_cumulative
+    required_joins: [user_transactions_monthly]
+    sql_on: user_transactions_monthly_cumulative.user_id = users_cohorts.id
+            AND user_transactions_monthly_cumulative.month = user_transactions_monthly.month
+    relationship: many_to_one
+
 
 # - explore: user_order_speed
 #   joins:
