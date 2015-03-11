@@ -3,10 +3,6 @@
 
 # DIMENSIONS #
 
-  - dimension: today_is_28th
-    type: yesno
-    sql: EXTRACT(day FROM CURDATE()) = 28
-
   - dimension: id
     type: int
     primary_key: true
@@ -67,6 +63,18 @@
     decimals: 2
     html: |
       ${{ rendered_value }}
+  
+  - measure: average_sale_price
+    type: average
+    sql: ${sale_price}
+    decimals: 2
+    html: |
+      ${{ rendered_value }}
+
+  - measure: average_gross_margin
+    type: average
+    sql: ${gross_margin}
+    decimals: 2
 
 #   - measure: total_sale_price_per_first_order_user_daily
 #     type: sum
@@ -88,18 +96,6 @@
 #     decimals: 2
 #     html: |
 #       ${{ rendered_value }}
-
-  - measure: average_sale_price
-    type: average
-    sql: ${sale_price}
-    decimals: 2
-    html: |
-      ${{ rendered_value }}
-
-  - measure: average_gross_margin
-    type: average
-    sql: ${gross_margin}
-    decimals: 2
 
 #   - measure: gross_margin_percentage
 #     type: number
