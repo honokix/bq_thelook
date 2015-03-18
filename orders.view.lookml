@@ -205,9 +205,7 @@
   - measure: average_order_profit
     type: average
     sql: ${order_profit}
-    decimals: 2
-    html:  |
-      ${{ rendered_value }}
+    value_format: $##.##
       
 
 # SETS #
