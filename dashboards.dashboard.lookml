@@ -425,7 +425,6 @@
   title: "4) User Lookup"
   show_applied_filters: false
   layout: grid
-  auto_run: false 
   rows:
     - elements: [lifetime_orders, total_items_returned, lifetime_spend]
       height: 180
