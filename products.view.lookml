@@ -9,6 +9,7 @@
     sql: ${TABLE}.id
 
   - dimension: brand_name   # brand name is a string in the db
+    alias: [brand.name]
     sql: ${TABLE}.brand     #  we want a top level entity.
     html: |
       {{ linked_value }}
@@ -16,6 +17,7 @@
       <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>
  
   - dimension: category_name    # We want category to be a top level entity even though doesn't
+    alias: [category.name]
     sql: ${TABLE}.category      #  have its own table
     html: |
       {{ linked_value }}
@@ -24,6 +26,7 @@
 #       <img src="http://s1.huffpost.com/images/v/linkout_image.png" width=8 height=8></a>
 
   - dimension: department_name
+    alias: [department.name]
     sql: ${TABLE}.department
 
   - dimension: item_name
@@ -61,6 +64,7 @@
     drill_fields: detail          # set to show when the count field is clicked
 
   - measure: brand_count    # number of different brands.
+    alias: [brand.count]
     type: count_distinct
     sql: ${TABLE}.brand     # the field in the db to distinctly count
     drill_fields:                 # when the user clicks brand count
@@ -69,6 +73,7 @@
       - -brand_count        # but don't show the brand count, because it will always be 1
 
   - measure: category_count #
+    alias: [category.count]
     type: count_distinct
     sql: ${TABLE}.category
     drill_fields:
@@ -77,6 +82,7 @@
       - -category_count
 
   - measure: department_count
+    alias: [department.count]
     type: count_distinct
     sql: ${TABLE}.department
     drill_fields:
