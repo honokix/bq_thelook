@@ -61,10 +61,10 @@
     type: looker_area
     explore: order_items
     dimensions: [orders.created_date]
-    pivots: [category.name]
+    pivots: [products.category_name]
     measures: [order_items.count]
     filters:
-      category.name: Blazers & Jackets, Sweaters, Pants, Shorts, Fashion Hoodies & Sweatshirts, Accessories
+      products.category_name: Blazers & Jackets, Sweaters, Pants, Shorts, Fashion Hoodies & Sweatshirts, Accessories
     listen:
       date: orders.created_date
       state: users.state
@@ -145,11 +145,11 @@
     type: looker_donut_multiples
     explore: order_items
     dimensions: [orders.created_week]
-    pivots: [category.name]
+    pivots: [products.category_name]
     measures: [order_items.count]
     filters:
       orders.created_date: 6 weeks ago for 6 weeks
-      category.name: Accessories, Active, Blazers & Jackets, Clothing Sets
+      products.category_name: Accessories, Active, Blazers & Jackets, Clothing Sets
     sorts: [orders.created_week desc]
     colors: ["#651F81","#EF7F0F","#555E61","#2DA7CE"]
     limit: 24
@@ -159,7 +159,7 @@
     title: "Top 10 Brands"
     type: table
     explore: order_items
-    dimensions: [brand.name]
+    dimensions: [products.brand_name]
     measures: [order_items.count, order_items.total_sale_price, order_items.average_sale_price]
     listen:
       date: orders.created_date
@@ -218,7 +218,7 @@
     title: "Brand Name"
     type: suggest_filter
     explore: products
-    dimension: brand.name
+    dimension: products.brand_name
     default_value: Calvin Klein
 
   - name: date
@@ -234,7 +234,7 @@
     measures: [orders.count]
     listen:
       date: orders.created_date
-      brand: brand.name
+      brand: products.brand_name
 
   - name: total_customers
     type: single_value
@@ -242,7 +242,7 @@
     measures: [users.count]
     listen:
       date: orders.created_date
-      brand: brand.name
+      brand: products.brand_name
 
   - name: average_order_value
     type: single_value
@@ -250,7 +250,7 @@
     measures: [order_items.average_sale_price]
     listen:
       date: orders.created_date
-      brand: brand.name
+      brand: products.brand_name
 
   - name: sales_over_time
     title: Sales
@@ -259,7 +259,7 @@
     dimensions: [orders.created_date]
     measures: [order_items.total_sale_price, order_items.average_sale_price]
     listen:
-      brand: brand.name
+      brand: products.brand_name
     filters:
       orders.created_date: 90 days
     limit: 500
@@ -279,12 +279,12 @@
     title: "Sales by Department and Category"
     type: table
     explore: order_items
-    dimensions: [category.name]
-    pivots: [department.name]
+    dimensions: [products.category_name]
+    pivots: [products.department_name]
     measures: [order_items.count, order_items.total_sale_price]
     listen:
       date: orders.created_date
-      brand: brand.name
+      brand: products.brand_name
     sorts: [order_items.count desc]
     limit: 500
 
@@ -296,7 +296,7 @@
     measures: [order_items.count, order_items.total_sale_price]
     listen:
       date: orders.created_date
-      brand: brand.name
+      brand: products.brand_name
     sorts: [order_items.count desc]
     limit: 15
 
@@ -319,14 +319,14 @@
     title: "Category Name"
     type: suggest_filter
     explore: products
-    dimension: category.name
+    dimension: products.category_name
     default_value: Jeans
 
   - name: department
     title: "Department"
     type: suggest_filter
     explore: products
-    dimension: department.name
+    dimension: products.department_name
 
   - name: date
     title: "Date"
@@ -340,9 +340,9 @@
     explore: order_items
     measures: [orders.count]
     listen:
-      category: category.name
+      category: products.category_name
       date: orders.created_date
-      department: department.name
+      department: products.department_name
 
   - name: total_customers
     type: single_value
@@ -350,8 +350,8 @@
     measures: [users.count]
     listen:
       date: orders.created_date
-      category: category.name
-      department: department.name
+      category: products.category_name
+      department: products.department_name
 
   - name: average_order_value
     type: single_value
@@ -359,18 +359,18 @@
     measures: [order_items.average_sale_price]
     listen:
       date: orders.created_date
-      category: category.name
-      department: department.name
+      category: products.category_name
+      department: products.department_name
 
   - name: comparison
     title: "All Categories Comparison"
     type: table
     explore: order_items
-    dimensions: [category.name]
+    dimensions: [products.category_name]
     measures: [order_items.average_sale_price, users.count, orders.count]
     listen:
       date: orders.created_date
-      department: department.name
+      department: products.department_name
     sorts: [order_items.average_sale_price desc]
     limit: 50
 
@@ -382,8 +382,8 @@
     measures: [order_items.average_sale_price, order_items.total_sale_price]
     listen:
       date: orders.created_date
-      category: category.name
-      department: department.name
+      category: products.category_name
+      department: products.department_name
     sorts: [orders.created_date]
     x_axis_datetime: yes
     y_axis_orientation: [left,right]
@@ -398,8 +398,8 @@
     measures: [order_items.average_sale_price, order_items.count]
     listen:
       date: orders.created_date
-      category: category.name
-      department: department.name
+      category: products.category_name
+      department: products.department_name
     sorts: [users.age_tier]
     limit: 500
     x_axis_label: "Age Tier"
@@ -410,12 +410,12 @@
     title: "Top Brands"
     type: table
     explore: order_items
-    dimensions: [brand.name]
+    dimensions: [products.brand_name]
     measures: [order_items.count, order_items.total_sale_price]
     listen:
       date: orders.created_date
-      category: category.name
-      department: department.name
+      category: products.category_name
+      department: products.department_name
     sorts: [order_items.total_sale_price desc]
     limit: 25
 
@@ -510,7 +510,7 @@
     title: "Favorite Categories" 
     type: looker_pie
     explore: order_items
-    dimensions: [category.name]
+    dimensions: [products.category_name]
     measures: [order_items.count]
     listen:
       email: users.email
@@ -538,7 +538,7 @@
     type: table
     model: thelook
     explore: products
-    dimensions: [products.id, category.name, brand.name, products.item_name, products.product_image,
+    dimensions: [products.id, products.category_name, products.brand_name, products.item_name, products.product_image,
       products.retail_price]
     filters:
       products.id: '2671,7612,17264,24492,7201,3388,603,19921,25175,3607,21479,21397,14605,10249,1448,4859,6028,14359,17866,9933,24074,22444,11972,11380,4357,3796,16321,9261,6732,13204'
