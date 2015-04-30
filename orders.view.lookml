@@ -205,7 +205,8 @@
   - measure: average_order_profit
     type: average
     sql: ${order_profit}
-    value_format: $##.##
+    decimals: 2
+    value_format: '$#.00'
       
 
 # SETS #
