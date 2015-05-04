@@ -23,6 +23,12 @@
 
   - dimension: lifetime_orders
     type: number
+    
+  - measure: average_ltv
+    type: average
+    decimals: 2
+    drill_fields: [lifetime_orders, users.count]
+    sql: ${lifetime_orders}
 
 
   - dimension: lifetime_number_of_orders_tier
