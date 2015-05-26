@@ -156,7 +156,7 @@
     charts_across: 3
 
   - name: top_10_brands
-    title: "Top 10 Brands"
+    title: "Top 15 Brands"
     type: table
     explore: order_items
     dimensions: [products.brand_name]
