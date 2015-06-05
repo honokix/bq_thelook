@@ -9,7 +9,12 @@
     sql: ${TABLE}.id 
 
   - dimension: age
-    type: int
+    type: number
+    
+  - measure: average_age
+    type: average
+    decimals: 2
+    sql: ${age}
 
 # kittens for certain demos
 

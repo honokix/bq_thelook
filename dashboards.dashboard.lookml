@@ -25,10 +25,11 @@
     default_value: Last 90 Days
 
   - name: state
-    title: "State / Region"
-    type: suggest_filter
+    title: 'State / Region'
+    type: field_filter
     explore: users
-    dimension: users.state
+    field: users.state
+
 
   elements:
 
@@ -214,12 +215,15 @@
 
   filters:
 
+
+
   - name: brand
-    title: "Brand Name"
-    type: suggest_filter
+    title: 'Brand Name'
+    type: field_filter
     explore: products
-    dimension: products.brand_name
+    field: products.brand_name
     default_value: Calvin Klein
+
 
   - name: date
     title: "Date"
@@ -316,17 +320,19 @@
   filters:
 
   - name: category
-    title: "Category Name"
-    type: suggest_filter
+    title: 'Category Name'
+    type: field_filter
     explore: products
-    dimension: products.category_name
+    field: products.category_name
     default_value: Jeans
 
   - name: department
-    title: "Department"
-    type: suggest_filter
+    title: 'Department'
+    type: field_filter
     explore: products
-    dimension: products.department_name
+    field: products.department_name
+    default_value: Jeans
+
 
   - name: date
     title: "Date"
@@ -434,10 +440,10 @@
   filters:
   
   - name: email
-    title: "Email"
-    type: suggest_filter
+    title: 'Email'
+    type: field_filter
     explore: users
-    dimension: users.email
+    field: users.email
   
   elements:   
   
