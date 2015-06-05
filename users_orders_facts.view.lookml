@@ -39,9 +39,10 @@
 
 
 
-  - dimension: repeat_customer
+  - dimension: repeat_customer # comment
     type: yesno
     sql: ${lifetime_orders} > 1
+  
   
   - dimension_group: first_order
     type: time
