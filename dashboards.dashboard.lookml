@@ -331,7 +331,7 @@
     type: field_filter
     explore: products
     field: products.department_name
-    default_value: Jeans
+    
 
 
   - name: date
