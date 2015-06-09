@@ -1,7 +1,7 @@
 - view: users
   fields:
 
-# DIMENSIONS #
+# DIMENSIONS # 
 
   - dimension: id
     type: int
