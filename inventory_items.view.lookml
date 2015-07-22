@@ -14,7 +14,7 @@
 
   - dimension_group: created
     type: time
-    timeframes: [time, date, week, month, dow, hod]
+    timeframes: [time, date, week, month, day_of_week, hour_of_day]
     sql: ${TABLE}.created_at
 
   - dimension: product_id
