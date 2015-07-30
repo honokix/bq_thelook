@@ -56,20 +56,18 @@
     type: sum
     decimals: 2
     sql: ${gross_margin}
+    value_format: '$#,##0.00'
 
   - measure: total_sale_price
     type: sum
     sql: ${sale_price}
-    decimals: 2
-    html: |
-      ${{ rendered_value }}
+    value_format: '$#,##0.00'
+
   
   - measure: average_sale_price
     type: average
     sql: ${sale_price}
-    decimals: 2
-    html: |
-      ${{ rendered_value }}
+    value_format: '$#,##0.00'
 
   - measure: average_gross_margin
     type: average
