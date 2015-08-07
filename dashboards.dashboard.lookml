@@ -40,6 +40,7 @@
     listen:
       date: orders.created_date
       state: users.state
+    font_size: medium
 
   - name: average_order_profit
     type: single_value
@@ -48,6 +49,7 @@
     listen:
       date: orders.created_date
       state: users.state
+    font_size: medium
 
   - name: first_purchasers
     type: single_value
@@ -56,6 +58,7 @@
     listen:
       date: orders.created_date
       state: users.state
+    font_size: medium
 
   - name: orders_by_day_and_category
     title: "Orders by Day and Category"
