@@ -158,6 +158,7 @@
     colors: ["#651F81","#EF7F0F","#555E61","#2DA7CE"]
     limit: 24
     charts_across: 3
+    show_value_labels: true
 
   - name: top_10_brands
     title: "Top 15 Brands"
@@ -242,6 +243,7 @@
     listen:
       date: orders.created_date
       brand: products.brand_name
+    font_size: medium
 
   - name: total_customers
     type: single_value
@@ -250,6 +252,7 @@
     listen:
       date: orders.created_date
       brand: products.brand_name
+    font_size: medium
 
   - name: average_order_value
     type: single_value
@@ -258,6 +261,7 @@
     listen:
       date: orders.created_date
       brand: products.brand_name
+    font_size: medium
 
   - name: sales_over_time
     title: Sales
@@ -352,6 +356,7 @@
       category: products.category_name
       date: orders.created_date
       department: products.department_name
+    font_size: medium
 
   - name: total_customers
     type: single_value
@@ -361,6 +366,7 @@
       date: orders.created_date
       category: products.category_name
       department: products.department_name
+    font_size: medium
 
   - name: average_order_value
     type: single_value
@@ -370,6 +376,7 @@
       date: orders.created_date
       category: products.category_name
       department: products.department_name
+    font_size: medium
 
   - name: comparison
     title: "All Categories Comparison"
