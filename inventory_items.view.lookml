@@ -33,7 +33,7 @@
   - dimension: days_in_inventory_tier
     type: tier
     sql: ${days_in_inventory}
-    tiers: [0,5,10,20,40,80,160,360]
+    tiers: [0,5,10,20,40,80,160,365]
 
 
 # MEASURES #
