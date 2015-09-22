@@ -28,12 +28,13 @@
 
   - dimension: days_in_inventory
     type: int
-    sql: DATEDIFF(${sold_date}, ${created_date})
+    sql: DATEDIFF(coalesce(${sold_date},curdate()), ${created_date})
 
   - dimension: days_in_inventory_tier
     type: tier
     sql: ${days_in_inventory}
     tiers: [0,5,10,20,40,80,160,360]
+
 
 # MEASURES #
 
