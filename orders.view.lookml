@@ -29,7 +29,7 @@
   - dimension: total_amount_of_order_usd_tier
     type: tier
     sql: ${total_amount_of_order_usd}
-    tiers: [0,10,50,150,500,750,1000,2000]
+    tiers: [0,10,50,150,500,750,1000,2000,3000]
 
   - dimension: order_items_list
     sql: |
