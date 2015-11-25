@@ -99,7 +99,7 @@
 # kittens for certain demos
 
 - explore: kitten_order_items
-  label: 'Order Items' 
+  label: 'Order Items (Kittens)' 
   hidden: true
   extends: order_items 
   joins:
@@ -109,7 +109,7 @@
 - view: kitten_users
   extends: users
   fields:
-  - dimension: portrait
+  - dimension: kitten_portrait
     sql: GREATEST(MOD(${id}*97,867),MOD(${id}*31,881),MOD(${id}*72,893))
     html: |
       <img height=120 width=120 src="http://placekitten.com/g/{{ value }}/{{ value }}">
@@ -117,7 +117,7 @@
   - dimension: kitten_name
     sql: CONCAT(${first_name},' ', ${TABLE}.last_name)
 
-  - dimension: first_name
+  - dimension: kitten_first_name
     sql_case:
       Bella: MOD(${id},24) = 23
       Bandit: MOD(${id},24) = 22
@@ -145,4 +145,4 @@
       Jasmine: MOD(${id},24) = 0
   
   sets:
-    detail: [SUPER*, kitten_name, portrait]
+    detail: [SUPER*, kitten_name, kitten_portrait]
