@@ -88,8 +88,8 @@
       - age
       - history
 #         # Counters for views that join 'users'
-#       - orders.count
-#       - order_items.count 
+      - orders.count
+      - order_items.count 
 
 
 
