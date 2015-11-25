@@ -1,12 +1,14 @@
 # PRELIMINARIES #
 - connection: thelook
 - scoping: true                          # for backward compatibility
-- include: "*.lookml"
-- label: The Look
+- include: "*.view.lookml"       # include all the views
+- include: "*.dashboard.lookml"  # include all the dashboards
+- label: 'The Look'
 
 # EXPLORES #
 
 - explore: order_items
+  view: order_items
   joins:
 
     - join: orders
@@ -27,8 +29,8 @@
       
 #     - join: subsequent_order_facts
 #       foreign_key: orders.id
-                                            
-
+                                          
+                                        
 - explore: inventory_items
   joins:
     - join: products
