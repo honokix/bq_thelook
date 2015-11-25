@@ -89,11 +89,13 @@
       - history
 #         # Counters for views that join 'users'
 #       - orders.count
-#       - order_items.count
-      
-      
-      
-      
+#       - order_items.count 
+
+
+
+
+
+
 # kittens for certain demos
 
 - explore: kitten_order_items
