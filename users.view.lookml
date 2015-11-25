@@ -145,4 +145,4 @@
       Jasmine: MOD(${id},24) = 0
   
   sets:
-    detail: [SUPER*, kitten_name, kitten_portrait]
+    detail: [SUPER*, kitten_first_name, kitten_portrait]
