@@ -26,11 +26,9 @@
     - join: inventory_items
       foreign_key: order_items.inventory_item_id
       #fields: inventory_items.export        # don't import all of the fields, just the fields in this set.
-      
-#     - join: subsequent_order_facts
-#       foreign_key: orders.id
-                                          
-                                        
+
+
+
 - explore: inventory_items
   joins:
     - join: products
