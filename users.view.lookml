@@ -68,6 +68,7 @@
 
   - measure: count
     type: count
+    sql: COALESCE(${id}, 0)
     drill_fields: detail
 
   - measure: count_percent_of_total

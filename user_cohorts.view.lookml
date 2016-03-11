@@ -80,6 +80,44 @@
     decimals: 2
     sql: ${monthly_revenue}
 
+  - measure: user_count
+    type: count
+    sql: ${user_id}
+
+  - measure: active_user_count
+    type: count
+    sql: ${user_id}
+    filters:
+      monthly_transactions: '> 0'
+
+  - measure: active_user_percentage
+    type: number
+    decimals: 2
+    sql: ${active_user_count} / ${user_count}
+    value_format_name: percent_2
+    html: |
+      {% if value > 0.5 %}
+        <p style="color: white; background-color: #3D6D9E; font-size:100%; text-align:center">{{ rendered_value }}</p>
+      {% elsif value > 0.45 %}
+        <p style="color: black; background-color: #4D6C97; font-size:100%; text-align:center">{{ rendered_value }}</p>
+      {% elsif value > 0.4 %}
+        <p style="color: black; background-color: #5D6B91; font-size:100%; text-align:center">{{ rendered_value }}</p>
+      {% elsif value > 0.35 %}
+        <p style="color: black; background-color: #6E6A8A; font-size:100%; text-align:center">{{ rendered_value }}</p>
+      {% elsif value > 0.3 %}
+        <p style="color: black; background-color: #7E6984; font-size:100%; text-align:center">{{ rendered_value }}</p>
+      {% elsif value > 0.25 %}
+        <p style="color: black; background-color: #8E687E; font-size:100%; text-align:center">{{ rendered_value }}</p>
+      {% elsif value > 0.2 %}
+        <p style="color: black; background-color: #AF6671; font-size:100%; text-align:center">{{ rendered_value }}</p>
+      {% elsif value > 0.15 %}
+        <p style="color: black; background-color: #D06464; font-size:100%; text-align:center">{{ rendered_value }}</p>
+      {% elsif value > 0.1 %}
+        <p style="color: black; background-color: #E0635E; font-size:100%; text-align:center">{{ rendered_value }}</p>
+      {% elsif value > 0.05 %}
+        <p style="color: black; background-color: #F16358; font-size:100%; text-align:center">{{ rendered_value }}</p>
+      {% endif %}     
+
 #####################################################################################
 
 - view: user_transactions_monthly_cumulative
