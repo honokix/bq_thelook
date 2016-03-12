@@ -61,6 +61,7 @@
   - dimension: monthly_revenue
     type: number
     sql: ${TABLE}.monthly_revenue
+    value_format_name: usd_0
 
   - measure: sum_monthly_transactions
     type: sum
@@ -69,6 +70,7 @@
   - measure: sum_monthly_revenue
     type: sum
     sql: ${monthly_revenue}
+    value_format_name: usd_0
   
   - measure: average_monthly_transactions
     type: average
@@ -79,6 +81,7 @@
     type: average
     decimals: 2
     sql: ${monthly_revenue}
+    value_format_name: usd_0
 
   - measure: user_count
     type: count
@@ -184,6 +187,7 @@
   - measure: sum_cumulative_monthly_revenue
     type: sum
     sql: ${cumulative_monthly_revenue}
+    value_format_name: usd_0
 
   - measure: average_cumulative_monthly_transactions
     type: average
@@ -194,3 +198,4 @@
     type: average
     decimals: 2
     sql: ${cumulative_monthly_revenue}
+    value_format_name: usd_0
