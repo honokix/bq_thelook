@@ -36,7 +36,8 @@
   fields:
 
   - dimension: user_id
-    type: int
+    type: number
+    value_format_name: id
     primary_key: true
     sql: ${TABLE}.user_id
 
@@ -74,28 +75,23 @@
   
   - measure: average_monthly_transactions
     type: average
-    decimals: 2
     sql: ${monthly_transactions}
 
   - measure: average_monthly_revenue
     type: average
-    decimals: 2
     sql: ${monthly_revenue}
     value_format_name: usd_0
 
   - measure: user_count
     type: count
-    sql: ${user_id}
 
   - measure: active_user_count
     type: count
-    sql: ${user_id}
     filters:
       monthly_transactions: '> 0'
 
   - measure: active_user_percentage
     type: number
-    decimals: 2
     sql: ${active_user_count} / ${user_count} * 2
     value_format_name: percent_1
     html: |
