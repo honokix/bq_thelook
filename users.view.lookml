@@ -31,10 +31,6 @@
     sql: ${age}
     tiers: [0,10,20,30,40,50,60,70,80]
 
-  - dimension: old
-    type: yesno
-    sql: ${age} > 30
-
   - dimension: city
 
   - dimension: country
