@@ -17,5 +17,3 @@ Please contact [support@looker.com](mailto:support@looker.com) or use the chat b
 
 
 Click the "Edit" button above to make changes.
-
-

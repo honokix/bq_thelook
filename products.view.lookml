@@ -4,7 +4,7 @@
 # DIMENSIONS #
 
   - dimension: id
-    type: int
+    type: number
     primary_key: true
     sql: ${TABLE}.id
 
@@ -33,12 +33,13 @@
     sql: ${TABLE}.item_name
 
   - dimension: rank
-    type: int
+    type: number
+    value_format_name: decimal_0
     sql: ${TABLE}.rank
 
   - dimension: retail_price
     type: number
-    decimals: 2
+    value_format_name: decimal_2
     sql: ${TABLE}.retail_price
     
   - dimension: retail_price_tiered

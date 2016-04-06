@@ -5,11 +5,11 @@
 
   - dimension: id
     primary_key: true
-    type: int
+    type: number
 
   - dimension: cost
     type: number
-    decimals: 2
+    value_format_name: decimal_2
     sql: ${TABLE}.cost
 
   - dimension_group: created
@@ -19,7 +19,7 @@
 
   - dimension: product_id
     hidden: true
-    type: int
+    type: number
 
   - dimension_group: sold
     type: time
@@ -27,7 +27,8 @@
     sql: ${TABLE}.sold_at
 
   - dimension: days_in_inventory
-    type: int
+    type: number
+    value_format_name: decimal_0
     sql: DATEDIFF(coalesce(${sold_date},curdate()), ${created_date})
 
   - dimension: days_in_inventory_tier
@@ -50,22 +51,22 @@
 
   - measure: percent_sold
     type: number
-    decimals: 2
+    value_format_name: decimal_2
     sql: 100.0 * ${sold_count}/${count}
 
   - measure: total_cost
     type: sum
-    decimals: 2
+    value_format_name: decimal_2
     sql: ${cost}
 
   - measure: average_cost
     type: average
-    decimals: 2
+    value_format_name: decimal_2
     sql: ${cost}
 
   - measure: average_days_in_inventory
     type: average
-    decimals: 2
+    value_format_name: decimal_2
     sql: ${days_in_inventory}
 
 # SETS #

@@ -30,12 +30,12 @@
 
   - dimension: average_item_price
     type: number
-    decimals: 2
+    value_format_name: decimal_2
     sql: ${TABLE}.average_item_price
 
   - dimension: lifetime_revenue
     type: number
-    decimals: 2
+    value_format_name: decimal_2
     sql: ${TABLE}.lifetime_revenue
 
   - dimension: lifetime_revenue_tiered

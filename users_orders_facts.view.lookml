@@ -26,7 +26,7 @@
     
   - measure: average_ltv
     type: average
-    decimals: 2
+    value_format_name: decimal_2
     drill_fields: [lifetime_orders, users.count]
     sql: ${lifetime_orders}
 
@@ -55,7 +55,8 @@
     sql: ${TABLE}.latest_order
 
   - dimension: days_as_customer
-    type: int
+    type: number
+    value_format_name: decimal_0
 
   - dimension: days_as_customer_tiered
     type: tier
@@ -64,7 +65,9 @@
     sql: ${days_as_customer}
 
   - dimension: days_since_purchase
-    type: int
+    type: number
+    value_format_name: decimal_0
 
   - dimension: number_of_distinct_months_with_orders
-    type: int
+    type: number
+    value_format_name: decimal_0
