@@ -7,7 +7,7 @@
     
   - dimension: id
     primary_key: true
-    type: int
+    type: number
     sql: ${TABLE}.id
 
   - dimension_group: created
@@ -20,7 +20,7 @@
 
   - dimension: total_amount_of_order_usd
     type: number
-    decimals: 2
+    value_format_name: decimal_2
     sql: |
       (SELECT SUM(order_items.sale_price)
       FROM order_items
@@ -41,7 +41,7 @@
 
   - dimension: total_cost_of_order
     type: number
-    decimals: 2
+    value_format_name: decimal_2
     sql: |
         (SELECT SUM(inventory_items.cost)
         FROM order_items
@@ -49,7 +49,8 @@
         WHERE order_items.order_id = orders.id)
 
   - dimension: total_number_of_items
-    type: int
+    type: number
+    value_format_name: decimal_0
     sql: |
         (SELECT COUNT(order_items.id)
         FROM order_items
@@ -57,14 +58,14 @@
 
   - dimension: order_profit
     type: number
-    decimals: 2
+    value_format_name: decimal_2
     sql: ${total_amount_of_order_usd} - ${total_cost_of_order}
     html: |
       ${{ rendered_value }}
 
   - measure: profit_per_user
     type: number
-    decimals: 2
+    value_format_name: decimal_2
     sql: 1.0 * ${order_profit}/NULLIF(${users.count},0)
     html: |
       ${{ rendered_value }}
@@ -82,7 +83,7 @@
     sql: ${order_sequence_number} = 1
 
   - dimension: user_id
-    type: int
+    type: number
     hidden: true
 
   - dimension: month_text
@@ -119,7 +120,8 @@
       - MONTH(${users_orders_facts.first_order_date})
 
   - dimension_group: months_since_users_first_order_smooth
-    type: int
+    type: number
+    value_format_name: decimal_0
     sql: FLOOR(DATEDIFF(${created_date}, ${users_orders_facts.first_order_date})/30.416667)
 
 # MEASURES - Measure fields calculate an aggregate value across a set of values for a dimension.
@@ -134,7 +136,7 @@
   - measure: average_total_amount_of_order_usd
     type: average
     sql: ${total_amount_of_order_usd}
-    decimals: 2
+    value_format_name: decimal_2
     html:  |
       ${{ rendered_value }}
 
@@ -172,13 +174,13 @@
     label: Count (Percent of Total)
     type: percent_of_total
     drill_fields: detail*
-    decimals: 1
+    value_format_name: decimal_1
     sql: ${count}
 
   - measure: total_first_purchase_revenue
     type: sum
     sql: ${total_amount_of_order_usd}
-    decimals: 2
+    value_format_name: decimal_2
     filters:
       is_first_purchase: yes
 
@@ -191,21 +193,20 @@
   - measure: total_returning_shopper_revenue
     type: sum
     sql: ${total_amount_of_order_usd}
-    decimals: 2
+    value_format_name: decimal_2
     filters:
       is_first_purchase: no
 
   - measure: total_order_profit
     type: sum
     sql: ${order_profit}
-    decimals: 2
+    value_format_name: decimal_2
     html:  |
       ${{ value }}
 
   - measure: average_order_profit
     type: average
     sql: ${order_profit}
-    decimals: 2
     value_format: '$#.00'
       
 

@@ -28,10 +28,10 @@
   # endhighlight
     
   - dimension: user_id
-    type: int
+    type: number
   
   - dimension: order_id
-    type: int
+    type: number
     
   - dimension: event_type
   

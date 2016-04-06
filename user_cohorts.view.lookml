@@ -150,7 +150,7 @@
   fields:
   
   - dimension: user_id
-    type: int
+    type: number
     primary_key: true
     sql: ${TABLE}.user_id
 
@@ -187,11 +187,11 @@
 
   - measure: average_cumulative_monthly_transactions
     type: average
-    decimals: 2
+    value_format_name: decimal_2
     sql: ${cumulative_monthly_transactions}
 
   - measure: average_cumulative_monthly_revenue
     type: average
-    decimals: 2
+    value_format_name: decimal_2
     sql: ${cumulative_monthly_revenue}
     value_format_name: usd_0

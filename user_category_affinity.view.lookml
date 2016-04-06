@@ -72,5 +72,5 @@
     
   - measure: category_affinity
     type: number
-    decimals: 1
+    value_format_name: decimal_1
     sql: ${joint_frequency}/(${category_a_frequency}+${category_b_frequency}-${joint_frequency})*100
