@@ -78,4 +78,4 @@
   - measure: average_365_day_revenue
     type: average
     sql: ${365_day_revenue}
-    value_format_name: decimal_2      
+    value_format_name: decimal_2
