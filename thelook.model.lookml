@@ -35,6 +35,7 @@
       foreign_key: inventory_items.product_id
       
 - explore: orders
+  persist_for: 6 hours
   joins:
     - join: users
       foreign_key: orders.user_id

@@ -18,7 +18,7 @@
 
   - dimension: age
     type: number
-    description: "foo" # REPLACEME: users.age
+    description: "foo word foo word foo word foo word foo word foo word foo word" # REPLACEME: users.age
 
   - measure: average_age
     type: average

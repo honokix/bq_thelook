@@ -14,7 +14,42 @@
     type: time
     timeframes: [time, date, week, month, month_num, year, day_of_week_index, hour_of_day, minute5]
     sql: ${TABLE}.created_at
+    convert_tz: false
+  
+  - filter: offset_period
+    suggestions: [1 day, 7 day, 30 day, 364 day]
+  
+  - dimension: randomonium
+    value_format_name: decimal_2
+    sql: RAND()*100
+  
+  - dimension: colin_date
+    type: date
+    sql: |
+      DATE_ADD(${TABLE}.created_at, INTERVAL -
+            {% capture name %}{% parameter offset_period %}{% endcapture %}
+            {% assign normalized_name = name | replace: "'", "" | replace: "^", "" | strip %}
+            {% assign valid_times = "1 day|7 day|30 day|364 day" | split: "|" %}
+            {% assign whitelisted = false %}
+            {% for timeframe in valid_times %}
+              {% if normalized_name == timeframe %}
+                {% assign whitelisted = true %}
+              {% endif %}
+            {% endfor %}
+            {% if whitelisted %}{{normalized_name}}{% else %}BAD TIMEFRAME{% endif %})
+    convert_tz: false
 
+  - dimension: offsetter
+    type: number
+    sql: |
+        {% capture name %}{% parameter offset_period %}{% endcapture %}
+        {% assign timer = 0 %}
+        {% if name == "'1 day'" %} {% assign timer = 1 %} {% endif %}
+        {% if name == "'7 day'" %} {% assign timer = 7 %} {% endif %}
+        {% if name == "'30 day'" %} {% assign timer = 30 %} {% endif %}
+        {% if name == "'364 day'" %} {% assign timer = 364 %} {% endif %}
+        {{ timer }}
+        
   - dimension: status
     sql: ${TABLE}.status
 

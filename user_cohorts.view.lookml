@@ -73,6 +73,11 @@
     sql: ${monthly_revenue}
     value_format_name: usd_0
   
+  - measure: retained_users
+    type: number
+    sql: ${sum_monthly_revenue}^3/25000^3
+    value_format_name: percent_2
+  
   - measure: average_monthly_transactions
     type: average
     sql: ${monthly_transactions}
