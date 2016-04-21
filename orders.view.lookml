@@ -6,6 +6,7 @@
 # When a view is joined to a base view all dimensions become available in that base view #
     
   - dimension: id
+    label: "woot"
     primary_key: true
     type: number
     sql: ${TABLE}.id
@@ -38,6 +39,22 @@
             {% endfor %}
             {% if whitelisted %}{{normalized_name}}{% else %}BAD TIMEFRAME{% endif %})
     convert_tz: false
+
+  - filter: age_buckets
+
+  - dimension: age_tier_custom
+    type: string
+    sql: |
+            CASE
+            {% capture buckets %}{% parameter age_buckets %}{% endcapture %}
+            {% assign clean_buckets = buckets | replace: "'", "" | strip %}
+            {% assign tiers = clean_buckets | split: "|" %}
+            {% for tier in tiers %}
+                WHEN ${users.age} < {{tier}} THEN {{tier}} - 5
+            {% endfor %}
+                ELSE "Unknown"
+            END
+
 
   - dimension: offsetter
     type: number
