@@ -41,6 +41,7 @@
     convert_tz: false
 
   - filter: age_buckets
+    description: "Use '|' as a delimeter"
 
   - dimension: age_tier_custom
     type: string
