@@ -16,10 +16,9 @@
       sql: ${TABLE}.video_url
 
     - dimension: embedded_video
-      required_fields: ${video_url}
       sql: ${video_url}
       html: |
-        <video width="400" height="250" controls>
+        <video width="600" height="400" controls>
         <source src="{{ value }}" type="video/mp4">
         </video>
     
