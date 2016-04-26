@@ -6,7 +6,7 @@
     sql: |
       SELECT
         "Slack Your Data with the Lookerbot" as video_name
-        , "https://www.dropbox.com/s/ubz3ib0vvrhbznc/alexa_meet_looker.mp4?dl=1" as video_url
+        , "https://www.youtube.com/v/zOIi5QwU_-w" as video_url
 
   fields:
     - dimension: video_name
