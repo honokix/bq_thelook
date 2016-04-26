@@ -561,3 +561,91 @@
     sorts: [products.id]
     limit: 500
     total: false
+
+#----------------------------------------
+- dashboard: test_dash
+#----------------------------------------
+  title: 'Tester'
+  layout: grid
+  tile_size: 100
+
+#  filters:
+
+  rows:
+  - height: 400
+    elements: [add_a_unique_name_1461688596125, add_a_unique_name_1461688776766, add_a_unique_name_1461688811955]
+  
+  elements:
+  - name: add_a_unique_name_1461688596125
+    title: Control Error Rate
+    type: single_value
+    model: thelook
+    explore: orders
+    measures: [orders.count]
+    dynamic_fields:
+    - table_calculation: calculation_1
+      label: Calculation 1
+      expression: 0.003+${orders.count}-${orders.count}
+      value_format_name: percent_2
+    - table_calculation: sample_size
+      label: Sample Size
+      expression: ${orders.count}
+      value_format_name: decimal_0
+    hidden_fields: [orders.count]
+    sorts: [orders.created_date desc, orders.count desc]
+    limit: 500
+    query_timezone: America/Los_Angeles
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: value
+    show_comparison_label: true
+  
+  - name: add_a_unique_name_1461688776766
+    title: Test Error Rate
+    type: single_value
+    model: thelook
+    explore: orders
+    measures: [orders.count]
+    dynamic_fields:
+    - table_calculation: test_error_rate
+      label: Test Error Rate
+      expression: 0.0248+${orders.count}-${orders.count}
+      value_format_name: percent_2
+    - table_calculation: sample_size
+      label: Sample Size
+      expression: ${orders.count}-1000+rand()*2000
+      value_format_name: decimal_0
+    hidden_fields: [orders.count]
+    sorts: [orders.created_date desc, orders.count desc]
+    limit: 500
+    query_timezone: America/Los_Angeles
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: value
+    show_comparison_label: true
+
+  - name: add_a_unique_name_1461688811955
+    title: Untitled Visualization
+    type: single_value
+    model: thelook
+    explore: orders
+    measures: [orders.count]
+    dynamic_fields:
+    - table_calculation: statistically_significant
+      label: Statistically Significant
+      expression: '"Statistically Significant"'
+      value_format_name: percent_2
+    - table_calculation: p_value
+      label: P-Value
+      expression: '"0.0001"'
+      value_format_name: decimal_0
+    hidden_fields: [orders.count]
+    sorts: [orders.created_date desc, orders.count desc]
+    limit: 500
+    query_timezone: America/Los_Angeles
+    show_single_value_title: false
+    show_comparison: true
+    comparison_type: value
+    show_comparison_label: true
+  
+  
