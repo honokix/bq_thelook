@@ -55,7 +55,6 @@
     sql: ${TABLE}.latest_order
 
   - dimension: days_as_customer
-    label: "blah blah"
     type: number
     value_format_name: decimal_0
 
