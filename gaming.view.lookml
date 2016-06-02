@@ -372,10 +372,9 @@
       
   fields:
     - dimension: days_since_download
-      type: datetime
-      timeframes: [date]
+      type: date
       sql: ${TABLE}.days_since_download
-      tz_convert: false
+      convert_tz: false
 
     - dimension: dim_daus
       type: number
