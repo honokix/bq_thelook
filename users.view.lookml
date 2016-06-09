@@ -83,6 +83,7 @@
     suggestions: [count, sum, average, min, max]
   
   - measure: measure
+    type: number
     sql: |
             {% capture name %}{% parameter aggregation %}{% endcapture %}
             {% assign normalized_name = name | replace: "'", "" | replace: "^", "" | strip %}
