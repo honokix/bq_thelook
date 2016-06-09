@@ -1,12 +1,5 @@
 - view: users
   sql_table_name: users
-  
-  # START PARSE
-  my_descriptions:
-    description_user_age: &description_user_age
-      description: "Hello this is My Descriptiowangiowefnfw"
-  # END PARSE
-  
   fields:
 
 # DIMENSIONS # 
@@ -115,7 +108,7 @@
 # MEASURES #
 
   - measure: count
-    type: count
+    type: count_distinct
     sql: COALESCE(${id}, 0)
     drill_fields: detail
 
@@ -196,12 +189,6 @@
       Felix: MOD(${id},24) = 2
       Mimi: MOD(${id},24) = 1
       Jasmine: MOD(${id},24) = 0
-  
-  
-  - dimension: age_two
-    extends: age
-    description: how old people are
-  
   
   sets:
     detail: [SUPER*, kitten_first_name, kitten_portrait]
