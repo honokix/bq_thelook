@@ -59,7 +59,6 @@
   
   - dimension: state
 
-
   - dimension: zip
     hidden: true
     type: zipcode
@@ -67,6 +66,51 @@
   - dimension: zipcode
     type: zipcode
     sql: ${zip}
+  
+  - filter: dimension_picker
+    suggestions: [id, age, gender]
+  
+  - dimension: dimension
+    sql: |
+            {% capture name %}{% parameter dimension_picker %}{% endcapture %}
+            {% assign normalized_name = name | replace: "'", "" | replace: "^", "" | strip %}
+            {% assign valid_times = "id|age|gender" | split: "|" %}
+            {% assign whitelisted = false %}
+            {% for timeframe in valid_times %}
+              {% if normalized_name == timeframe %}
+                {% assign whitelisted = true %}
+              {% endif %}
+            {% endfor %}
+            {% if whitelisted %}{{normalized_name}}{% else %}BAD TIMEFRAME{% endif %}
+      
+  - filter: measure_picker
+    suggestions: [id, age]
+  
+  - filter: aggregation
+    suggestions: [count, sum, average, min, max]
+  
+  - measure: measure
+    sql: |
+            {% capture name %}{% parameter aggregation %}{% endcapture %}
+            {% assign normalized_name = name | replace: "'", "" | replace: "^", "" | strip %}
+            {% assign valid_times = "count|sum|average|min|max" | split: "|" %}
+            {% assign whitelisted = false %}
+            {% for timeframe in valid_times %}
+              {% if normalized_name == timeframe %}
+                {% assign whitelisted = true %}
+              {% endif %}
+            {% endfor %}
+            {% if whitelisted %}{{normalized_name}}{% else %}BAD TIMEFRAME{% endif %}(DISTINCT {% capture name %}{% parameter measure_picker %}{% endcapture %}
+            {% assign normalized_name = name | replace: "'", "" | replace: "^", "" | strip %}
+            {% assign valid_times = "id|age" | split: "|" %}
+            {% assign whitelisted = false %}
+            {% for timeframe in valid_times %}
+              {% if normalized_name == timeframe %}
+                {% assign whitelisted = true %}
+              {% endif %}
+            {% endfor %}
+            {% if whitelisted %}{{normalized_name}}{% else %}BAD TIMEFRAME{% endif %})
+      
 
 # MEASURES #
 

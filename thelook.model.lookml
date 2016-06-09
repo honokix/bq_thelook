@@ -60,6 +60,7 @@
 - explore: products
 
 - explore: users
+#   required_joins: [users_orders_facts, users_revenue_facts, users_sales_facts]
   joins:
   - join: users_orders_facts
     foreign_key: users.id

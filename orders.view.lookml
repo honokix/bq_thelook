@@ -217,7 +217,7 @@
   - measure: count
     type: count_distinct
     sql: ${TABLE}.id
-    drill_fields: detail*
+    drill_fields: [id, user_id]
 
   - measure: order_percent_change
     type: percent_of_previous
