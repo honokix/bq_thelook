@@ -16,16 +16,29 @@
     timeframes: [time, date, week, month, month_num, year, day_of_week_index, hour_of_day, minute5]
     sql: ${TABLE}.created_at
     convert_tz: false
+    html: |
+        {{ rendered_value }}
   
-  - filter: offset_period
-    suggestions: [1 day, 7 day, 30 day, 364 day]
+  - filter: time_period_filter
+
+  - filter: offset_days_filter
+
+  - dimension: time_period
+    type: number
+    sql: |
+        {% parameter time_period_filter %}
   
-  - dimension: randomonium
-    value_format_name: decimal_2
-    sql: RAND()*100
+  - dimension: offset_days
+    type: number
+    sql: |
+        {% parameter offset_days_filter %}
   
   - dimension: status
-    sql: ${TABLE}.status
+    sql: CONCAT(${TABLE}.status, '-', floor(rand()*10))
+
+  - measure: min_status
+    type: string
+    sql: MIN(${status})
 
   - dimension: total_amount_of_order_usd
     type: number
@@ -173,7 +186,8 @@
   - measure: count
     type: count_distinct
     sql: ${TABLE}.id
-    drill_fields: [id, user_id]
+    html: |
+        {{ rendered_value }}
 
   - measure: order_percent_change
     type: percent_of_previous
@@ -217,7 +231,11 @@
     type: average
     sql: ${order_profit}
     value_format: '$#.00'
-      
+
+  - measure: count_status
+    type: count
+    sql: ${status}
+
 
 # SETS #
 # Allow to define a set of dimensions, measure combinations. This is useful for setting a drill_path associated with a count

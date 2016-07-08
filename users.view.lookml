@@ -32,6 +32,9 @@
     type: time
     timeframes: [time, date, week, month, year]
     sql: ${TABLE}.created_at
+    html: |
+        {{ rendered_value }}
+
 
   - dimension: email
     html: |
