@@ -221,6 +221,7 @@
       is_first_purchase: no
 
   - measure: total_order_profit
+    group_label: 'Profit Stuff'
     type: sum
     sql: ${order_profit}
     value_format_name: decimal_2
@@ -228,6 +229,7 @@
       ${{ value }}
 
   - measure: average_order_profit
+    group_label: 'Profit Stuff'
     type: average
     sql: ${order_profit}
     value_format: '$#.00'
