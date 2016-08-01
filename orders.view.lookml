@@ -234,9 +234,6 @@
     sql: ${order_profit}
     value_format: '$#.00'
 
-  - measure: count_status
-    type: count
-    sql: ${status}
 
 
 # SETS #
