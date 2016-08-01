@@ -1,5 +1,6 @@
 # This view is referencing the 'orders' table in the database within the MODELS '- connection: thelook'
 - view: orders
+  access_filter_fields: [orders.created_date] 
   fields:
 
 # DIMENSIONS - Are used for grouping and filtering. #
