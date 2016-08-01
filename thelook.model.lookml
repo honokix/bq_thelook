@@ -7,6 +7,7 @@
 # EXPLORES #
 
 - explore: order_items
+  access_filter_fields: [orders.created_date]
   view: order_items
   joins:
 
