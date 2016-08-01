@@ -34,7 +34,7 @@
         {% parameter offset_days_filter %}
   
   - dimension: status
-    sql: CONCAT(${TABLE}.status, '-', floor(rand()*10))
+    sql: ${TABLE}.status
 
   - measure: min_status
     type: string
