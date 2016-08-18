@@ -25,10 +25,12 @@
     tiers: [0,10,20,30,40,50,60,70,80]
 
   - dimension: city
-    required_fields: [country, state]
-
 
   - dimension: country
+  
+  - dimension: country_first_letter
+    type: string
+    expression: SUBSTRING(${country},0,1)
 
   - dimension_group: created
     type: time
