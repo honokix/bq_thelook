@@ -30,7 +30,7 @@
   
   - dimension: country_first_letter
     type: string
-    expression: SUBSTRING(${country},0,1)
+    expression: substring(${country},0,1)
 
   - dimension_group: created
     type: time
