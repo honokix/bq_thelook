@@ -13,6 +13,7 @@
 
   - dimension_group: created
     type: time
+    description: "date fields"
     timeframes: [time, date, week, month, month_num, year, day_of_week_index, hour_of_day, minute5]
     sql: ${TABLE}.created_at
     convert_tz: false
