@@ -28,9 +28,9 @@
 
   - dimension: country
   
-  - dimension: country_first_letter
-    type: string
-    expression: substring(${country},0,1)
+#   - dimension: country_first_letter
+#     type: string
+#     expression: substring(${country},0,1)
 
   - dimension_group: created
     type: time
