@@ -30,9 +30,20 @@
     tiers: [0,10,20,30,40,50,60,70,80]
 
   - dimension: city
+    drill_fields: [zipcode]
+    
+  - dimension: state
+    drill_fields: [city, zipcode]
 
   - dimension: country
-  
+    drill_fields: [state, city, zipcode]
+
+  - dimension: zipcode
+    type: zipcode
+    sql: ${TABLE}.zip
+    alias: [zip]
+    drill_fields: [gender, age_tier]
+
 #   - dimension: country_first_letter
 #     type: string
 #     expression: substring(${country},0,1)
@@ -41,8 +52,6 @@
     type: time
     timeframes: [time, date, week, month, year]
     sql: ${TABLE}.created_at
-    html: |
-        {{ rendered_value }}
 
 
   - dimension: email
@@ -55,16 +64,6 @@
   - dimension: name
     sql: CONCAT(${TABLE}.first_name,' ', ${TABLE}.last_name)
 
-  - dimension: state
-
-  - dimension: zip
-    hidden: true
-    type: zipcode
-
-  - dimension: zipcode
-    type: zipcode
-    sql: ${zip}
-  
   - filter: dimension_picker
     suggestions: [id, age, gender]
   
