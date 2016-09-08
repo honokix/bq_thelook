@@ -17,9 +17,7 @@
     timeframes: [time, date, week, month, month_num, year, day_of_week_index, hour_of_day, minute5]
     sql: ${TABLE}.created_at
     convert_tz: false
-    html: |
-        {{ rendered_value }}
-  
+
   - filter: time_period_filter
 
   - filter: offset_days_filter
