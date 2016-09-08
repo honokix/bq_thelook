@@ -8,6 +8,11 @@
     type: number
     primary_key: true
     sql: ${TABLE}.id 
+    links:
+      - label: View Order History
+        url: /explore/thelook/orders?fields=orders.detail*&f[users.id]={{ value }}
+      - label: View Item History
+        url: /explore/thelook/order_items?fields=order_items.detail*&f[users.id]={{ value }}
 
   - dimension: age
     type: number
@@ -41,22 +46,15 @@
 
 
   - dimension: email
-    html: |
-      {{ linked_value }}
-      <a href="/dashboards/thelook/4_user_lookup?email={{ value | encode_uri }}" target="_new">
-      <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>  
+    links:
+      - url: /dashboards/thelook/4_user_lookup?email={{ value | encode_uri }}
+        label: User Lookup for {{ value }}
 
   - dimension: gender
 
   - dimension: name
     sql: CONCAT(${TABLE}.first_name,' ', ${TABLE}.last_name)
 
-  - dimension: history
-    sql: ${TABLE}.id
-    html: |
-      <a href="/explore/thelook/orders?fields=orders.detail*&f[users.id]={{ value }}">Orders</a>
-      | <a href="/explore/thelook/order_items?fields=order_items.detail*&f[users.id]={{ value }}">Items</a>
-  
   - dimension: state
 
   - dimension: zip

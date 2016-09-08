@@ -303,7 +303,7 @@
     title: Top Purchasers
     type: table
     explore: order_items
-    dimensions: [users.name, users.email, users.history]
+    dimensions: [users.name, users.email]
     measures: [order_items.count, order_items.total_sale_price]
     listen:
       date: orders.created_date
@@ -462,7 +462,7 @@
     type: looker_single_record
     explore: order_items
     dimensions: [users.id, users.email, users.name, users.created_month, users.age,
-      users.state, users.city, users.zip, users.history]
+      users.state, users.city, users.zip]
     listen:
       email: users.email
     filters:
