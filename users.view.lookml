@@ -67,8 +67,9 @@
   - filter: dimension_picker
     suggestions: [id, age, gender]
   
-#   - dimension: dimension
-#     sql: |
+  - dimension: dimension
+    sql: |
+        {% parameter dimension_picker %}
 #             {% capture name %}{% parameter dimension_picker %}{% endcapture %}
 #             {% assign normalized_name = name | replace: "'", "" | replace: "^", "" | strip %}
 #             {% assign valid_times = "id|age|gender" | split: "|" %}
