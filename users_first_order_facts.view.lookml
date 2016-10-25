@@ -17,7 +17,7 @@
     sql: ${TABLE}.first_order_date
 
   - dimension: first_orders_count_daily
-    type: int
+    type: number
     sql: ${TABLE}.first_orders_count
 
 
@@ -41,7 +41,7 @@
     sql: ${TABLE}.first_order_week
 
   - dimension: first_orders_count_weekly
-    type: int
+    type: number
     sql: ${TABLE}.first_orders_count
 
 
@@ -65,5 +65,5 @@
     sql: ${TABLE}.first_order_month
 
   - dimension: first_orders_count_monthly
-    type: int
+    type: number
     sql: ${TABLE}.first_orders_count

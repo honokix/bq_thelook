@@ -3,19 +3,19 @@
 
   - dimension: id
     primary_key: true
-    type: int
+    type: number
     sql: ${TABLE}.id
 
   - dimension: max_num_orders
-    type: int
+    type: number
     sql: ${TABLE}.max_num_orders
 
   - dimension: total_num_orders
-    type: int
+    type: number
     sql: ${TABLE}.total_num_orders
 
   - dimension: user_id
-    type: int
+    type: number
     hidden: true
     sql: ${TABLE}.user_id
 
