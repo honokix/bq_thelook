@@ -99,10 +99,6 @@
       WHERE o.id < ${TABLE}.id
       AND o.user_id=${TABLE}.user_id) + 1
 
-  - dimension: is_first_purchase
-    type: yesno
-    sql: ${order_sequence_number} = 1
-
   - dimension: user_id
     type: number
     hidden: true
@@ -182,6 +178,12 @@
   - measure: count
     type: count_distinct
     sql: ${TABLE}.id
+  
+  - measure: count_not_first
+    type: count_distinct
+    sql: ${TABLE}.id
+    filters: 
+      users.gender: 'm'
 
   - measure: order_percent_change
     type: percent_of_previous
