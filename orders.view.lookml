@@ -99,6 +99,10 @@
       WHERE o.id < ${TABLE}.id
       AND o.user_id=${TABLE}.user_id) + 1
 
+  - dimension: is_first_purchase
+    type: yesno
+    sql: ${order_sequence_number} = 1
+
   - dimension: user_id
     type: number
     hidden: true
