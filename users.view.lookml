@@ -8,6 +8,11 @@
     type: number
     primary_key: true
     sql: ${TABLE}.id 
+    links:
+      - label: View Order History
+        url: /explore/thelook/orders?fields=orders.detail*&f[users.id]={{ value }}
+      - label: View Item History
+        url: /explore/thelook/order_items?fields=order_items.detail*&f[users.id]={{ value }}
 
   - dimension: age
     type: number
@@ -25,63 +30,56 @@
     tiers: [0,10,20,30,40,50,60,70,80]
 
   - dimension: city
+    drill_fields: [zipcode]
+    
+  - dimension: state
+    drill_fields: [city, zipcode]
 
   - dimension: country
-  
-  - dimension: country_first_letter
-    type: string
-    expression: SUBSTRING(${country},0,1)
+    drill_fields: [state, city, zipcode]
+
+  - dimension: zipcode
+    type: zipcode
+    sql: ${TABLE}.zip
+    alias: [zip]
+    drill_fields: [gender, age_tier]
+
+#   - dimension: country_first_letter
+#     type: string
+#     expression: substring(${country},0,1)
 
   - dimension_group: created
     type: time
     timeframes: [time, date, week, month, year]
     sql: ${TABLE}.created_at
-    html: |
-        {{ rendered_value }}
 
 
   - dimension: email
-    html: |
-      {{ linked_value }}
-      <a href="/dashboards/thelook/4_user_lookup?email={{ value | encode_uri }}" target="_new">
-      <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>  
+    links:
+      - url: /dashboards/thelook/4_user_lookup?email={{ value | encode_uri }}
+        label: User Lookup for {{ value }}
 
   - dimension: gender
 
   - dimension: name
     sql: CONCAT(${TABLE}.first_name,' ', ${TABLE}.last_name)
 
-  - dimension: history
-    sql: ${TABLE}.id
-    html: |
-      <a href="/explore/thelook/orders?fields=orders.detail*&f[users.id]={{ value }}">Orders</a>
-      | <a href="/explore/thelook/order_items?fields=order_items.detail*&f[users.id]={{ value }}">Items</a>
-  
-  - dimension: state
-
-  - dimension: zip
-    hidden: true
-    type: zipcode
-
-  - dimension: zipcode
-    type: zipcode
-    sql: ${zip}
-  
   - filter: dimension_picker
     suggestions: [id, age, gender]
   
   - dimension: dimension
     sql: |
-            {% capture name %}{% parameter dimension_picker %}{% endcapture %}
-            {% assign normalized_name = name | replace: "'", "" | replace: "^", "" | strip %}
-            {% assign valid_times = "id|age|gender" | split: "|" %}
-            {% assign whitelisted = false %}
-            {% for timeframe in valid_times %}
-              {% if normalized_name == timeframe %}
-                {% assign whitelisted = true %}
-              {% endif %}
-            {% endfor %}
-            {% if whitelisted %}{{normalized_name}}{% else %}BAD TIMEFRAME{% endif %}
+        {% parameter dimension_picker %}
+#             {% capture name %}{% parameter dimension_picker %}{% endcapture %}
+#             {% assign normalized_name = name | replace: "'", "" | replace: "^", "" | strip %}
+#             {% assign valid_times = "id|age|gender" | split: "|" %}
+#             {% assign whitelisted = false %}
+#             {% for timeframe in valid_times %}
+#               {% if normalized_name == timeframe %}
+#                 {% assign whitelisted = true %}
+#               {% endif %}
+#             {% endfor %}
+#             {% if whitelisted %}{{normalized_name}}{% else %}BAD TIMEFRAME{% endif %}
       
   - filter: measure_picker
     suggestions: [id, age]
@@ -89,29 +87,29 @@
   - filter: aggregation
     suggestions: [count, sum, average, min, max]
   
-  - measure: measure
-    type: number
-    sql: |
-            {% capture name %}{% parameter aggregation %}{% endcapture %}
-            {% assign normalized_name = name | replace: "'", "" | replace: "^", "" | strip %}
-            {% assign valid_times = "count|sum|average|min|max" | split: "|" %}
-            {% assign whitelisted = false %}
-            {% for timeframe in valid_times %}
-              {% if normalized_name == timeframe %}
-                {% assign whitelisted = true %}
-              {% endif %}
-            {% endfor %}
-            {% if whitelisted %}{{normalized_name}}{% else %}BAD TIMEFRAME{% endif %}(DISTINCT {% capture name %}{% parameter measure_picker %}{% endcapture %}
-            {% assign normalized_name = name | replace: "'", "" | replace: "^", "" | strip %}
-            {% assign valid_times = "id|age" | split: "|" %}
-            {% assign whitelisted = false %}
-            {% for timeframe in valid_times %}
-              {% if normalized_name == timeframe %}
-                {% assign whitelisted = true %}
-              {% endif %}
-            {% endfor %}
-            {% if whitelisted %}{{normalized_name}}{% else %}BAD TIMEFRAME{% endif %})
-      
+#   - measure: measure
+#     type: number
+#     sql: |
+#             {% capture name %}{% parameter aggregation %}{% endcapture %}
+#             {% assign normalized_name = name | replace: "'", "" | replace: "^", "" | strip %}
+#             {% assign valid_times = "count|sum|average|min|max" | split: "|" %}
+#             {% assign whitelisted = false %}
+#             {% for timeframe in valid_times %}
+#               {% if normalized_name == timeframe %}
+#                 {% assign whitelisted = true %}
+#               {% endif %}
+#             {% endfor %}
+#             {% if whitelisted %}{{normalized_name}}{% else %}BAD TIMEFRAME{% endif %}(DISTINCT {% capture name %}{% parameter measure_picker %}{% endcapture %}
+#             {% assign normalized_name = name | replace: "'", "" | replace: "^", "" | strip %}
+#             {% assign valid_times = "id|age" | split: "|" %}
+#             {% assign whitelisted = false %}
+#             {% for timeframe in valid_times %}
+#               {% if normalized_name == timeframe %}
+#                 {% assign whitelisted = true %}
+#               {% endif %}
+#             {% endfor %}
+#             {% if whitelisted %}{{normalized_name}}{% else %}BAD TIMEFRAME{% endif %})
+#       
 
 # MEASURES #
 

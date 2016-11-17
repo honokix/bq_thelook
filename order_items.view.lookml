@@ -27,7 +27,7 @@
     hidden: true
 
   - dimension: sale_price
-    description: The sale price reflects the price that the item was sold at.
+    description: "The sale price reflects the price that the item was sold at."
     type: number
     value_format_name: decimal_2
     sql: ${TABLE}.sale_price

@@ -13,12 +13,11 @@
 
   - dimension_group: created
     type: time
+    description: "date fields"
     timeframes: [time, date, week, month, month_num, year, day_of_week_index, hour_of_day, minute5]
     sql: ${TABLE}.created_at
     convert_tz: false
-    html: |
-        {{ rendered_value }}
-  
+
   - measure: earliest_order_date
     type: date
     sql: MIN(${TABLE}.created_at
@@ -160,15 +159,12 @@
   - measure: sum_total_amount_of_order_usd
     type: sum
     sql: ${total_amount_of_order_usd}
-    html:  |
-      ${{ rendered_value }}
-      
+    value_format_name: usd
+
   - measure: average_total_amount_of_order_usd
     type: average
     sql: ${total_amount_of_order_usd}
-    value_format_name: decimal_2
-    html:  |
-      ${{ rendered_value }}
+    value_format_name: usd
 
   - measure: this_week_count
     type: count_distinct
@@ -194,8 +190,12 @@
   - measure: count
     type: count_distinct
     sql: ${TABLE}.id
-    html: |
-        {{ rendered_value }}
+  
+  - measure: count_not_first
+    type: count_distinct
+    sql: ${TABLE}.id
+    filters: 
+      users.gender: 'm'
 
   - measure: order_percent_change
     type: percent_of_previous
@@ -232,9 +232,7 @@
     group_label: 'Profit Stuff'
     type: sum
     sql: ${order_profit}
-    value_format_name: decimal_2
-    html:  |
-      ${{ value }}
+    value_format_name: usd
 
   - measure: average_order_profit
     group_label: 'Profit Stuff'
