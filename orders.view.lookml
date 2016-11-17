@@ -24,7 +24,7 @@
   
   - measure: latest_order_date
     type: date
-    sql: MIN(${TABLE}.created_at)
+    sql: MAX(${TABLE}.created_at)
   
   - filter: time_period_filter
 
