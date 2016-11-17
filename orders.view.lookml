@@ -19,6 +19,14 @@
     html: |
         {{ rendered_value }}
   
+  - measure: earliest_order_date
+    type: date
+    sql: MIN(${TABLE}.created_at
+  
+  - measure: latest_order_date
+    type: date
+    sql: MIN(${TABLE}.created_at)
+  
   - filter: time_period_filter
 
   - filter: offset_days_filter
