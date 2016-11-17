@@ -20,7 +20,7 @@
 
   - measure: earliest_order_date
     type: date
-    sql: MIN(${TABLE}.created_at
+    sql: MIN(${TABLE}.created_at)
   
   - measure: latest_order_date
     type: date
