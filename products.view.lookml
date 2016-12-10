@@ -13,7 +13,7 @@
     sql: ${TABLE}.brand     #  we want a top level entity.
     html: |
       {{ linked_value }}
-      <a href="/dashboards/thelook/2_brand_overview?brand={{ value | encode_uri }}" target="_new">
+      <a href="/dashboards/thelook/2_brand_overview?brand={{ value | encode_uri }}">
       <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>
  
   - dimension: category_name    # We want category to be a top level entity even though doesn't

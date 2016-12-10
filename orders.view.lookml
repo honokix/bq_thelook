@@ -17,12 +17,17 @@
     timeframes: [time, date, week, month, month_num, year, day_of_week_index, hour_of_day, minute5]
     sql: ${TABLE}.created_at
     convert_tz: false
+    
+  - measure: max_date
+    type: max
+    sql: ${TABLE}.created_at
 
   - filter: time_period_filter
 
   - filter: offset_days_filter
 
   - dimension: time_period
+    description: "date fields"
     type: number
     sql: |
         {% parameter time_period_filter %}
@@ -33,14 +38,17 @@
         {% parameter offset_days_filter %}
   
   - dimension: status
+    description: "date fieldssadfasdfasdfasdfas sdf asdf asdf asdf sad fas dfasdf df asdfasdfasdfasdf"
     sql: ${TABLE}.status
 
   - measure: min_status
     type: string
+    description: "date fieldssadfasdfasdfasdfasdf asdfasdfasdfasdf"
     sql: MIN(${status})
 
   - dimension: total_amount_of_order_usd
     type: number
+    description: "date fieldssadfasdfasdfasdfasdf asdfasdfasdfasdf"
     value_format_name: decimal_2
     sql: |
       (SELECT SUM(order_items.sale_price)
@@ -109,7 +117,7 @@
       October: ${created_month_num} = 10
       November: ${created_month_num} = 11
       December: ${created_month_num} = 12
-      else: 'Another Month'
+      else: ''
 
   - dimension: user_order_month_normalized
     type: number

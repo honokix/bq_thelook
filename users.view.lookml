@@ -59,6 +59,21 @@
       - url: /dashboards/thelook/4_user_lookup?email={{ value | encode_uri }}
         label: User Lookup for {{ value }}
 
+  - dimension: email_500
+    sql: |
+        CASE
+          WHEN ${email} in ('z%', 'y%', 'w%', 'v%') THEN ${email}
+          ELSE NULL
+        END
+
+
+  - dimension: email_1000
+    sql: |
+        CASE
+          WHEN ${email} in ('d%') THEN ${email}
+          ELSE NULL
+        END
+
   - dimension: gender
 
   - dimension: name
