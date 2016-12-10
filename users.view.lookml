@@ -60,17 +60,27 @@
         label: User Lookup for {{ value }}
 
   - dimension: email_500
+    sql: ${email}
+    suggest_dimension: email_500_suggest
+
+  - dimension: email_500_suggest
     sql: |
         CASE
-          WHEN ${email} in ('z%', 'y%', 'w%', 'v%') THEN ${email}
+          WHEN ${email} like 'd%' THEN ${email}
           ELSE NULL
         END
 
-
   - dimension: email_1000
+    sql: ${email}
+    suggest_dimension: email_1000_suggest
+
+  - dimension: email_1000_suggest
     sql: |
         CASE
-          WHEN ${email} in ('d%') THEN ${email}
+          WHEN ${email} like 'z%' THEN ${email}
+          WHEN ${email} like 'y%' THEN ${email}
+          WHEN ${email} like 'w%' THEN ${email}
+          WHEN ${email} like 'v%' THEN ${email}
           ELSE NULL
         END
 
