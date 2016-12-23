@@ -12,7 +12,7 @@ There are supply-side and demand-side tables:
 
 Please contact [support@looker.com](mailto:support@looker.com) or use the chat button for help.
 
-![image](https://cloud.githubusercontent.com/assets/1854675/4579256/437895d0-4fcb-11e4-94c3-2e7ceb9b12e0.png)
+![image](https://wwwstatic.lookercdn.com/product/thelook_dashboard_v0001.png)
 
 
 
