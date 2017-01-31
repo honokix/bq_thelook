@@ -14,9 +14,19 @@
   - dimension_group: created
     type: time
     description: "date fields"
-    timeframes: [time, date, week, month, month_num, year, day_of_week_index, hour_of_day, minute5]
+    timeframes: [time, date, week, month, month_num, year, day_of_week_index, hour_of_day, minute5, day_of_month]
     sql: ${TABLE}.created_at
     convert_tz: false
+  
+  - dimension_group: created_doy
+    type: time
+    description: "date fields"
+    timeframes: [day_of_year]
+    sql: ${TABLE}.created_at
+    convert_tz: false
+    html: |
+      {{created_month_num._rendered_value}}-{{created_day_of_month._rendered_value}}
+
     
   - measure: max_date
     type: max
