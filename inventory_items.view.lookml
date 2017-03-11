@@ -43,6 +43,9 @@
     type: count
     drill_fields: detail
 
+  - measure: count_two
+    type: count
+
   - measure: sold_count
     type: count
     drill_fields: detail

@@ -16,6 +16,12 @@
       <a href="/dashboards/thelook/2_brand_overview?brand={{ value | encode_uri }}">
       <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>
  
+  - dimension: brand_name_two   # brand name is a string in the db
+    alias: [brand.name]
+    sql: ${TABLE}.brand     #  we want a top level entity.
+    html: |
+      {{ value }}
+
   - dimension: category_name    # We want category to be a top level entity even though doesn't
     alias: [category.name]
     sql: ${TABLE}.category      #  have its own table
