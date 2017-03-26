@@ -33,7 +33,6 @@
       foreign_key: inventory_items.product_id
       
 - explore: orders
-  case_sensitive: false
   persist_for: 6 hours
   joins:
     - join: users
