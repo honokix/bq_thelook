@@ -42,9 +42,6 @@
     - join: users_orders_facts
       foreign_key: users.id
 
-    - join: test_data
-      sql_on: 1=1 
-
 - explore: funnel
   always_filter:
     event_time: 30 days ago for 30 days
