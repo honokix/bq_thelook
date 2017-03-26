@@ -63,29 +63,29 @@
       type: string
       sql: ${TABLE}.orders_created_week
 
-    - dimension: orders_count
+    - measure: orders_count
       type: sum
       sql: ${TABLE}.orders_count
 
-    - dimension: four_week_order_growth
+    - measure: four_week_order_growth
       type: sum
       sql: ${TABLE}.four_week_order_growth
       value_format_name: percent_1
 
-    - dimension: events_count
+    - measure: events_count
       type: sum
       sql: ${TABLE}.events_count
 
-    - dimension: events_sessions_count
+    - measure: events_sessions_count
       type: sum
       sql: ${TABLE}.events_sessions_count
 
-    - dimension: four_week_event_growth
+    - measure: four_week_event_growth
       type: sum
       sql: ${TABLE}.four_week_event_growth
       value_format_name: percent_1
 
-    - dimension: four_week_session_growth
+    - measure: four_week_session_growth
       type: sum
       sql: ${TABLE}.four_week_session_growth
       value_format_name: percent_1
