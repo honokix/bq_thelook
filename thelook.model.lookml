@@ -33,7 +33,6 @@
       foreign_key: inventory_items.product_id
       
 - explore: orders
-  case_sensitive: false
   persist_for: 6 hours
   joins:
     - join: users
@@ -41,9 +40,6 @@
 
     - join: users_orders_facts
       foreign_key: users.id
-
-    - join: test_data
-      sql_on: 1=1 
 
 - explore: funnel
   always_filter:
