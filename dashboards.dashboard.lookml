@@ -281,10 +281,10 @@
     show_view_names: false
     y_axis_combined: true
     show_x_axis_label: false
-    series_labels: 
+    series_labels:
       order_items.total_sale_price: Total Sales
       order_items.average_sale_price: Average Sale Price
-    series_colors: 
+    series_colors:
       order_items.total_sale_price: purple
       order_items.average_sale_price: orange
 
@@ -318,7 +318,7 @@
 #-----------------------------
   title: "3) Category Lookup"
   layout: grid
-  rows: 
+  rows:
     - elements: [total_orders, total_customers, average_order_value]
       height: 180
     - elements: [comparison, sales_by_day]
@@ -340,7 +340,7 @@
     type: field_filter
     explore: products
     field: products.department_name
-    
+
 
 
   - name: date
@@ -448,19 +448,19 @@
       height: 180
     - elements: [user_info, item_order_history, favorite_categories]
       height: 400
-  
+
   filters:
-  
+
   - name: email
     title: 'Email'
     type: field_filter
     explore: users
     field: users.email
-  
-  elements:   
-  
+
+  elements:
+
   - name: user_info
-    title: "User Info" 
+    title: "User Info"
     type: looker_single_record
     explore: order_items
     dimensions: [users.id, users.email, users.name, users.created_month, users.age,
@@ -468,19 +468,19 @@
     listen:
       email: users.email
     filters:
-      orders.created_date: 99 years      
+      orders.created_date: 99 years
     limit: 500
     show_null_labels: false
-      
+
   - name: lifetime_orders
-    title: "Lifetime Orders" 
+    title: "Lifetime Orders"
     type: single_value
     explore: order_items
     measures: [orders.count]
     listen:
       email: users.email
     filters:
-      orders.created_date: 99 years      
+      orders.created_date: 99 years
     sorts: [orders.count desc]
     limit: 500
     show_null_labels: false
@@ -492,40 +492,40 @@
     measures: [order_items.count]
     filters:
     listen:
-      email: users.email    
+      email: users.email
     filters:
-      orders.created_date: 99 years      
+      orders.created_date: 99 years
     sorts: [order_items.count desc]
     limit: 500
     show_null_labels: false
 
   - name: lifetime_spend
-    title: "Lifetime Spend" 
+    title: "Lifetime Spend"
     type: single_value
     explore: order_items
     measures: [order_items.total_sale_price]
     listen:
       email: users.email
     filters:
-      orders.created_date: 99 years      
+      orders.created_date: 99 years
     sorts: [order_items.total_sale_price desc]
     limit: 500
     show_null_labels: false
 
   - name: item_order_history
-    title: "Items Order History" 
+    title: "Items Order History"
     type: table
     explore: order_items
     dimensions: [products.item_name]
     listen:
       email: users.email
     filters:
-      orders.created_date: 99 years      
+      orders.created_date: 99 years
     sorts: [products.item_name]
     limit: 500
 
   - name: favorite_categories
-    title: "Favorite Categories" 
+    title: "Favorite Categories"
     type: looker_pie
     explore: order_items
     dimensions: [products.category_name]
@@ -536,7 +536,7 @@
       orders.created_date: 99 years
     sorts: [order_items.count desc]
     limit: 500
-    
+
 #----------------------------------------
 - dashboard: sample_dashboard_with_images
 #----------------------------------------
@@ -549,7 +549,7 @@
   rows:
   - height: 1000
     elements: [dashboard_with_images]
-  
+
   elements:
   - name: dashboard_with_images
     title: 'Product Dashboard with Images'
@@ -576,7 +576,7 @@
   rows:
   - height: 400
     elements: [add_a_unique_name_1461688596125, add_a_unique_name_1461688776766, add_a_unique_name_1461688811955]
-  
+
   elements:
   - name: add_a_unique_name_1461688596125
     title: Control Error Rate
@@ -601,7 +601,7 @@
     show_comparison: true
     comparison_type: value
     show_comparison_label: true
-  
+
   - name: add_a_unique_name_1461688776766
     title: Test Error Rate
     type: single_value
@@ -649,5 +649,4 @@
     show_comparison: true
     comparison_type: value
     show_comparison_label: true
-  
-  
+
