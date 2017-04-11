@@ -132,8 +132,8 @@ view: users {
   dimension: dimension {
     sql:
           {% assign dim = dimension_value._sql %}
-          {% if dim contains 'gender' %} gender
-          {% elsif dim contains 'age' %} age
+          {% if dim contains 'gender' %} users.gender
+          {% elsif dim contains 'age' %} users.age
           {% else %} NULL
           {% endif %};;
   }
@@ -172,8 +172,8 @@ view: users {
           {% else %} NULL
           {% endif %}
           {% assign mea = measure_value._sql %}
-          {% if mea contains 'id' %} id)
-          {% elsif mea contains 'age' %} age)
+          {% if mea contains 'id' %} users.id)
+          {% elsif mea contains 'age' %} users.age)
           {% else %} NULL
           {% endif %};;
     }
