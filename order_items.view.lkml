@@ -95,6 +95,47 @@ view: order_items {
     value_format_name: decimal_2
   }
 
+  measure: median_sale_price {
+    type: median
+    sql: ${sale_price} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: median_gross_margin {
+    type: average
+    sql: ${gross_margin} ;;
+    value_format_name: decimal_2
+  }
+
+  measure: 25th_percentile_sale_price {
+    type: percentile
+    percentile: 25
+    sql: ${sale_price} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: 25th_percentile_gross_margin {
+    type: percentile
+    percentile: 25
+    sql: ${gross_margin} ;;
+    value_format_name: decimal_2
+  }
+
+  measure: 75th_percentile_sale_price {
+    type: percentile
+    percentile: 75
+    sql: ${sale_price} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: 75th_percentile_gross_margin {
+    type: percentile
+    percentile: 75
+    sql: ${gross_margin} ;;
+    value_format_name: decimal_2
+  }
+
+
   #   - measure: total_sale_price_per_first_order_user_daily
   #     type: sum
   #     sql: ${sale_price} / ${users_first_order_facts_daily.first_orders_count_daily}
