@@ -102,7 +102,7 @@ view: order_items {
   }
 
   measure: median_gross_margin {
-    type: average
+    type: median
     sql: ${gross_margin} ;;
     value_format_name: decimal_2
   }
@@ -120,6 +120,21 @@ view: order_items {
     sql: ${gross_margin} ;;
     value_format_name: decimal_2
   }
+
+  measure: 50th_percentile_sale_price {
+    type: percentile
+    percentile: 50
+    sql: ${sale_price} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: 50th_percentile_gross_margin {
+    type: percentile
+    percentile: 50
+    sql: ${gross_margin} ;;
+    value_format_name: decimal_2
+  }
+
 
   measure: 75th_percentile_sale_price {
     type: percentile
