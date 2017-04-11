@@ -119,56 +119,63 @@ view: users {
   }
 
   filter: dimension_picker {
-    suggestions: ["id", "age", "gender"]
+    suggestions: ["gender", "age"]
   }
 
-  dimension: dimension {
+  dimension: dimension_value {
+    type: string
+    hidden: yes
     sql: {% parameter dimension_picker %}
       ;;
   }
 
-  #             {% capture name %}{% parameter dimension_picker %}{% endcapture %}
-  #             {% assign normalized_name = name | replace: "'", "" | replace: "^", "" | strip %}
-  #             {% assign valid_times = "id|age|gender" | split: "|" %}
-  #             {% assign whitelisted = false %}
-  #             {% for timeframe in valid_times %}
-  #               {% if normalized_name == timeframe %}
-  #                 {% assign whitelisted = true %}
-  #               {% endif %}
-  #             {% endfor %}
-  #             {% if whitelisted %}{{normalized_name}}{% else %}BAD TIMEFRAME{% endif %}
+  dimension: dimension {
+    sql:
+          {% assign dim = dimension_value._sql %}
+          {% if dim contains 'gender' %} gender
+          {% elsif dim contains 'age' %} age
+          {% else %} NULL
+          {% endif %};;
+  }
 
   filter: measure_picker {
     suggestions: ["id", "age"]
   }
 
-  filter: aggregation {
+  filter: aggregation_picker {
     suggestions: ["count", "sum", "average", "min", "max"]
   }
 
-  #   - measure: measure
-  #     type: number
-  #     sql: |
-  #             {% capture name %}{% parameter aggregation %}{% endcapture %}
-  #             {% assign normalized_name = name | replace: "'", "" | replace: "^", "" | strip %}
-  #             {% assign valid_times = "count|sum|average|min|max" | split: "|" %}
-  #             {% assign whitelisted = false %}
-  #             {% for timeframe in valid_times %}
-  #               {% if normalized_name == timeframe %}
-  #                 {% assign whitelisted = true %}
-  #               {% endif %}
-  #             {% endfor %}
-  #             {% if whitelisted %}{{normalized_name}}{% else %}BAD TIMEFRAME{% endif %}(DISTINCT {% capture name %}{% parameter measure_picker %}{% endcapture %}
-  #             {% assign normalized_name = name | replace: "'", "" | replace: "^", "" | strip %}
-  #             {% assign valid_times = "id|age" | split: "|" %}
-  #             {% assign whitelisted = false %}
-  #             {% for timeframe in valid_times %}
-  #               {% if normalized_name == timeframe %}
-  #                 {% assign whitelisted = true %}
-  #               {% endif %}
-  #             {% endfor %}
-  #             {% if whitelisted %}{{normalized_name}}{% else %}BAD TIMEFRAME{% endif %})
-  #
+  dimension: measure_value {
+    type: string
+    hidden: yes
+    sql: {% parameter measure_picker %}
+      ;;
+  }
+
+  dimension: aggregation_value {
+    type: string
+    hidden: yes
+    sql: {% parameter aggregation_picker %}
+      ;;
+  }
+
+  measure: measure {
+    sql:
+          {% assign agg = aggregation_value._sql %}
+          {% if agg contains 'count' %} count(
+          {% elsif agg contains 'sum' %} sum(
+          {% elsif agg contains 'average' %} average(
+          {% elsif agg contains 'min' %} min(
+          {% elsif agg contains 'max' %} max(
+          {% else %} NULL
+          {% endif %}
+          {% assign mea = measure_value._sql %}
+          {% if mea contains 'id' %} id)
+          {% elsif mea contains 'age' %} age)
+          {% else %} NULL
+          {% endif %};;
+    }
 
   # MEASURES #
 
