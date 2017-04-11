@@ -161,6 +161,7 @@ view: users {
   }
 
   measure: measure {
+    type:  number
     sql:
           {% assign agg = aggregation_value._sql %}
           {% if agg contains 'count' %} count(
