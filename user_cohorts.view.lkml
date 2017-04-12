@@ -5,14 +5,16 @@
 
 view: user_transactions_monthly {
   derived_table: {
-    sql: SELECT users.user_id as user_id
+    sql:
+      SELECT users.user_id as user_id
         , month_list.month as month
         , COALESCE(monthly_transactions, 0) as monthly_transactions
         , COALESCE(monthly_revenue, 0) as monthly_revenue
+        , COUNT(users.user_id) as monthly_user_count
       FROM (SELECT users.id as user_id, users.created_at as created_at FROM users) users
       LEFT JOIN (SELECT CONCAT(years.year, '-', months.month) as month
                 FROM
-                  (SELECT '2012' as year union SELECT '2013' union SELECT '2014' union SELECT '2015') years,
+                  (SELECT '2014' as year union SELECT '2015' union SELECT '2016' union SELECT '2017') years,
                   (SELECT '01' as month union SELECT '02' union SELECT '03' union SELECT '04'
                     union SELECT '05' union SELECT '06' union SELECT '07' union SELECT '08'
                     union SELECT '09' union SELECT '10' union SELECT '11' union SELECT '12') months
@@ -28,9 +30,68 @@ view: user_transactions_monthly {
                 LEFT JOIN orders o ON oi.order_id = o.id
                 GROUP BY 1,2) as data
           ON data.trans_month = month_list.month AND data.user_id = users.user_id
-       ;;
+      GROUP BY 1,2;;
     indexes: ["user_id", "month"]
     sql_trigger_value: SELECT CURRENT_DATE() ;;
+  }
+
+  filter: cohort_timeframe_picker {
+    suggestions: ["day", "week", "month", "quarter"]
+  }
+
+  dimension: cohort_timeframe_value {
+    type: string
+    hidden: yes
+    sql: {% parameter cohort_timeframe_picker %}
+      ;;
+  }
+
+  dimension: cohort_timeframe {
+    sql:
+          {% assign dim = cohort_timeframe_value._sql %}
+          {% if dim contains 'day' %}
+          {% elsif dim contains 'week' %}
+          {% elsif dim contains 'month' %}
+          {% elsif dim contains 'quarter' %}
+          {% else %} NULL
+          {% endif %};;
+  }
+
+  dimension: cohort_pivot_timeframe {
+    sql:
+          {% assign dim = cohort_timeframe_value._sql %}
+          {% if dim contains 'day' %}
+          {% elsif dim contains 'week' %}
+          {% elsif dim contains 'month' %}
+          {% elsif dim contains 'quarter' %}
+          {% else %} NULL
+          {% endif %};;
+  }
+
+
+  filter: measure_picker {
+    suggestions: ["revenue", "cumulative revenue", "transactions", "cumulative transactions", "users", "active user percentage"]
+  }
+
+  dimension: measure_value {
+    type: string
+    hidden: yes
+    sql: {% parameter measure_picker %}
+      ;;
+  }
+
+  measure: measure {
+    type:  number
+    sql:
+          {% assign meas = measure_value._sql %}
+          {% if meas contains 'cumulative revenue' %} SUM(user_transactions_monthly_cumulative.cumulative_monthly_revenue)
+          {% elsif meas contains 'cumulative transactions' %} SUM(user_transactions_monthly_cumulative.cumulative_monthly_transactions)
+          {% elsif meas contains 'revenue' %} SUM(user_transactions_monthly.monthly_revenue)
+          {% elsif meas contains 'transactions' %} SUM(user_transactions_monthly.monthly_transactions)
+          {% elsif meas contains 'users' %} COUNT(user_transactions_monthly.user_id)
+          {% elsif meas contains 'active user percentage' %} user_transactions_monthly
+          {% else %} NULL
+          {% endif %};;
   }
 
   dimension: user_id {
@@ -143,6 +204,7 @@ view: user_transactions_monthly {
       {% endif %}
       ;;
   }
+
 }
 
 #####################################################################################

@@ -97,6 +97,7 @@ explore: users {
 
 explore: users_cohorts {
   from: users
+  always_join: [user_transactions_monthly, user_transactions_monthly_cumulative]
 
   join: users_orders_facts {
     foreign_key: users_cohorts.id
