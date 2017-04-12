@@ -89,7 +89,8 @@ view: user_transactions_monthly {
           {% elsif meas contains 'revenue' %} SUM(user_transactions_monthly.monthly_revenue)
           {% elsif meas contains 'transactions' %} SUM(user_transactions_monthly.monthly_transactions)
           {% elsif meas contains 'users' %} COUNT(user_transactions_monthly.user_id)
-          {% elsif meas contains 'active user percentage' %} user_transactions_monthly
+          {% elsif meas contains 'active user percentage' %}
+                    SUM(CASE WHEN user_transactions_monthly.monthly_transactions > 1 THEN 1 ELSE 0 END) / COUNT(user_transactions_monthly.user_id)
           {% else %} NULL
           {% endif %};;
   }
