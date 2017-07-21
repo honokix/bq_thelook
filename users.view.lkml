@@ -6,6 +6,7 @@ view: users {
     type: number
     primary_key: yes
     sql: ${TABLE}.id ;;
+    tags: ["segment_user_id"]
 
     link: {
       label: "View Order History"
