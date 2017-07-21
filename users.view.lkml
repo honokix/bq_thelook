@@ -82,6 +82,7 @@ view: users {
       url: "/dashboards/thelook/4_user_lookup?email={{ value | encode_uri }}"
       label: "User Lookup for {{ value }}"
     }
+    tags: ["email"]
   }
 
   dimension: email_500 {
