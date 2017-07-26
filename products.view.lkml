@@ -18,15 +18,6 @@ view: products {
       ;;
   }
 
-  # brand name is a string in the db
-  dimension: brand_name_two {
-    alias: [brand.name]
-    #  we want a top level entity.
-    sql: ${TABLE}.brand ;;
-    html: {{ value }}
-      ;;
-  }
-
   # We want category to be a top level entity even though doesn't
   dimension: category_name {
     alias: [category.name]
