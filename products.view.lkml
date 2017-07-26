@@ -7,15 +7,12 @@ view: products {
     sql: ${TABLE}.id ;;
   }
 
-  # brand name is a string in the db
   dimension: brand_name {
-    alias: [brand.name]
-    #  we want a top level entity.
     sql: ${TABLE}.brand ;;
-    html: {{ linked_value }}
-      <a href="/dashboards/thelook/2_brand_overview?brand={{ value | encode_uri }}">
-      <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>
-      ;;
+    link: {
+      label: "Brand Overview"
+      url: "/dashboards/27?Brand={{ value | encode_uri }}&Date={{ _filters['orders.created_date'] | encode_uri }}"
+    }
   }
 
   # We want category to be a top level entity even though doesn't
