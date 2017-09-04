@@ -5,6 +5,38 @@ view: orders {
     sql: ${TABLE}.id ;;
   }
 
+  parameter: date_granularity {
+    type: string
+    allowed_value: {
+      label: "Day"
+      value: "day"
+    }
+    allowed_value: {
+      label: "Month"
+      value: "month"
+    }
+    allowed_value: {
+      label: "Quarter"
+      value: "quarter"
+    }
+    allowed_value: {
+      label: "Year"
+      value: "year"
+    }
+  }
+
+  dimension: date {
+    label_from_parameter: date_granularity
+    sql:
+      CASE
+        WHEN {% parameter date_granularity %} = 'day'     THEN ${created_date}
+        WHEN {% parameter date_granularity %} = 'month'   THEN ${created_month}
+        WHEN {% parameter date_granularity %} = 'quarter' THEN ${created_quarter}
+        WHEN {% parameter date_granularity %} = 'year'    THEN ${created_year}
+        ELSE NULL
+      END ;;
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
@@ -13,6 +45,7 @@ view: orders {
       week,
       month,
       month_num,
+      quarter,
       year,
       day_of_week_index,
       hour_of_day,
