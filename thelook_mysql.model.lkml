@@ -1,6 +1,6 @@
 label: "The Look"
 
-connection: "thelook"
+connection: "thelook_events_mysql"
 
 include: "*.view"
 include: "*.dashboard"
