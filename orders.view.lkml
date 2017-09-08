@@ -5,6 +5,15 @@ view: orders {
     sql: ${TABLE}.id ;;
   }
 
+parameter: row_limit {
+  type: number
+}
+
+  dimension: row_limiter {
+    type: number
+    sql: {% parameter row_limit %};;
+    }
+
   parameter: date_granularity {
     type: string
     allowed_value: {
