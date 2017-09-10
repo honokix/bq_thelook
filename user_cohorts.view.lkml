@@ -69,30 +69,41 @@ view: user_transactions_monthly {
   }
 
 
-  filter: measure_picker {
-    suggestions: ["revenue", "cumulative revenue", "transactions", "cumulative transactions", "users", "active user percentage"]
+  parameter: measure_picker {
+    allowed_value: { label: "Revenue"                 value: "revenue" }
+    allowed_value: { label: "Cumulative Revenue"      value: "cumulative revenue" }
+    allowed_value: { label: "Transactions"            value: "transactions" }
+    allowed_value: { label: "Cumulative Transactions" value: "cumulative transactions" }
+    allowed_value: { label: "Users"                   value: "users" }
+    allowed_value: { label: "Active User Percentage"  value: "active user percentage" }
   }
 
   dimension: measure_value {
     type: string
     hidden: yes
-    sql: {% parameter measure_picker %}
-      ;;
+    sql: {% parameter measure_picker %} ;;
   }
 
   measure: measure {
-    type:  number
+    type: number
     sql:
-          {% assign meas = measure_value._sql %}
-          {% if meas contains 'cumulative revenue' %} SUM(user_transactions_monthly_cumulative.cumulative_monthly_revenue)
-          {% elsif meas contains 'cumulative transactions' %} SUM(user_transactions_monthly_cumulative.cumulative_monthly_transactions)
-          {% elsif meas contains 'revenue' %} SUM(user_transactions_monthly.monthly_revenue)
-          {% elsif meas contains 'transactions' %} SUM(user_transactions_monthly.monthly_transactions)
-          {% elsif meas contains 'users' %} COUNT(user_transactions_monthly.user_id)
-          {% elsif meas contains 'active user percentage' %}
-                    SUM(CASE WHEN user_transactions_monthly.monthly_transactions > 1 THEN 1 ELSE 0 END) / COUNT(user_transactions_monthly.user_id)
-          {% else %} NULL
-          {% endif %};;
+      {% assign selected = measure_value._sql %}
+      {% if selected contains 'revenue' %}
+        SUM(user_transactions_monthly.monthly_revenue)
+      {% elsif selected contains 'cumulative revenue' %}
+        SUM(user_transactions_monthly_cumulative.cumulative_monthly_revenue)
+      {% elsif selected contains 'transactions' %}
+        SUM(user_transactions_monthly.monthly_transactions)
+      {% elsif selected contains 'cumulative transactions' %}
+        SUM(user_transactions_monthly_cumulative.cumulative_monthly_transactions)
+      {% elsif selected contains 'users' %}
+        COUNT(user_transactions_monthly.user_id)
+      {% elsif selected contains 'active user percentage' %}
+        SUM(CASE WHEN user_transactions_monthly.monthly_transactions > 1 THEN 1 ELSE 0 END)
+        / COUNT(user_transactions_monthly.user_id)
+      {% else %}
+        NULL
+      {% endif %};;
   }
 
   dimension: user_id {
