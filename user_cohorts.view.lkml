@@ -68,7 +68,6 @@ view: user_transactions_monthly {
           {% endif %};;
   }
 
-
   parameter: measure_picker {
     allowed_value: { label: "Revenue"                 value: "revenue" }
     allowed_value: { label: "Cumulative Revenue"      value: "cumulative revenue" }

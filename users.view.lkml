@@ -21,8 +21,6 @@ view: users {
 
   dimension: age {
     type: number
-    # REPLACEME: users.age
-    description: "foo word foo word foo word foo word foo word foo word foo word"
   }
 
   measure: average_age {
