@@ -5,9 +5,9 @@ view: orders {
     sql: ${TABLE}.id ;;
   }
 
-parameter: row_limit {
-  type: number
-}
+  parameter: row_limit {
+    type: number
+  }
 
   dimension: row_limiter {
     type: number
