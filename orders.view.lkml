@@ -5,15 +5,6 @@ view: orders {
     sql: ${TABLE}.id ;;
   }
 
-  parameter: row_limit {
-    type: number
-  }
-
-  dimension: row_limiter {
-    type: number
-    sql: {% parameter row_limit %};;
-    }
-
   parameter: date_granularity {
     type: string
     allowed_value: {
@@ -367,6 +358,15 @@ view: orders {
     type: average
     sql: ${order_profit} ;;
     value_format: "$#.00"
+  }
+
+  parameter: row_limit {
+    type: number
+  }
+
+  dimension: row_limiter {
+    type: number
+    sql: {% parameter row_limit %};;
   }
 
   set: detail {
