@@ -36,6 +36,12 @@ view: order_items {
     sql: ${TABLE}.sale_price ;;
   }
 
+  dimension: percent_of_total_sale_price {
+    type: number
+    value_format_name: percent_1
+    sql: ${sale_price} / ${orders.total_amount_of_order_usd} ;;
+  }
+
   dimension: gross_margin {
     type: number
     value_format_name: decimal_2
