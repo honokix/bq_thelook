@@ -7,33 +7,59 @@ view: orders {
 
   parameter: date_granularity {
     type: string
-    allowed_value: {
-      label: "Day"
-      value: "day"
-    }
-    allowed_value: {
-      label: "Month"
-      value: "month"
-    }
-    allowed_value: {
-      label: "Quarter"
-      value: "quarter"
-    }
-    allowed_value: {
-      label: "Year"
-      value: "year"
-    }
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
   }
 
   dimension: date {
     label_from_parameter: date_granularity
     sql:
       CASE
-        WHEN {% parameter date_granularity %} = 'day'     THEN ${created_date}
-        WHEN {% parameter date_granularity %} = 'month'   THEN ${created_month}
-        WHEN {% parameter date_granularity %} = 'quarter' THEN ${created_quarter}
-        WHEN {% parameter date_granularity %} = 'year'    THEN ${created_year}
-        ELSE NULL
+        WHEN {% parameter date_granularity %} = 'Day' THEN
+          ${created_date}
+        WHEN {% parameter date_granularity %} = 'Month' THEN
+          ${created_month}
+        WHEN {% parameter date_granularity %} = 'Quarter' THEN
+          ${created_quarter}
+        WHEN {% parameter date_granularity %} = 'Year' THEN
+          ${created_year}
+        ELSE
+          NULL
+      END ;;
+  }
+
+  parameter: metric_selector {
+    type: string
+    allowed_value: {
+      label: "Total Order Profit"
+      value: "total_order_profit"
+    }
+    allowed_value: {
+      label: "First-Time Shopper Revenue"
+      value: "total_first_purchase_revenue"
+    }
+    allowed_value: {
+      label: "Returning Shopper Revenue"
+      value: "total_returning_shopper_revenue"
+    }
+  }
+
+  measure: metric {
+    label_from_parameter: metric_selector
+    type: number
+    value_format_name: decimal_0
+    sql:
+      CASE
+        WHEN {% parameter metric_selector %} = 'total_order_profit' THEN
+          ${total_order_profit}
+        WHEN {% parameter metric_selector %} = 'total_first_purchase_revenue' THEN
+          ${total_first_purchase_revenue}
+        WHEN {% parameter metric_selector %} = 'total_returning_shopper_revenue' THEN
+          ${total_returning_shopper_revenue}
+        ELSE
+          NULL
       END ;;
   }
 
