@@ -55,19 +55,8 @@ view: order_items {
 
   dimension: item_gross_margin_percentage_tier {
     type: tier
+    tiers: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
     sql: ${item_gross_margin_percentage} ;;
-    tiers: [
-      0,
-      10,
-      20,
-      30,
-      40,
-      50,
-      60,
-      70,
-      80,
-      90
-    ]
   }
 
   # MEASURES #
