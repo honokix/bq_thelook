@@ -49,7 +49,7 @@ view: orders {
   measure: metric {
     label_from_parameter: metric_selector
     type: number
-    value_format_name: decimal_0
+    value_format: "$0.0,\"K\""
     sql:
       CASE
         WHEN {% parameter metric_selector %} = 'total_order_profit' THEN
